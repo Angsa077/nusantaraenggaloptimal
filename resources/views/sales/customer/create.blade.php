@@ -7,18 +7,35 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Tambah User</h4>
+                            <h4 class="card-title">Tambah Customer</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('adminmanajemenuser.store') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('salescustomer.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="name">Nama Lengkap</label>
+                                                <label for="nama_toko">Nama Toko</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="shopping-bag"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="nama_toko" class="form-control"
+                                                            placeholder="Silahkan Masukan Nama Toko" name="nama_toko"
+                                                            value="{{ Session::get('nama_toko') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="nama_pemilik">Nama Pemilik</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -26,105 +43,9 @@
                                                                 <i data-feather="user"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="name" class="form-control"
-                                                            placeholder="Silahkan Masukan Nama Lengkap" name="name"
-                                                            value="{{ Session::get('name') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="level">Jabatan</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="chevrons-right"></i>
-                                                            </span>
-                                                        </div>
-                                                        <select class="form-control" name="level" id="level"
-                                                            value="{{ Session::get('level') }}">
-                                                            <option selected>Pilih Jabatan</option>
-                                                            <option value="kepalacabang">Kepala Cabang</option>
-                                                            <option value="supervisor">Supervisor</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="sales">Sales</option>
-                                                            <option value="kurir">Kurir</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="email">Email</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="mail"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="email" id="email" class="form-control"
-                                                            placeholder="Silahkan Masukan Email" name="email"
-                                                            value="{{ Session::get('email') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="nip">NIP</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="credit-card"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="nip" class="form-control"
-                                                            placeholder="Silahkan Masukan NIP" name="nip"
-                                                            value="{{ Session::get('nip') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="nik">NIK</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="credit-card"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="nik" class="form-control"
-                                                            placeholder="Silahkan Masukan NIK" name="nik"
-                                                            value="{{ Session::get('nik') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="npwp">NPWP</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="credit-card"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="npwp" class="form-control"
-                                                            placeholder="Silahkan Masukan NPWP" name="npwp"
-                                                            value="{{ Session::get('npwp') }}">
+                                                        <input type="text" id="nama_pemilik" class="form-control"
+                                                            placeholder="Silahkan Masukan Nama Pemilik" name="nama_pemilik"
+                                                            value="{{ Session::get('nama_pemilik') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,14 +61,13 @@
                                                                 <i data-feather="phone"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="no_hp" class="form-control"
-                                                            placeholder="Silahkan Masukan No HP" name="no_hp"
-                                                            value="{{ Session::get('no_hp') }}">
+                                                        <input type="text" id="no_hp" class="form-control" name="no_hp"
+                                                        placeholder="Silahkan Masukan No HP" value="{{ Session::get('no_hp') }}">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+    
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="alamat">Alamat</label>
@@ -158,9 +78,8 @@
                                                                 <i data-feather="map-pin"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="alamat" class="form-control"
-                                                            placeholder="Silahkan Masukan Alamat Tinggal Saat Ini"
-                                                            name="alamat" value="{{ Session::get('alamat') }}">
+                                                        <input type="text" id="alamat" class="form-control" name="alamat"
+                                                        placeholder="Silahkan Masukan Alamat" value="{{ Session::get('alamat') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,7 +87,7 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="tp_lahir">Tempat Lahir</label>
+                                                <label for="provinsi">Provinsi</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -176,47 +95,11 @@
                                                                 <i data-feather="map-pin"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="tp_lahir" class="form-control"
-                                                            placeholder="Silahkan Masukan Tempat Lahir" name="tp_lahir"
-                                                            value="{{ Session::get('tp_lahir') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="tg_lahir">Tanggal Lahir</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="calendar"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="date" id="tg_lahir" class="form-control"
-                                                            placeholder="Silahkan Masukan Tanggal Lahir" name="tg_lahir"
-                                                            value="{{ Session::get('tg_lahir') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="jk">Jenis Kelamin</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="chevrons-right"></i>
-                                                            </span>
-                                                        </div>
-                                                        <select class="form-control" name="jk" id="jk"
-                                                            value="{{ Session::get('jk') }}">
-                                                            <option selected>Pilih Jenis Kelamin</option>
-                                                            <option value="lakilaki">Laki-Laki</option>
-                                                            <option value="perempuan">Perempuan</option>
+                                                        <select id="provinsi" class="form-control" name="provinsi" value="{{ Session::get('provinsi') }}">
+                                                            <option>Pilih Provinsi Anda</option>
+                                                            @foreach ($provinces as $provinsi)
+                                                                <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -225,26 +108,93 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="tgl_masuk">Tanggal Masuk Kerja</label>
+                                                <label for="kabupaten">Kota / Kabupaten</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">
-                                                                <i data-feather="calendar"></i>
+                                                                <i data-feather="map-pin"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="date" id="tgl_masuk" class="form-control"
-                                                            placeholder="Silahkan Masukan Tanggal Masuk Kerja"
-                                                            name="tgl_masuk" value="{{ Session::get('tgl_masuk') }}">
+                                                        <select id="kabupaten" class="form-control" name="kabupaten" value="{{ Session::get('kabupaten') }}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="kecamatan">Kecamatan</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="map-pin"></i>
+                                                            </span>
+                                                        </div>
+                                                        <select id="kecamatan" class="form-control" name="kecamatan" value="{{ Session::get('kecamatan') }}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="desa">Kelurahan / Desa</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="map-pin"></i>
+                                                            </span>
+                                                        </div>
+                                                        <select id="desa" class="form-control" name="desa" value="{{ Session::get('desa') }}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="gambar">Gambar Customer</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="file-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="file" id="gambar" class="form-control"
+                                                            placeholder="Silahkan Masukan Gambar Customer" name="gambar">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="catatan">Catatan Customer</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="clipboard"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="catatan" class="form-control"
+                                                            placeholder="Silahkan Masukan Catatan Customer" name="catatan"
+                                                            value="{{ Session::get('catatan') }}">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary mr-1 mb-1 mt-3">Submit</button>
+                                            <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>

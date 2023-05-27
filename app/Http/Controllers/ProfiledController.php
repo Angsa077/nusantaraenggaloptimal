@@ -24,7 +24,7 @@ class ProfiledController extends Controller
             'profile_photo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'no_hp' => 'required|string|max:20',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
         ]);
     
         // Verifikasi password yang dimasukkan dengan password di database

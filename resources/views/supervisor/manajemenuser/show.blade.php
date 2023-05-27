@@ -291,22 +291,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <a href="{{ route('adminmanajemenuser.edit', $data->id) }}"
-                                            class="btn btn-primary mr-1 mb-1">Edit</a>
-                                        @if ($data->level == '3')
-                                            <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                                action="{{ route('adminmanajemenuser.destroy', $data->id) }}" class="d-inline"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger ml-3" type="submit" name="submit">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>

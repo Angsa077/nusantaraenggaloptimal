@@ -29,7 +29,7 @@ class ChangedPasswordController extends Controller
                 ->where('id', $user->id)
                 ->update(['password' => Hash::make($request->password)]);
 
-            return redirect()->back()->with('success', 'Password updated successfully!');
+                return redirect()->route('dashboard')->with('success', 'Password updated successfully!');
         } else {
             return redirect()->back()->withErrors(['current_password' => 'Incorrect current password.']);
         }
