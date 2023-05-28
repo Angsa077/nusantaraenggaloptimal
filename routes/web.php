@@ -50,15 +50,15 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('/change-profile', [ProfiledController::class, 'showProfile'])->name('profile.changed');
     Route::put('/change-profile', [ProfiledController::class, 'changeprofile'])->name('profile.updated');
+    Route::post('/getkabupaten', [AdminCustomerController::class, 'getkabupaten'])->name(('getkabupaten'));
+    Route::post('/getkecamatan', [AdminCustomerController::class, 'getkecamatan'])->name(('getkecamatan'));
+    Route::post('/getdesa', [AdminCustomerController::class, 'getdesa'])->name(('getdesa'));
 });
 
 Route::group(['middleware' => ['auth', 'level:admin']], function(){
     Route::resource('adminmanajemenuser', AdminManajemenuserController::class);
     Route::resource('adminbarang', AdminBarangController::class);
     Route::resource('admincustomer', AdminCustomerController::class);
-    Route::post('/getkabupaten', [AdminCustomerController::class, 'getkabupaten'])->name(('getkabupaten'));
-    Route::post('/getkecamatan', [AdminCustomerController::class, 'getkecamatan'])->name(('getkecamatan'));
-    Route::post('/getdesa', [AdminCustomerController::class, 'getdesa'])->name(('getdesa'));
 });
 
 Route::group(['middleware' => ['auth', 'level:kepalacabang']], function(){
