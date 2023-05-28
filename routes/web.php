@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminBarangController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminManajemenuserController;
+use App\Http\Controllers\AdminPenjualanController;
 use App\Http\Controllers\ChangedPasswordController;
 use App\Http\Controllers\KepalaCabangBarangController;
 use App\Http\Controllers\KepalaCabangCustomerController;
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth', 'level:admin']], function(){
     Route::resource('adminmanajemenuser', AdminManajemenuserController::class);
     Route::resource('adminbarang', AdminBarangController::class);
     Route::resource('admincustomer', AdminCustomerController::class);
+    Route::resource('adminpenjualan', AdminPenjualanController::class);
 });
 
 Route::group(['middleware' => ['auth', 'level:kepalacabang']], function(){

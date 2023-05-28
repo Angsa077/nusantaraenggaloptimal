@@ -36,6 +36,38 @@
                                 class="align-middle">Customer</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Penjualan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('adminpenjualan.index') }}">
+                            <i class="align-middle" data-feather="check-square"></i> <span
+                                class="align-middle">Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-cards.html">
+                            <i class="align-middle" data-feather="credit-card"></i> <span
+                                class="align-middle">Pembayaran</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-typography.html">
+                            <i class="align-middle" data-feather="map-pin"></i> <span
+                                class="align-middle">pengiriman</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="icons-feather.html">
+                            <i class="align-middle" data-feather="shopping-bag"></i> <span
+                                class="align-middle">Pengembalian</span>
+                        </a>
+                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'kepalacabang')
