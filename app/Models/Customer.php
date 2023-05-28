@@ -9,6 +9,7 @@ use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
 use App\Models\User;
+use App\Models\Penjualan;
 
 class Customer extends Model
 {
@@ -40,5 +41,9 @@ class Customer extends Model
     {
         return $this->belongsTo(User::class, 'id_staf', 'id');
     }
-    
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class);
+    }
 }

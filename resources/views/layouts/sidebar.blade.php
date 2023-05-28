@@ -95,39 +95,39 @@
                                 class="align-middle">Customer</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Penjualan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('salespenjualan.index') }}">
+                            <i class="align-middle" data-feather="check-square"></i> <span
+                                class="align-middle">Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-cards.html">
+                            <i class="align-middle" data-feather="credit-card"></i> <span
+                                class="align-middle">Pembayaran</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="ui-typography.html">
+                            <i class="align-middle" data-feather="map-pin"></i> <span
+                                class="align-middle">pengiriman</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="icons-feather.html">
+                            <i class="align-middle" data-feather="shopping-bag"></i> <span
+                                class="align-middle">Pengembalian</span>
+                        </a>
+                    </li>
                 @endif
-
-                <li class="sidebar-header">
-                    Penjualan
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-forms.html">
-                        <i class="align-middle" data-feather="check-square"></i> <span
-                            class="align-middle">Pesanan</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-cards.html">
-                        <i class="align-middle" data-feather="credit-card"></i> <span
-                            class="align-middle">Pembayaran</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-typography.html">
-                        <i class="align-middle" data-feather="map-pin"></i> <span
-                            class="align-middle">Pengantaran</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="icons-feather.html">
-                        <i class="align-middle" data-feather="shopping-bag"></i> <span
-                            class="align-middle">Pengembalian</span>
-                    </a>
-                </li>
 
                 <li class="sidebar-header">
                     Laporan
@@ -135,15 +135,22 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="charts-chartjs.html">
-                        <i class="align-middle" data-feather="clipboard"></i> <span
-                            class="align-middle">Penjualan</span>
+                        <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                            Penjualan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="maps-google.html">
-                        <i class="align-middle" data-feather="dollar-sign"></i> <span
-                            class="align-middle">Pendapatan</span>
+                        <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
+                            Pendapatan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="maps-google.html">
+                        <i class="align-middle" data-feather="package"></i> <span class="align-middle">Laporan Stok
+                            Barang</span>
                     </a>
                 </li>
             </ul>

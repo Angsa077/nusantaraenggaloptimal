@@ -10,6 +10,7 @@ use App\Http\Controllers\KepalaCabangManajemenuserController;
 use App\Http\Controllers\ProfiledController;
 use App\Http\Controllers\SalesBarangController;
 use App\Http\Controllers\SalesCustomerController;
+use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
 use App\Http\Controllers\SupervisorManajemenuserController;
@@ -75,4 +76,5 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
 Route::group(['middleware' => ['auth', 'level:sales']], function(){
     Route::resource('salesbarang', SalesBarangController::class);
     Route::resource('salescustomer', SalesCustomerController::class);
+    Route::resource('salespenjualan', SalesPenjualanController::class);
 });

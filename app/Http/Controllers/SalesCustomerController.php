@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\District;
-use App\Models\Province;
-use App\Models\Regency;
 use App\Models\User;
-use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 
 class SalesCustomerController extends Controller
 {

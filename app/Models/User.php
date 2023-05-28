@@ -10,6 +10,11 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Customer;
+use App\Models\Barang;
+use App\Models\Penjualan;
+use App\Models\Pembayaran;
+use App\Models\Pengiriman;
+use App\Models\Pengembalian;
 
 class User extends Authenticatable
 {
@@ -86,5 +91,25 @@ class User extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class, 'id_admin', 'id');
+    }
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class);
+    }
+    
+    public function pengembalian()
+    {
+        return $this->hasMany(Pengembalian::class);
+    }
+
+    public function pengiriman()
+    {
+        return $this->hasMany(Pengiriman::class);
     }
 }
