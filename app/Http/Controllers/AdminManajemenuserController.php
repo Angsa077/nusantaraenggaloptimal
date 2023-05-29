@@ -185,6 +185,10 @@ class AdminManajemenuserController extends Controller
                 'id_admin' => Auth::user()->id,
             ];
 
+        if ($request->simpan == 'Hapus') {
+            $data['status_akun'] = 'hapus';
+        }
+
         User::where('id', $id)->update($data);
         return redirect()->route('adminmanajemenuser.index')->with('success','Berhasil Memperbarui Data User');
     }

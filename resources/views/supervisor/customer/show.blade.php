@@ -213,6 +213,38 @@
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group has-icon-left">
+                                            <label for="timestamp">Waktu Input</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->created_at }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="timestamp">Terakhir di Update</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->updated_at }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
                                             <label for="catatan">Catatan Customer</label>
                                             <div class="position-relative">
                                                 <div class="input-group">

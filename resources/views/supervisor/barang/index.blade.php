@@ -14,7 +14,6 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Kode Barang</th>
                                     <th scope="col" class="text-left text-md">Nama</th>
-                                    <th scope="col" class="text-left text-md">Kategori</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
                                     <th scope="col" class="text-left text-md">Jumlah</th>
                                     <th scope="col" class="text-left text-md">Harga Beli</th>
@@ -27,7 +26,6 @@
                                     <tr>
                                         <td class="text-left text-md">{{ $item->kd_barang  }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
-                                        <td class="text-left text-md">{{ $item->kategori }}</td>
                                         <td class="text-left text-md">{{ $item->merek }}</td>
                                         <td class="text-left text-md">{{ $item->jumlah }}</td>
                                         <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_beli, 2, ',', '.') }}</td>

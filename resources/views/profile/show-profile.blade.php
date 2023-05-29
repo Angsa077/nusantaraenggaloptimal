@@ -34,6 +34,27 @@
                             </div>
 
                             <div class="form-group row mt-2">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $user->name }}" required autocomplete="name" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2">
+                                <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP') }}</label>
+                                <div class="col-md-6">
+                                    <input id="nip" type="text" class="form-control @error('nip') is-invalid @enderror" name="nip" value="{{ old('nip') ?? $user->nip }}" required autocomplete="nip" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2">
+                                <label for="level" class="col-md-4 col-form-label text-md-right">{{ __('Jabatan') }}</label>
+                                <div class="col-md-6">
+                                    <input id="level" type="text" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') ?? $user->level }}" required autocomplete="level" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                                 <div class="col-md-6">

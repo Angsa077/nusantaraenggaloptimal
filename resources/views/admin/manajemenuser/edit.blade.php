@@ -266,6 +266,11 @@
                                                 name="simpan">Submit</button>
                                         </div>
                                         @endif
+
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-secondary mr-1 mb-1" name="simpan"
+                                                value="Hapus">Hapus</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

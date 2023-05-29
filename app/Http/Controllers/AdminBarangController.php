@@ -35,12 +35,9 @@ class AdminBarangController extends Controller
     {
         Session::flash('kd_barang', $request->kd_barang);
         Session::flash('nama', $request->nama);
-        Session::flash('kategori', $request->kategori);
         Session::flash('merek', $request->merek);
         Session::flash('harga_beli', $request->harga_beli);
         Session::flash('harga_jual', $request->harga_jual);
-        Session::flash('kondisi', $request->kondisi);
-        Session::flash('berat', $request->berat);
         Session::flash('jumlah', $request->jumlah);
         Session::flash('expired', $request->expired);
         Session::flash('catatan', $request->catatan);
@@ -49,12 +46,9 @@ class AdminBarangController extends Controller
             [
                 'kd_barang' => 'required',
                 'nama' => 'required',
-                'kategori' => 'required',
                 'merek' => 'required',
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
-                'kondisi' => 'required',
-                'berat' => 'required',
                 'jumlah' => 'required',
                 'expired' => 'required',
                 'gambar' => 'mimes:jpeg,jpg,png,gif|max:1024',
@@ -62,12 +56,9 @@ class AdminBarangController extends Controller
             [
                 'kd_barang.required' => 'Kode Barang Wajib Diisi',
                 'nama.required' => 'Nama Barang Wajib Diisi',
-                'kategori.required' => 'Kategori Barang Wajib Diisi',
                 'merek.required' => 'Merek Barang Wajib Diisi',
                 'harga_beli.required' => 'Harga Beli Barang Wajib Diisi',
                 'harga_jual.required' => 'Harga Jual Barang Wajib Diisi',
-                'kondisi.required' => 'Kondisi Barang Wajib Diisi',
-                'berat.required' => 'Berat Barang Wajib Diisi',
                 'jumlah.required' => 'Jumlah Barang Wajib Diisi',
                 'expired.required' => 'Expired Barang Wajib Diisi',
                 'gambar.mimes' => 'Gambar Barang Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
@@ -90,12 +81,9 @@ class AdminBarangController extends Controller
             $data = [
                 'kd_barang' => $request->kd_barang,
                 'nama' => $request->nama,
-                'kategori' => $request->kategori,
                 'merek' => $request->merek,
                 'harga_beli' => $request->harga_beli,
                 'harga_jual' => $request->harga_jual,
-                'kondisi' => $request->kondisi,
-                'berat' => $request->berat,
                 'jumlah' => $request->jumlah,
                 'expired' => $request->expired,
                 'status_barang' => 'Proses',
@@ -136,12 +124,9 @@ class AdminBarangController extends Controller
             [
                 'kd_barang' => 'required',
                 'nama' => 'required',
-                'kategori' => 'required',
                 'merek' => 'required',
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
-                'kondisi' => 'required',
-                'berat' => 'required',
                 'jumlah' => 'required',
                 'expired' => 'required',
                 'gambar' => 'mimes:jpeg,jpg,png,gif|max:1024',
@@ -149,12 +134,9 @@ class AdminBarangController extends Controller
             [
                 'kd_barang.required' => 'Kode Barang Wajib Diisi',
                 'nama.required' => 'Nama Barang Wajib Diisi',
-                'kategori.required' => 'Kategori Barang Wajib Diisi',
                 'merek.required' => 'Merek Barang Wajib Diisi',
                 'harga_beli.required' => 'Harga Beli Barang Wajib Diisi',
                 'harga_jual.required' => 'Harga Jual Barang Wajib Diisi',
-                'kondisi.required' => 'Kondisi Barang Wajib Diisi',
-                'berat.required' => 'Berat Barang Wajib Diisi',
                 'jumlah.required' => 'Jumlah Barang Wajib Diisi',
                 'expired.required' => 'Expired Barang Wajib Diisi',
                 'gambar.mimes' => 'Gambar Barang Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
@@ -183,12 +165,9 @@ class AdminBarangController extends Controller
             $data = [
                 'kd_barang' => $request->kd_barang,
                 'nama' => $request->nama,
-                'kategori' => $request->kategori,
                 'merek' => $request->merek,
                 'harga_beli' => $request->harga_beli,
                 'harga_jual' => $request->harga_jual,
-                'kondisi' => $request->kondisi,
-                'berat' => $request->berat,
                 'jumlah' => $request->jumlah,
                 'expired' => $request->expired,
                 'status_barang' => 'Proses',

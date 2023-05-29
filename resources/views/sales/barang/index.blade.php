@@ -14,11 +14,9 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Kode Barang</th>
                                     <th scope="col" class="text-left text-md">Nama</th>
-                                    <th scope="col" class="text-left text-md">Kategori</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
                                     <th scope="col" class="text-left text-md">Jumlah</th>
-                                    <th scope="col" class="text-left text-md">Harga Beli</th>
-                                    <th scope="col" class="text-left text-md">Harga Jual</th>
+                                    <th scope="col" class="text-left text-md">Harga</th>
                                     <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
@@ -27,10 +25,8 @@
                                     <tr>
                                         <td class="text-left text-md">{{ $item->kd_barang  }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
-                                        <td class="text-left text-md">{{ $item->kategori }}</td>
                                         <td class="text-left text-md">{{ $item->merek }}</td>
                                         <td class="text-left text-md">{{ $item->jumlah }}</td>
-                                        <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_beli, 2, ',', '.') }}</td>
                                         <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
                                         <td class="text-left text-md"><a href="{{ route('salesbarang.show', $item->kd_barang) }}"
                                                 class="btn"><i data-feather="more-horizontal"></i></a></td>

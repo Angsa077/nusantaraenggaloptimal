@@ -53,38 +53,6 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="kategori">Kategori Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="package"></i>
-                                                            </span>
-                                                        </div>
-                                                        <select class="form-control" name="kategori" id="kategori"
-                                                            value="{{ Session::get('kategori') }}">
-                                                            <option selected>Pilih Kategori Barang</option>
-                                                            <option value="Kendaraan">Kendaraan</option>
-                                                            <option value="Peralatan Konstruksi">Peralatan Konstruksi
-                                                            </option>
-                                                            <option value="Perlengkapan Kantor">Perlengkapan Kantor</option>
-                                                            <option value="Perlengkapan Pemasaran">Perlengkapan Pemasaran
-                                                            </option>
-                                                            <option value="Perlengkapan Keamanan">Perlengkapan Keamanan
-                                                            </option>
-                                                            <option value="Perlengkapan Kebersihan">Perlengkapan Kebersihan
-                                                            </option>
-                                                            <option value="Perlengkapan Elektronik">Perlengkapan Elektronik
-                                                            </option>
-                                                            <option value="Perlengkapan Kebun">Perlengkapan Kebun</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
                                                 <label for="merek">Merek Barang</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
@@ -132,45 +100,6 @@
                                                         <input type="number" id="harga_jual" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
                                                             value="{{ Session::get('harga_jual') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="kondisi">Kondisi Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="package"></i>
-                                                            </span>
-                                                        </div>
-                                                        <select class="form-control" name="kondisi" id="kondisi"
-                                                            value="{{ Session::get('kondisi') }}">
-                                                            <option selected>Pilih Kondisi Barang</option>
-                                                            <option value="Baru">Baru</option>
-                                                            <option value="Baru">Bekas</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="berat">Berat Barang / Gram</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="package"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="number" id="berat" class="form-control"
-                                                            placeholder="Silahkan Masukan Berat Barang / Gram"
-                                                            name="berat" value="{{ Session::get('berat') }}">
                                                     </div>
                                                 </div>
                                             </div>

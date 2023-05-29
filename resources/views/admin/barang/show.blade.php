@@ -57,24 +57,6 @@
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group has-icon-left">
-                                            <label for="kategori">Kategori Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="kategori" class="form-control"
-                                                        placeholder="Silahkan Masukan Kategori" name="kategori"
-                                                        value="{{ $data->kategori }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
                                             <label for="merek">Merek Barang</label>
                                             <div class="position-relative">
                                                 <div class="input-group">
@@ -131,42 +113,6 @@
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group has-icon-left">
-                                            <label for="kondisi">Kondisi Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="kondisi" class="form-control"
-                                                        placeholder="Silahkan Masukan Kondisi barang" name="kondisi"
-                                                        value="{{ $data->kondisi }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="berat">Berat Barang / Gram</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="berat" class="form-control"
-                                                        placeholder="Silahkan Masukan Berat Barang / Gram" name="berat"
-                                                        value="{{ $data->berat }} Gram" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
                                             <label for="jumlah">Jumlah Barang</label>
                                             <div class="position-relative">
                                                 <div class="input-group">
@@ -213,6 +159,38 @@
                                                     </div>
                                                     <input type="text" id="id_staf" class="form-control" name="id_staf"
                                                         value="{{ $data->user->name }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="timestamp">Waktu Input</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->created_at }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="timestamp">Terakhir di Update</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->updated_at }}" readonly>
                                                 </div>
                                             </div>
                                         </div>

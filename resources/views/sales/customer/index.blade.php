@@ -15,7 +15,6 @@
                                     <th scope="col" class="text-left text-md">Kode Customer</th>
                                     <th scope="col" class="text-left text-md">Nama Toko</th>
                                     <th scope="col" class="text-left text-md">Nama Pemilik</th>
-                                    <th scope="col" class="text-left text-md">No HP</th>
                                     <th scope="col" class="text-left text-md">Alamat</th>
                                     <th scope="col" class="text-left text-md">Utang</th>
                                     <th scope="col" class="text-left text-md">Detail</th>
@@ -27,7 +26,6 @@
                                         <td class="text-left text-md">{{ $item->kd_customer  }}</td>
                                         <td class="text-left text-md">{{ $item->nama_toko }}</td>
                                         <td class="text-left text-md">{{ $item->nama_pemilik }}</td>
-                                        <td class="text-left text-md">{{ $item->no_hp }}</td>
                                         <td class="text-left text-md">{{ $item->alamat }}</td>
                                         <td class="text-left text-md">{{ 'Rp ' . number_format($item->utang, 2, ',', '.') }}</td>
                                         <td class="text-left text-md"><a href="{{ route('salescustomer.show', $item->kd_customer) }}"
