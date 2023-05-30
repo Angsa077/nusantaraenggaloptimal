@@ -157,8 +157,8 @@
                                                             <i data-feather="user"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="text" id="id_staf" class="form-control" name="id_staf"
-                                                        value="{{ $data->user->name }}" readonly>
+                                                    <input type="text" id="id_staf" class="form-control"
+                                                        name="id_staf" value="{{ $data->user->name }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,8 @@
                                                             <i data-feather="clock"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->created_at }}" readonly>
+                                                    <input type="text" id="timestamp" class="form-control"
+                                                        name="timestamp" value="{{ $data->created_at }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,7 +191,8 @@
                                                             <i data-feather="clock"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->updated_at }}" readonly>
+                                                    <input type="text" id="timestamp" class="form-control"
+                                                        name="timestamp" value="{{ $data->updated_at }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,17 +217,10 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-end">
+                                        <a href="{{ route('adminbarang.tambahstok', $data->kd_barang) }}"
+                                            class="btn btn-success mr-1 mb-1">Tambah Stok Barang</a>
                                         <a href="{{ route('adminbarang.edit', $data->kd_barang) }}"
                                             class="btn btn-primary mr-1 mb-1">Edit</a>
-                                        <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                            action="{{ route('adminbarang.destroy', $data->kd_barang) }}"
-                                            class="d-inline" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger ml-3" type="submit" name="submit">
-                                                Delete
-                                            </button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

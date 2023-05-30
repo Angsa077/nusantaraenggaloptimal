@@ -38,10 +38,10 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <button type="button" class="btn btn-secondary mb-2" data-toggle="modal" 
-                                                data-target="#customerModal">
+                                                <button type="button" class="btn btn-secondary mb-2" data-toggle="modal"
+                                                    data-target="#customerModal">
                                                     Pilih Customer
-                                                </button>                                                
+                                                </button>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -165,6 +165,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="col-3 col-md-3 order-md-2 order-last"> <a
+                                    href="{{ route('adminbarang.create') }}" class="btn btn-sm btn-secondary">
+                                    Tambah Barang</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,6 +217,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="col-3 col-md-3 order-md-2 order-last"> <a
+                                    href="{{ route('admincustomer.create') }}" class="btn btn-sm btn-secondary">
+                                    Tambah Customer</a>
+                            </div>
                         </div>
                     </div>
                 </div>

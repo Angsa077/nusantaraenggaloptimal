@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth']], function(){
 Route::group(['middleware' => ['auth', 'level:admin']], function(){
     Route::resource('adminmanajemenuser', AdminManajemenuserController::class);
     Route::resource('adminbarang', AdminBarangController::class);
+    Route::get('/adminbarang/{id}/tambahstok', [AdminBarangController::class, 'tambahStok'])->name('adminbarang.tambahstok');
+    Route::post('/adminbarang/{id}/tambahstok', [AdminBarangController::class,'storeStok'])->name('adminbarang.storestok');
     Route::resource('admincustomer', AdminCustomerController::class);
     Route::resource('adminpenjualan', AdminPenjualanController::class);
 });

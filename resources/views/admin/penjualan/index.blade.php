@@ -21,6 +21,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
+                                    @if ($item->status_barang == 'tersedia')
                                     <tr>
                                         <td class="text-left text-md">{{ $item->tgl_penjualan  }}</td>
                                         <td class="text-left text-md">{{ $item->kd_penjualan  }}</td>
@@ -30,6 +31,7 @@
                                         <td class="text-left text-md"><a href="{{ route('adminpenjualan.show', $item->no_pr) }}"
                                                 class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

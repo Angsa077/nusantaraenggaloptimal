@@ -27,7 +27,7 @@ class KepalaCabangManajemenuserController extends Controller
         if ($request->simpan == 'Setujui') {
             $data['status_akun'] = 'aktif';
         } elseif ($request->simpan == 'Tolak') {
-            $data['status_akun'] = 'nonaktif';
+            $data['status_akun'] = 'tolak';
         }
 
         if ($request->simpan == 'Hapus') {

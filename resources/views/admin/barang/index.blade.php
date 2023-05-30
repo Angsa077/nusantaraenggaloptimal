@@ -18,6 +18,7 @@
                                     <th scope="col" class="text-left text-md">Jumlah</th>
                                     <th scope="col" class="text-left text-md">Harga Beli</th>
                                     <th scope="col" class="text-left text-md">Harga Jual</th>
+                                    <th scope="col" class="text-left text-md">Status Barang</th>
                                     <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                         <td class="text-left text-md">{{ $item->jumlah }}</td>
                                         <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_beli, 2, ',', '.') }}</td>
                                         <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
+                                        <td class="text-left text-md">{{ $item->status_barang }}</td>
                                         <td class="text-left text-md"><a href="{{ route('adminbarang.show', $item->kd_barang) }}"
                                                 class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>

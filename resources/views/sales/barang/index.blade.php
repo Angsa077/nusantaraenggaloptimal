@@ -22,6 +22,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
+                                @if ($item->status_barang == 'tersedia')
                                     <tr>
                                         <td class="text-left text-md">{{ $item->kd_barang  }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
@@ -31,6 +32,7 @@
                                         <td class="text-left text-md"><a href="{{ route('salesbarang.show', $item->kd_barang) }}"
                                                 class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

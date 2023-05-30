@@ -17,7 +17,7 @@ class AdminBarangController extends Controller
     public function index()
     {
         $data = Barang::orderBy('kd_barang')->get();
-        return view('admin.barang.index', ['data'=>$data]);
+        return view('admin.barang.index', ['data' => $data]);
     }
 
     /**
@@ -64,36 +64,35 @@ class AdminBarangController extends Controller
                 'gambar.mimes' => 'Gambar Barang Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
                 'gambar.max' => 'Gambar Barang Yang Diperbolehkan Maksimal 1MB',
             ]
-            );
+        );
 
-            if ($request->hasFile('gambar')) {
-                $foto_file = $request->file('gambar');
+        if ($request->hasFile('gambar')) {
+            $foto_file = $request->file('gambar');
             if ($foto_file != null) {
                 $foto_ekstensi = $foto_file->extension();
                 $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
                 $foto_file->move(public_path('gambar_barang'), $foto_nama);
-
             } else {
                 $foto_nama = null;
             }
         }
 
-            $data = [
-                'kd_barang' => $request->kd_barang,
-                'nama' => $request->nama,
-                'merek' => $request->merek,
-                'harga_beli' => $request->harga_beli,
-                'harga_jual' => $request->harga_jual,
-                'jumlah' => $request->jumlah,
-                'expired' => $request->expired,
-                'status_barang' => 'Proses',
-                'catatan' => $request->catatan,
-                'id_staf' => Auth::user()->id,
-                'gambar' => $foto_nama,
-            ];
+        $data = [
+            'kd_barang' => $request->kd_barang,
+            'nama' => $request->nama,
+            'merek' => $request->merek,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'jumlah' => $request->jumlah,
+            'expired' => $request->expired,
+            'status_barang' => 'proses',
+            'catatan' => $request->catatan,
+            'id_staf' => Auth::user()->id,
+            'gambar' => $foto_nama,
+        ];
 
         Barang::create($data);
-        return redirect()->route('adminbarang.index')->with('success','Berhasil Mengisi Data Barang');
+        return redirect()->route('adminbarang.index')->with('success', 'Berhasil Mengisi Data Barang');
     }
 
     /**
@@ -103,7 +102,7 @@ class AdminBarangController extends Controller
     {
         $user = User::all();
         $data = Barang::where('kd_barang', $id)->first();
-        return view('admin.barang.show', ['data'=>$data, 'user' => $user]);
+        return view('admin.barang.show', ['data' => $data, 'user' => $user]);
     }
 
     /**
@@ -112,7 +111,7 @@ class AdminBarangController extends Controller
     public function edit(string $id)
     {
         $data = Barang::where('kd_barang', $id)->first();
-        return view('admin.barang.edit', ['data'=>$data]);
+        return view('admin.barang.edit', ['data' => $data]);
     }
 
     /**
@@ -142,10 +141,10 @@ class AdminBarangController extends Controller
                 'gambar.mimes' => 'Gambar Barang Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
                 'gambar.max' => 'Gambar Barang Yang Diperbolehkan Maksimal 1MB',
             ]
-            );
+        );
 
-            if ($request->hasFile('gambar')) {
-                $foto_file = $request->file('gambar');
+        if ($request->hasFile('gambar')) {
+            $foto_file = $request->file('gambar');
             if ($foto_file != null) {
                 $foto_ekstensi = $foto_file->extension();
                 $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
@@ -157,26 +156,30 @@ class AdminBarangController extends Controller
                 $foto_nama = null;
             }
 
-            $data = [ 
+            $data = [
                 'gambar' => $foto_nama,
             ];
         }
 
-            $data = [
-                'kd_barang' => $request->kd_barang,
-                'nama' => $request->nama,
-                'merek' => $request->merek,
-                'harga_beli' => $request->harga_beli,
-                'harga_jual' => $request->harga_jual,
-                'jumlah' => $request->jumlah,
-                'expired' => $request->expired,
-                'status_barang' => 'Proses',
-                'catatan' => $request->catatan,
-                'id_staf' => Auth::user()->id,
-            ];
+        $data = [
+            'kd_barang' => $request->kd_barang,
+            'nama' => $request->nama,
+            'merek' => $request->merek,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'jumlah' => $request->jumlah,
+            'expired' => $request->expired,
+            'status_barang' => 'proses',
+            'catatan' => $request->catatan,
+            'id_staf' => Auth::user()->id,
+        ];
 
-        User::where('kd_barang', $id)->update($data);
-        return redirect()->route('adminbarang.index')->with('success','Berhasil memperbarui Data barang');
+        if ($request->simpan == 'Hapus') {
+            $data['status_barang'] = 'hapus';
+        }
+
+        Barang::where('kd_barang', $id)->update($data);
+        return redirect()->route('adminbarang.index')->with('success', 'Berhasil memperbarui Data barang');
     }
 
     /**
@@ -189,5 +192,34 @@ class AdminBarangController extends Controller
 
         Barang::where('kd_barang', $id)->delete();
         return redirect()->route('adminbarang.index')->with('success', 'Berhasil Menghapus Data Barang');
+    }
+
+    public function tambahStok(string $id)
+    {
+        $data = Barang::where('kd_barang', $id)->firstOrFail();
+        return view('admin.barang.tambahstok', compact('data'));
+    }
+
+    public function storeStok(Request $request, string $id)
+    {
+
+        $request->validate(
+            [
+                'jumlah' => 'required|min:1',
+            ],
+            [
+                'jumlah.required' => 'Jumlah Barang Wajib Diisi',
+                'jumlah.min' => 'Jumlah Barang Minimal Satu',
+            ]
+        );
+
+        $barang = Barang::where('kd_barang', $id)->firstOrFail();
+
+        $data = [
+            'jumlah' => $barang->jumlah += $request->jumlah,
+        ];
+
+        Barang::where('kd_barang', $id)->update($data);
+        return redirect()->route('adminbarang.index')->with('success', 'Berhasil memperbarui Data barang');
     }
 }
