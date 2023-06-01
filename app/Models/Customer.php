@@ -10,6 +10,7 @@ use App\Models\District;
 use App\Models\Village;
 use App\Models\User;
 use App\Models\Penjualan;
+use App\Models\PenjualanSementara;
 
 class Customer extends Model
 {
@@ -45,5 +46,10 @@ class Customer extends Model
     public function penjualan()
     {
         return $this->hasMany(Penjualan::class);
+    }
+
+    public function penjualansementara()
+    {
+        return $this->hasMany(PenjualanSementara::class);
     }
 }

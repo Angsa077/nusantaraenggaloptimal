@@ -81,4 +81,5 @@ Route::group(['middleware' => ['auth', 'level:sales']], function(){
     Route::resource('salesbarang', SalesBarangController::class);
     Route::resource('salescustomer', SalesCustomerController::class);
     Route::resource('salespenjualan', SalesPenjualanController::class);
+    Route::post('salespenjualan/sementara', [SalesPenjualanController::class,'sementara'])->name('salespenjualan.sementara');
 });

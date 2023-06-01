@@ -15,6 +15,7 @@ use App\Models\Penjualan;
 use App\Models\Pembayaran;
 use App\Models\Pengiriman;
 use App\Models\Pengembalian;
+use App\Models\PenjualanSementara;
 
 class User extends Authenticatable
 {
@@ -111,5 +112,10 @@ class User extends Authenticatable
     public function pengiriman()
     {
         return $this->hasMany(Pengiriman::class);
+    }
+
+    public function penjualansementara()
+    {
+        return $this->hasMany(PenjualanSementara::class);
     }
 }

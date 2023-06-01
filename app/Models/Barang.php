@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Penjualan;
+use App\Models\PenjualanSementara;
 
 class Barang extends Model
 {
@@ -21,5 +22,10 @@ class Barang extends Model
     public function penjualan()
     {
         return $this->hasMany(Penjualan::class);
+    }
+
+    public function penjualansementara()
+    {
+        return $this->hasMany(PenjualanSementara::class);
     }
 }
