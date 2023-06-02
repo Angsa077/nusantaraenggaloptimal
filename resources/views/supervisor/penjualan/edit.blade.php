@@ -141,7 +141,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
+                                    @if ($data->status_persetujuan == 'persetujuanspv')
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="button" class="btn btn-secondary mr-1 mb-1"
                                                 data-toggle="modal" data-target="#listDataModal">Periksa Barang</button>
@@ -170,7 +170,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('adminpenjualan.update', $data->kd_penjualan) }}" method="POST"
+                <form action="{{ route('supervisorpenjualan.update', $data->kd_penjualan) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -184,8 +184,8 @@
                             required>
                         <label for="kd_barang"><strong>Nama Barang:</strong> {{ $data->barang->nama }}</label><br>
 
-                        <input type="checkbox" id="jumlah_barang" name="jumlah_barang" value="{{ $data->jumlah_barang }}"
-                            required>
+                        <input type="checkbox" id="jumlah_barang" name="jumlah_barang"
+                            value="{{ $data->jumlah_barang }}" required>
                         <label for="jumlah_barang"><strong>Jumlah Barang:</strong> {{ $data->jumlah_barang }}
                             Barang</label><br>
 
@@ -201,20 +201,27 @@
 
                         <input type="checkbox" id="masa_garansi" name="masa_garansi" value="{{ $data->masa_garansi }}"
                             required>
-                        <label for="masa_garansi"><strong>Masa Garansi:</strong> {{ $data->masa_garansi }} Hari</label><br>
+                        <label for="masa_garansi"><strong>Masa Garansi:</strong> {{ $data->masa_garansi }}
+                            Hari</label><br>
+
+                        <div class="input-group mt-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i data-feather="clipboard"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="catatan" class="form-control"
+                                placeholder="Silahkan Masukan Catatan" name="catatan"
+                                value="{{ Session::get('catatan') }}" required>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary" name="simpan">Proses SPV</button>
-                    </form>
-                        <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                            action="{{ route('adminpenjualan.destroy', $data->kd_penjualan) }}" class="d-inline"
-                            method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger mr-1 mb-1" type="submit" name="submit">Delete</button>
-                        </form>
-                    </div>
+                        <button type="submit" class="btn btn-secondary mb-1" name="simpan" value="Setujui">Setujui</button>
+                        <button type="submit" class="btn btn-danger mb-1" name="simpan" value="Tolak">Tolak</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

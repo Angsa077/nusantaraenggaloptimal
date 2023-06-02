@@ -18,9 +18,9 @@ return new class extends Migration
             $table->date('tgl_sampai')->nullable();
             $table->string('nama_penerima', 20)->nullable();
             $table->string('bukti_pengiriman')->nullable();
-            $table->string('status_persetujuan', 20)->nullable();
+            $table->string('bukti_penerimaan')->nullable();
             $table->string('catatan')->nullable();
-		    $table->bigInteger('id_staf')->nullable();
+	        $table->bigInteger('id_staf')->nullable();
             $table->timestamps();
         });
     }

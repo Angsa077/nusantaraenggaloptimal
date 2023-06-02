@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Penjualan;
+use App\Models\User;
 
 class Pengiriman extends Model
 {
@@ -19,13 +20,18 @@ class Pengiriman extends Model
         'tgl_sampai',
         'nama_penerima',
         'bukti_pengiriman',
-        'status_persetujuan',
+        'bukti_penerimaan',
         'catatan',
         'id_staf'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_staf', 'id');
+    }
+    
     public function penjualan()
     {
-        return $this->hasMany(Penjualan::class);
+        return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\ChangedPasswordController;
 use App\Http\Controllers\KepalaCabangBarangController;
 use App\Http\Controllers\KepalaCabangCustomerController;
 use App\Http\Controllers\KepalaCabangManajemenuserController;
+use App\Http\Controllers\KurirPengembalian;
+use App\Http\Controllers\KurirPengiriman;
 use App\Http\Controllers\ProfiledController;
 use App\Http\Controllers\SalesBarangController;
 use App\Http\Controllers\SalesCustomerController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
 use App\Http\Controllers\SupervisorManajemenuserController;
+use App\Http\Controllers\SupervisorPenjualanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,6 +80,7 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
     Route::resource('supervisormanajemenuser', SupervisorManajemenuserController::class);
     Route::resource('supervisorbarang', SupervisorBarangController::class);
     Route::resource('supervisorcustomer', SupervisorCustomerController::class);
+    Route::resource('supervisorpenjualan', SupervisorPenjualanController::class);
 });
 
 Route::group(['middleware' => ['auth', 'level:sales']], function(){
@@ -85,4 +89,9 @@ Route::group(['middleware' => ['auth', 'level:sales']], function(){
     Route::resource('salespenjualan', SalesPenjualanController::class);
     Route::post('salespenjualan/sementara', [SalesPenjualanController::class,'sementara'])->name('salespenjualan.sementara');
     Route::delete('salespenjualan/create/{id}', [SalesPenjualanController::class, 'destroysementara'])->name('salespenjualan.destroysementara');
+});
+
+Route::group(['middleware' => ['auth', 'level:kurir']], function(){
+    Route::resource('kurirpengiriman', KurirPengiriman::class);
+    Route::resource('kurirpengembalian', KurirPengembalian::class);
 });

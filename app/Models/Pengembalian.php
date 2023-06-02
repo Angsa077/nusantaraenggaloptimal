@@ -25,6 +25,6 @@ class Pengembalian extends Model
 
     public function penjualan()
     {
-        return $this->hasMany(Penjualan::class);
+        return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
     }
 }
