@@ -44,52 +44,10 @@ class SalesPenjualanController extends Controller
         $isTableEmpty = PenjualanSementara::count() === 0;
         if (!$existingCustomer) {
             if (!$isTableEmpty) {
-            return redirect()->back()->withErrors(['kd_customer' => 'Selesaikan Pembayaran Kode Customer Yang Sudah Ada Terlebih Dahulu']);
+                return redirect()->back()->withErrors(['kd_customer' => 'Selesaikan Pembayaran Kode Customer Yang Sudah Ada Terlebih Dahulu']);
             }
         }
 
-            $barang = Barang::where('kd_barang', $request->kd_barang)->first();
-            if (!$barang) {
-                return redirect()->back()->withErrors(['kd_barang' => 'Kode Barang Tidak Ditemukan']);
-            }
-
-            Session::flash('kd_barang', $request->kd_barang);
-            Session::flash('kd_customer', $request->kd_customer);
-            Session::flash('jumlah_barang', $request->jumlah_barang);
-            Session::flash('masa_garansi', $request->masa_garansi);
-
-            $total_harga = $barang->harga_jual * $request->jumlah_barang;
-
-            $request->validate(
-                [
-                    'kd_barang' => 'required',
-                    'kd_customer' => 'required',
-                    'jumlah_barang' => 'required',
-                    'masa_garansi' => 'required',
-                ],
-                [
-                    'kd_barang.required' => 'Kode Barang Wajib Diisi',
-                    'kd_customer.required' => 'Kode Customer Wajib Diisi',
-                    'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
-                    'masa_garansi.required' => 'Masa Garansi Wajib Diisi',
-                ]
-            );
-
-            $data = [
-                'kd_barang' => $request->kd_barang,
-                'kd_customer' => $request->kd_customer,
-                'jumlah_barang' => $request->jumlah_barang,
-                'total_harga' => $total_harga,
-                'masa_garansi' => $request->masa_garansi,
-                'id_staf' => Auth::user()->id,
-            ];
-
-            PenjualanSementara::create($data);
-            return redirect()->back()->with('success', 'Berhasil Mengisi Pesanan, Silahkan Lanjutkan Pembayaran');
-    }
-
-    public function store(Request $request)
-    {
         $barang = Barang::where('kd_barang', $request->kd_barang)->first();
         if (!$barang) {
             return redirect()->back()->withErrors(['kd_barang' => 'Kode Barang Tidak Ditemukan']);
@@ -99,11 +57,51 @@ class SalesPenjualanController extends Controller
         Session::flash('kd_customer', $request->kd_customer);
         Session::flash('jumlah_barang', $request->jumlah_barang);
         Session::flash('masa_garansi', $request->masa_garansi);
-        Session::flash('total_bayar', $request->total_bayar);
 
         $total_harga = $barang->harga_jual * $request->jumlah_barang;
-        $sisa_bayar = $total_harga - $request->total_bayar;
 
+        $request->validate(
+            [
+                'kd_barang' => 'required',
+                'kd_customer' => 'required',
+                'jumlah_barang' => 'required',
+                'masa_garansi' => 'required',
+            ],
+            [
+                'kd_barang.required' => 'Kode Barang Wajib Diisi',
+                'kd_customer.required' => 'Kode Customer Wajib Diisi',
+                'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
+                'masa_garansi.required' => 'Masa Garansi Wajib Diisi',
+            ]
+        );
+
+        $data = [
+            'kd_barang' => $request->kd_barang,
+            'kd_customer' => $request->kd_customer,
+            'jumlah_barang' => $request->jumlah_barang,
+            'total_harga' => $total_harga,
+            'masa_garansi' => $request->masa_garansi,
+            'id_staf' => Auth::user()->id,
+        ];
+
+        PenjualanSementara::create($data);
+        return redirect()->back()->with('success', 'Berhasil Mengisi Pesanan, Silahkan Lanjutkan Pembayaran');
+    }
+
+    public function store(Request $request)
+    {
+        $penjualansementara = PenjualanSementara::where('id_staf', Auth::user()->id)->first();
+        $kd_penjualan = $penjualansementara->kd_penjualan;
+        $kd_barang = $penjualansementara->kd_barang;
+        $kd_customer = $penjualansementara->kd_customer;
+        $masa_garansi = $penjualansementara->masa_garansi;
+
+        $total_harga = $penjualansementara->sum('total_harga');
+        $jumlah_barang = $penjualansementara->sum('jumlah_barang');
+
+        Session::flash('total_bayar', $request->total_bayar);
+
+        $sisa_bayar = $total_harga - $request->total_bayar;
         if ($total_harga == $request->total_bayar) {
             $status_pembayaran = "lunas";
         } elseif ($request->total_bayar < $total_harga) {
@@ -112,18 +110,10 @@ class SalesPenjualanController extends Controller
 
         $request->validate(
             [
-                'kd_barang' => 'required',
-                'kd_customer' => 'required',
-                'jumlah_barang' => 'required',
-                'masa_garansi' => 'required',
                 'total_bayar' => 'required|numeric|max:' . $total_harga,
                 'bukti_pembayaran' => 'required|mimes:jpeg,jpg,png,gif|max:1024',
             ],
             [
-                'kd_barang.required' => 'Kode Barang Wajib Diisi',
-                'kd_customer.required' => 'Kode Customer Wajib Diisi',
-                'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
-                'masa_garansi.required' => 'Masa Garansi Wajib Diisi',
                 'total_bayar.required' => 'Total Pembayaran Wajib Diisi',
                 'total_bayar.numeric' => 'Total Pembayaran harus berupa angka',
                 'total_bayar.max' => 'Total Pembayaran tidak boleh lebih dari Harga Total',
@@ -145,12 +135,13 @@ class SalesPenjualanController extends Controller
         }
 
         $data_penjualan = [
-            'kd_barang' => $request->kd_barang,
-            'kd_customer' => $request->kd_customer,
-            'jumlah_barang' => $request->jumlah_barang,
+            'kd_penjualan' => $kd_penjualan,
+            'kd_barang' => $kd_barang,
+            'kd_customer' => $kd_customer,
+            'jumlah_barang' => $jumlah_barang,
             'total_harga' => $total_harga,
             'total_bayar' => $request->total_bayar,
-            'masa_garansi' => $request->masa_garansi,
+            'masa_garansi' => $masa_garansi,
             'tgl_penjualan' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
             'status_pembayaran' => $status_pembayaran,
             'status_persetujuan'  => 'proses',
@@ -169,7 +160,6 @@ class SalesPenjualanController extends Controller
             'catatan' => $request->catatan,
         ];
         Pembayaran::create($data_pembayaran);
-
         return redirect()->route('salespenjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
     }
 
@@ -209,5 +199,11 @@ class SalesPenjualanController extends Controller
 
     public function destroy(string $id)
     {
+    }
+
+    public function destroysementara($id)
+    {
+        PenjualanSementara::where('kd_penjualansementara', $id)->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus Penjualan Sementara');
     }
 }

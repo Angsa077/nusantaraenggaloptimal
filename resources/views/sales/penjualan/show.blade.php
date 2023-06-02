@@ -143,8 +143,6 @@
 
                                     @if ($data->status_persetujuan == 'proses' )
                                     <div class="col-12 d-flex justify-content-end">
-                                        <a href="{{ route('salespenjualan.edit', $data->kd_penjualan) }}"
-                                            class="btn btn-secondary mr-1 mb-1">Edit</a>
                                         <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                             action="{{ route('salespenjualan.destroy', $data->kd_penjualan) }}" class="d-inline"
                                             method="POST">

@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth', 'level:admin']], function(){
     Route::post('/adminbarang/{id}/tambahstok', [AdminBarangController::class,'storeStok'])->name('adminbarang.storestok');
     Route::resource('admincustomer', AdminCustomerController::class);
     Route::resource('adminpenjualan', AdminPenjualanController::class);
+    Route::post('adminpenjualan/sementara', [AdminPenjualanController::class,'sementara'])->name('adminpenjualan.sementara');
+    Route::delete('adminpenjualan/create/{id}', [AdminPenjualanController::class, 'destroysementara'])->name('adminpenjualan.destroysementara');
 });
 
 Route::group(['middleware' => ['auth', 'level:kepalacabang']], function(){
@@ -82,4 +84,5 @@ Route::group(['middleware' => ['auth', 'level:sales']], function(){
     Route::resource('salescustomer', SalesCustomerController::class);
     Route::resource('salespenjualan', SalesPenjualanController::class);
     Route::post('salespenjualan/sementara', [SalesPenjualanController::class,'sementara'])->name('salespenjualan.sementara');
+    Route::delete('salespenjualan/create/{id}', [SalesPenjualanController::class, 'destroysementara'])->name('salespenjualan.destroysementara');
 });

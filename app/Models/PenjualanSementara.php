@@ -14,6 +14,7 @@ class PenjualanSementara extends Model
     protected $table ="penjualansementara";
     protected $fillable = 
     [
+        'kd_penjualansementara',
         'kd_penjualan',
         'kd_barang',
         'kd_customer',

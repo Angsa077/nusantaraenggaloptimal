@@ -113,7 +113,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('salespenjualan.sementara') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('salespenjualan.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12 col-12">
@@ -190,6 +190,7 @@
                                                 <th scope="col" class="text-left text-md">Harga Barang</th>
                                                 <th scope="col" class="text-left text-md">Jumlah Barang</th>
                                                 <th scope="col" class="text-left text-md">Total Harga</th>
+                                                <th scope="col" class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -204,6 +205,14 @@
                                                         <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->barang->harga_jual, 2, ',', '.') }}</td>
                                                         <td class="text-left text-md">{{ $pensem->jumlah_barang }} Unit</td>
                                                         <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->total_harga, 2, ',', '.') }}</td>
+                                                        <td class="text-center">
+                                                            <form action="{{ route('salespenjualan.destroysementara', $pensem->kd_penjualansementara) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                            </form>
+                                                        </td>
+                                                        
                                                     </tr>
                                                     <?php
                                                         $total_jumlah_barang += $pensem->jumlah_barang;
