@@ -71,6 +71,24 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
+                                                <label for="jumlah">Jumlah Barang</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="package"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="number" id="jumlah" class="form-control"
+                                                            placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
+                                                            value="{{ Session::get('jumlah') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
                                                 <label for="harga_beli">Harga Beli</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
@@ -100,24 +118,6 @@
                                                         <input type="number" id="harga_jual" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
                                                             value="{{ Session::get('harga_jual') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="jumlah">Jumlah Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="package"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="number" id="jumlah" class="form-control"
-                                                            placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                            value="{{ Session::get('jumlah') }}">
                                                     </div>
                                                 </div>
                                             </div>

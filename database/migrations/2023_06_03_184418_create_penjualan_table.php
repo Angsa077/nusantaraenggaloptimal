@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id('kd_penjualan');
-            $table->string('kd_barang', 20)->nullable();
+            $table->bigInteger('id_barang')->nullable();
             $table->string('kd_customer', 20)->nullable();
             $table->bigInteger('jumlah_barang')->nullable();
             $table->double('total_bayar')->nullable();
@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('status_pengembalian', 20)->nullable();
             $table->string('status_persetujuan', 20)->nullable();
             $table->string('catatan')->nullable();
-		    $table->bigInteger('id_staf')->nullable();
+	        $table->bigInteger('id_staf')->nullable();
+            $table->bigInteger('id_admin')->nullable();
+            $table->bigInteger('id_spv')->nullable();
             $table->timestamps();
         });
     }

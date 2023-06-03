@@ -67,13 +67,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 d-flex justify-content-end mt-3">
-                                        @if ($data->status_barang != 'proses' && $data->status_barang != 'tolak')
-                                            <a href="{{ route('adminbarang.tambahstok', $data->kd_barang) }}"
-                                                class="btn btn-secondary">Tambah Stok Barang</a>
-                                        @endif
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -83,7 +76,7 @@
         </section>
     </div>
 
-    <!-- Stok Barang -->
+    <!-- Stok Barang Modal -->
     <div class="main-content container-fluid">
         <section class="section">
             <div class="card">
@@ -116,7 +109,7 @@
                                                 {{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
                                             <td class="text-left text-md">{{ $item->status_barang }}</td>
                                             <td class="text-left text-md"><a
-                                                    href="{{ route('adminbarang.edit', $item->id_barang) }}"
+                                                    href="{{ route('supervisorbarang.edit', $item->id_barang) }}"
                                                     class="btn"><i data-feather="more-horizontal"></i></a></td>
                                         </tr>
                                         <?php $totalJumlah += $item->jumlah; ?> <!-- Tambahkan jumlah ke totalJumlah -->

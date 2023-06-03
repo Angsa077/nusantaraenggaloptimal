@@ -16,7 +16,7 @@ class PenjualanSementara extends Model
     [
         'kd_penjualansementara',
         'kd_penjualan',
-        'kd_barang',
+        'id_barang',
         'kd_customer',
         'jumlah_barang',
         'total_harga',
@@ -26,7 +26,7 @@ class PenjualanSementara extends Model
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'kd_barang', 'kd_barang');
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
     }
 
     public function customer()

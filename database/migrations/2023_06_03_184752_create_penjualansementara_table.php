@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('penjualansementara', function (Blueprint $table) {
             $table->id('kd_penjualansementara');
             $table->bigInteger('kd_penjualan')->nullable();
-            $table->string('kd_barang', 20)->nullable();
+            $table->bigInteger('id_barang')->nullable();
             $table->string('kd_customer', 20)->nullable();
             $table->bigInteger('jumlah_barang')->nullable();
             $table->double('total_harga')->nullable();

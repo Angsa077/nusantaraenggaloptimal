@@ -15,11 +15,20 @@ class SupervisorBarangController extends Controller
         return view('supervisor.barang.index', ['data'=>$data]);
     }
 
+    public function show(string $id)
+    {
+        $spv = User::all();
+        $user = User::all();
+        $barang = Barang::all();
+        $data = Barang::where('kd_barang', $id)->first();
+        return view('supervisor.barang.show', ['data' => $data, 'barang' => $barang, 'user' => $user, 'spv' => $spv]);
+    }
+
     public function edit(string $id)
     {
         $spv = User::all();
         $user = User::all();
-        $data = Barang::where('kd_barang', $id)->first();
+        $data = Barang::where('id_barang', $id)->first();
         return view('supervisor.barang.edit', ['data'=>$data, 'user' => $user, 'spv' => $spv]);
     }
 
@@ -35,23 +44,23 @@ class SupervisorBarangController extends Controller
         }
 
         if ($request->simpan == 'Hapus') {
-            Barang::where('kd_barang', $id)->delete();
+            Barang::where('id_barang', $id)->delete();
+            return redirect()->route('supervisorbarang.index')->with('success','Berhasil Menghapus Data Barang');
         } elseif ($request->simpan == 'Batal') {
             $data['status_barang'] = 'tolak';
         }
 
-        $jumlah = $request->session()->get('jumlah');
-
         if ($request->simpan == 'Tambah') {
             $data = [
                 'status_barang' => 'tersedia',
-                'jumlah' => $jumlah,
+                'id_spv' => Auth::user()->id,
         ];
         } elseif ($request->simpan == 'Tidak') {
-            $data['status_barang'] = 'tersedia';
+            Barang::where('id_barang', $id)->delete();
+            return redirect()->route('supervisorbarang.index')->with('success','Berhasil Menghapus Data Barang');
         }
 
-        Barang::where('kd_barang', $id)->update($data);
+        Barang::where('id_barang', $id)->update($data);
         return redirect()->route('supervisorbarang.index')->with('success','Berhasil Memperbarui Data Barang');
     }
 }

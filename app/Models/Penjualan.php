@@ -18,7 +18,7 @@ class Penjualan extends Model
     protected $fillable = 
     [
         'kd_penjualan',
-        'kd_barang',
+        'id_barang',
         'kd_customer',
         'jumlah_barang',
         'total_bayar',
@@ -30,7 +30,9 @@ class Penjualan extends Model
         'status_pengembalian',
         'status_persetujuan',
         'catatan',
-        'id_staf'
+        'id_staf',
+        'id_admin',
+        'id_spv',
     ];
 
     public function user()
@@ -38,9 +40,19 @@ class Penjualan extends Model
         return $this->belongsTo(User::class, 'id_staf', 'id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'id_admin', 'id');
+    }
+
+    public function spv()
+    {
+        return $this->belongsTo(User::class, 'id_spv', 'id');
+    }
+
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'kd_barang', 'kd_barang');
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
     }
 
     public function customer()

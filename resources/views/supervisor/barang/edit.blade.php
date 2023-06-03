@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('supervisorbarang.update', $data->kd_barang) }}" method="POST"
+                                <form action="{{ route('supervisorbarang.update', $data->id_barang) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -79,6 +79,24 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
+                                                <label for="jumlah">Jumlah Barang</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="package"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="jumlah" class="form-control"
+                                                            placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
+                                                            value="{{ $data->jumlah }} Barang" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
                                                 <label for="harga_beli">Harga Beli</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
@@ -110,24 +128,6 @@
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
                                                             value="{{ 'Rp ' . number_format($data->harga_jual, 2, ',', '.') }}"
                                                             readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="jumlah">Jumlah Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="package"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="jumlah" class="form-control"
-                                                            placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                            value="{{ $data->jumlah }} Barang" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,11 +187,39 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if ($data->status_barang == 'proses')
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
+                                                    value="Tolak">Tolak</button>
+                                                <button type="submit" class="btn btn-secondary mt-3" name="simpan"
+                                                    value="Setujui">Setujui</button>
+                                            </div>
+                                        @endif
+
+                                        @if ($data->status_barang == 'hapus')
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
+                                                    value="Batal">Batal</button>
+                                                <button type="submit" class="btn btn-secondary mt-3" name="simpan"
+                                                    value="Hapus">Hapus</button>
+                                            </div>
+                                        @endif
+
+                                        @if ($data->status_barang == 'tambah')
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-secondary mt-3 mr-2" name="simpan"
+                                                    value="Tidak">Tidak</button>
+                                                <button type="submit" class="btn btn-danger mt-3" name="simpan"
+                                                    value="Tambah">Tambah</button>
+                                            </div>
+                                        @endif
                                     </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="col-12">
                     <div class="card">
@@ -267,40 +295,11 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    @if ($data->status_barang == 'proses')
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
-                                                value="Tolak">Tolak</button>
-                                            <button type="submit" class="btn btn-secondary mt-3" name="simpan"
-                                                value="Setujui">Setujui</button>
-                                        </div>
-                                    @endif
-
-                                    @if ($data->status_barang == 'hapus')
-                                        <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
-                                            value="Batal">Batal</button>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-secondary mt-3" name="simpan"
-                                                value="Hapus">Hapus</button>
-                                        </div>
-                                    @endif
-
-                                    @if ($data->status_barang == 'tambah')
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-secondary mt-3 mr-2" name="simpan"
-                                                value="Tidak">Tidak</button>
-                                            <button type="submit" class="btn btn-danger mt-3" name="simpan"
-                                                value="Tambah">Tambah</button>
-                                        </div>
-                                    @endif
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection
