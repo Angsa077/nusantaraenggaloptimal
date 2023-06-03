@@ -13,7 +13,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     @if ($data->gambar)
-                                        <div class="position-relative">
+                                        <div class="position-relative mb-3">
                                             <img src="{{ asset('gambar_barang/' . $data->gambar) }}" width="100px"
                                                 height="100px" alt="">
                                         </div>

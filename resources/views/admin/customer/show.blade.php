@@ -261,18 +261,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 d-flex justify-content-end mt-2">
-                                        <a href="{{ route('admincustomer.edit', $data->kd_customer) }}"
-                                            class="btn btn-primary mr-1 mb-1">Edit</a>
+                                    <div class="col-12 d-flex justify-content-end mt-3">
                                         <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                             action="{{ route('admincustomer.destroy', $data->kd_customer) }}"
                                             class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger ml-3" type="submit" name="submit">
+                                            <button class="btn btn-danger mr-3" type="submit" name="submit">
                                                 Delete
                                             </button>
                                         </form>
+                                        <a href="{{ route('admincustomer.edit', $data->kd_customer) }}"
+                                            class="btn btn-secondary">Edit</a>
                                     </div>
                                 </div>
                             </div>

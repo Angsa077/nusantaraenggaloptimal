@@ -12,14 +12,8 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
-                                    @if ($data->gambar)
-                                        <div class="position-relative">
-                                            <img src="{{ asset('gambar_barang/' . $data->gambar) }}" width="100px"
-                                                height="100px" alt="">
-                                        </div>
-                                    @endif
 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="kd_barang">Kode Barang</label>
                                             <div class="position-relative">
@@ -37,7 +31,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="nama">Nama Barang</label>
                                             <div class="position-relative">
@@ -55,7 +49,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-4 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="merek">Merek Barang</label>
                                             <div class="position-relative">
@@ -73,149 +67,64 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="harga_beli">Harga Beli</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="dollar-sign"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="harga_beli" class="form-control"
-                                                        placeholder="Silahkan Masukan Harga Beli" name="harga_beli"
-                                                        value="{{ 'Rp ' . number_format($data->harga_beli, 2, ',', '.') }}"
-                                                        readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="harga_jual">Harga Jual</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="dollar-sign"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="harga_jual" class="form-control"
-                                                        placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
-                                                        value="{{ 'Rp ' . number_format($data->harga_jual, 2, ',', '.') }}"
-                                                        readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="jumlah">Jumlah Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="number" id="jumlah" class="form-control"
-                                                        placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                        value="{{ $data->jumlah }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="expired">Tanggal Expired</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="calendar"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="date" id="expired" class="form-control"
-                                                        placeholder="Silahkan Masukan Tanggal Expired" name="expired"
-                                                        value="{{ $data->expired }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="id_staf">Nama Staf </label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="user"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="id_staf" class="form-control" name="id_staf"
-                                                        value="{{ $data->user->name }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="timestamp">Waktu Input</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="clock"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->created_at }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="timestamp">Terakhir di Update</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="clock"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->updated_at }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="catatan">Catatan Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="clipboard"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="catatan" class="form-control"
-                                                        placeholder="Silahkan Masukan Catatan Barang" name="catatan"
-                                                        value="{{ $data->catatan }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Stok Barang Modal -->
+    <div class="main-content container-fluid">
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    Stok Barang
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive-sm">
+                        <table class="table table-hover" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-left text-md">Tanggal Masuk</th>
+                                    <th scope="col" class="text-left text-md">Jumlah</th>
+                                    <th scope="col" class="text-left text-md">Harga Beli</th>
+                                    <th scope="col" class="text-left text-md">Harga Jual</th>
+                                    <th scope="col" class="text-left text-md">Status Barang</th>
+                                    <th scope="col" class="text-left text-md">Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $totalJumlah = 0; ?> <!-- Tambahkan variabel totalJumlah -->
+                                @foreach ($barang as $item)
+                                    @if ($item->kd_barang == $data->kd_barang)
+                                        <tr>
+                                            <td class="text-left text-md">{{ $item->created_at }}</td>
+                                            <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($item->harga_beli, 2, ',', '.') }}</td>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
+                                            <td class="text-left text-md">{{ $item->status_barang }}</td>
+                                            <td class="text-left text-md"><a
+                                                    href="{{ route('kepalacabangbarang.edit', $item->id_barang) }}"
+                                                    class="btn"><i data-feather="more-horizontal"></i></a></td>
+                                        </tr>
+                                        <?php $totalJumlah += $item->jumlah; ?> <!-- Tambahkan jumlah ke totalJumlah -->
+                                    @endif
+                                @endforeach
+                                <tr>
+                                    <td class="text-left text-md"><strong>Total Barang</strong></td>
+                                    <td class="text-left text-md"><strong>{{ $totalJumlah }} Barang</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -193,7 +193,7 @@
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
+                                            <button type="submit" class="btn btn-secondary mr-2 mt-3">Submit</button>
                                         </div>
                                     </div>
                                 </form>

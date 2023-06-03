@@ -128,7 +128,7 @@
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary mr-1 mb-1"
+                                            <button type="submit" class="btn btn-secondary mr-2 mt-3"
                                                 name="simpan">Submit</button>
                                         </div>
                                     </div>

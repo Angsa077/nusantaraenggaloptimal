@@ -79,7 +79,7 @@
 
                             <div class="form-group row mb-0 mt-2">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">
+                                    <button type="submit" class="btn btn-secondary" data-toggle="modal" data-target="#confirmModal">
                                         {{ __('Save Changes') }}
                                     </button>
                                 </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="confirmPassword()">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="confirmPassword()">Save Changes</button>
                 </div>
             </div>
         </div>

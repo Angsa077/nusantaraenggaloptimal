@@ -34,7 +34,7 @@
                             </tbody>
                         </table>
                         <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('salespenjualan.create') }}"
-                                class="btn btn-secondary mr-3"><i data-feather="plus"></i>
+                                class="btn btn-secondary mr-3">
                                 Tambah Pesanan</a>
                         </div>
                     </div>

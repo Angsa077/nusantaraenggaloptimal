@@ -12,6 +12,7 @@
                         <table class="table table-hover" id="myTable">
                             <thead>
                                 <tr>
+                                    <th scope="col" class="text-left text-md">Tanggal Barang Masuk</th>
                                     <th scope="col" class="text-left text-md">Kode Barang</th>
                                     <th scope="col" class="text-left text-md">Nama</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
@@ -24,6 +25,7 @@
                                 @foreach ($data as $item)
                                 @if ($item->status_barang == 'tersedia')
                                     <tr>
+                                        <td class="text-left text-md">{{ $item->created_at  }}</td>
                                         <td class="text-left text-md">{{ $item->kd_barang  }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
                                         <td class="text-left text-md">{{ $item->merek }}</td>
