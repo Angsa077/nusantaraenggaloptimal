@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="main-content container-fluid">
+    <div class="main-content container-fluid mt-5">
 
         <section id="multiple-column-form">
             <div class="row match-height">
@@ -11,12 +11,13 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('adminbarang.update', $data->kd_barang) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('adminbarang.update', $data->kd_barang) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
                                         @if ($data->gambar)
-                                            <div class="position-relative">
+                                            <div class="position-relative mb-3">
                                                 <img src="{{ asset('gambar_barang/' . $data->gambar) }}" width="100px"
                                                     height="100px" alt="">
                                             </div>
@@ -88,12 +89,12 @@
                                                         </div>
                                                         <input type="number" id="harga_beli" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Beli" name="harga_beli"
-                                                            value="{{$data->harga_beli}}">
+                                                            value="{{ $data->harga_beli }}">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="harga_jual">Harga Jual</label>
@@ -106,7 +107,7 @@
                                                         </div>
                                                         <input type="number" id="harga_jual" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
-                                                            value="{{$data->harga_jual}}">
+                                                            value="{{ $data->harga_jual }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,8 +159,9 @@
                                                                 <i data-feather="file-plus"></i>
                                                             </span>
                                                         </div>
-                                                <input type="file" id="gambar" class="form-control"
-                                                    placeholder="Silahkan Masukan Gambar Barang" name="gambar" value="{{ $data->gambar }}">
+                                                        <input type="file" id="gambar" class="form-control"
+                                                            placeholder="Silahkan Masukan Gambar Barang" name="gambar"
+                                                            value="{{ $data->gambar }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,16 +185,13 @@
                                             </div>
                                         </div>
 
-                                        @if ($data->status_barang != 'proses')
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary mr-1 mb-1"
-                                                name="simpan">Submit</button>
-                                        </div>
-                                        @endif
-
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-secondary mr-1 mb-1" name="simpan"
-                                                value="Hapus">Hapus</button>
+                                            @if ($data->status_barang == 'proses' || $data->status_barang == 'tolak')
+                                                <button type="submit" class="btn btn-danger mr-2" name="simpan"
+                                                    value="Hapus">Hapus</button>
+                                                <button type="submit" class="btn btn-secondary"
+                                                    name="simpan">Perbarui</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </form>
@@ -200,7 +199,7 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </section>
     </div>
 @endsection

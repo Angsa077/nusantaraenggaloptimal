@@ -100,9 +100,10 @@ class AdminBarangController extends Controller
      */
     public function show(string $id)
     {
+        $spv = User::all();
         $user = User::all();
         $data = Barang::where('kd_barang', $id)->first();
-        return view('admin.barang.show', ['data' => $data, 'user' => $user]);
+        return view('admin.barang.show', ['data' => $data, 'user' => $user, 'spv' => $spv]);
     }
 
     /**
@@ -214,10 +215,13 @@ class AdminBarangController extends Controller
         );
 
         $barang = Barang::where('kd_barang', $id)->firstOrFail();
+        $jumlah =$barang->jumlah += $request->jumlah;
 
         $data = [
-            'jumlah' => $barang->jumlah += $request->jumlah,
+            'status_barang' => 'tambah',
         ];
+
+        $request->session()->put('jumlah', $jumlah);
 
         Barang::where('kd_barang', $id)->update($data);
         return redirect()->route('adminbarang.index')->with('success', 'Berhasil memperbarui Data barang');

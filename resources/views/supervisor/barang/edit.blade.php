@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="main-content container-fluid">
+    <div class="main-content container-fluid mt-5">
 
         <section id="multiple-column-form">
             <div class="row match-height">
@@ -11,12 +11,13 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('supervisorbarang.update', $data->kd_barang) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('supervisorbarang.update', $data->kd_barang) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
                                         @if ($data->gambar)
-                                            <div class="position-relative">
+                                            <div class="position-relative mb-3">
                                                 <img src="{{ asset('gambar_barang/' . $data->gambar) }}" width="100px"
                                                     height="100px" alt="">
                                             </div>
@@ -86,14 +87,15 @@
                                                                 <i data-feather="dollar-sign"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="harga_beli" class="form-control"
+                                                        <input type="text" id="harga_beli" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Beli" name="harga_beli"
-                                                            value="{{$data->harga_beli}}" readonly>
+                                                            value="{{ 'Rp ' . number_format($data->harga_beli, 2, ',', '.') }}"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="harga_jual">Harga Jual</label>
@@ -104,9 +106,10 @@
                                                                 <i data-feather="dollar-sign"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="harga_jual" class="form-control"
+                                                        <input type="text" id="harga_jual" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
-                                                            value="{{$data->harga_jual}}" readonly>
+                                                            value="{{ 'Rp ' . number_format($data->harga_jual, 2, ',', '.') }}"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,9 +125,9 @@
                                                                 <i data-feather="package"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="jumlah" class="form-control"
+                                                        <input type="text" id="jumlah" class="form-control"
                                                             placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                            value="{{ $data->jumlah }}" readonly>
+                                                            value="{{ $data->jumlah }} Barang" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,7 +163,7 @@
                                                         </div>
                                                         <input type="text" id="catatan" class="form-control"
                                                             placeholder="Silahkan Masukan Catatan Barang" name="catatan"
-                                                            value="{{ $data->catatan }}" readonly>
+                                                            value="{{ $data->catatan ?: 'Tidak ada' }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,60 +171,136 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="timestamp">Waktu Input</label>
+                                                <label for="status_barang">Status Barang</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">
-                                                                <i data-feather="clock"></i>
+                                                                <i data-feather="package"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->created_at }}" readonly>
+                                                        <input type="text" id="status_barang" class="form-control"
+                                                            placeholder="Silahkan Masukan Status Barang"
+                                                            name="status_barang" value="{{ $data->status_barang }}"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="timestamp">Terakhir di Update</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="clock"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="timestamp" class="form-control" name="timestamp" value="{{ $data->updated_at }}" readonly>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="id_staf">Nama Staf </label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="user"></i>
+                                                        </span>
                                                     </div>
+                                                    <input type="text" id="id_staf" class="form-control"
+                                                        name="id_staf" value="{{ $data->user->name }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        @if ($data->status_barang == 'proses')
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-secondary mr-3 mb-1 mt-3" name="simpan"
-                                                    value="Setujui">Setujui</button>
-                                                <button type="submit" class="btn btn-danger mb-1 mt-3" name="simpan"
-                                                    value="Tolak">Tolak</button>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="id_spv">Nama Supervisor </label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="user"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="id_spv" class="form-control"
+                                                        name="id_spv"
+                                                        value="{{ $data->spv ? $data->spv->name : 'Tidak ada' }}"
+                                                        readonly>
+                                                </div>
                                             </div>
-                                        @endif
+                                        </div>
+                                    </div>
 
-                                        @if ($data->status_barang == 'hapus')
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="timestamp">Waktu Input</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control"
+                                                        name="timestamp" value="{{ $data->created_at }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="timestamp">Terakhir di Update</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="clock"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="timestamp" class="form-control"
+                                                        name="timestamp" value="{{ $data->updated_at }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if ($data->status_barang == 'proses')
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-secondary mr-3 mb-1 mt-3" name="simpan"
-                                                value="Hapus">Hapus</button>
-                                            <button type="submit" class="btn btn-danger mb-1 mt-3" name="simpan"
-                                                value="Batal">Batal</button>
+                                            <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
+                                                value="Tolak">Tolak</button>
+                                            <button type="submit" class="btn btn-secondary mt-3" name="simpan"
+                                                value="Setujui">Setujui</button>
                                         </div>
                                     @endif
-                                    </div>
+
+                                    @if ($data->status_barang == 'hapus')
+                                        <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
+                                            value="Batal">Batal</button>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-secondary mt-3" name="simpan"
+                                                value="Hapus">Hapus</button>
+                                        </div>
+                                    @endif
+
+                                    @if ($data->status_barang == 'tambah')
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-secondary mt-3 mr-2" name="simpan"
+                                                value="Tidak">Tidak</button>
+                                            <button type="submit" class="btn btn-danger mt-3" name="simpan"
+                                                value="Tambah">Tambah</button>
+                                        </div>
+                                    @endif
+                                </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </section>
     </div>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupervisorBarangController extends Controller
 {
@@ -16,24 +17,38 @@ class SupervisorBarangController extends Controller
 
     public function edit(string $id)
     {
+        $spv = User::all();
         $user = User::all();
         $data = Barang::where('kd_barang', $id)->first();
-        return view('supervisor.barang.edit', ['data'=>$data, 'user' => $user]);
+        return view('supervisor.barang.edit', ['data'=>$data, 'user' => $user, 'spv' => $spv]);
     }
 
     public function update(Request $request, string $id)
     {
         if ($request->simpan == 'Setujui') {
-            $data['status_barang'] = 'tersedia';
+            $data = [
+                'status_barang' => 'tersedia',
+                'id_spv' => Auth::user()->id,
+        ];
         } elseif ($request->simpan == 'Tolak') {
             $data['status_barang'] = 'tolak';
         }
 
         if ($request->simpan == 'Hapus') {
             Barang::where('kd_barang', $id)->delete();
-            return redirect()->route('supervisorbarang.index')->with('success', 'Berhasil Menghapus Data Barang');
         } elseif ($request->simpan == 'Batal') {
             $data['status_barang'] = 'tolak';
+        }
+
+        $jumlah = $request->session()->get('jumlah');
+
+        if ($request->simpan == 'Tambah') {
+            $data = [
+                'status_barang' => 'tersedia',
+                'jumlah' => $jumlah,
+        ];
+        } elseif ($request->simpan == 'Tidak') {
+            $data['status_barang'] = 'tersedia';
         }
 
         Barang::where('kd_barang', $id)->update($data);

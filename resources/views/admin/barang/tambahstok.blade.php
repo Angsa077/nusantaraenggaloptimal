@@ -26,9 +26,10 @@
                                                                 <i data-feather="package"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="jumlahsaatini" class="form-control"
+                                                        <input type="text" id="jumlahsaatini" class="form-control"
                                                             placeholder="Silahkan Masukan Jumlah Barang"
-                                                            name="jumlahsaatini" value="{{ $data->jumlah }}" readonly>
+                                                            name="jumlahsaatini" value="{{ $data->jumlah }} Barang"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,11 +54,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <a href="{{ route('adminbarang.show', $data->kd_barang) }}"
-                                            class="btn btn-danger mt-2 mr-2">Batal</a>
-                                        <button type="submit" class="btn btn-secondary mt-2">Simpan</button>
-                                    </div>
+                                    @if ($data->status_barang != 'proses' && $data->status_barang != 'tolak')
+                                        <div class="col-12 d-flex justify-content-end mt-3">
+                                            <a href="{{ route('adminbarang.show', $data->kd_barang) }}"
+                                                class="btn btn-danger mr-2">Batal</a>
+                                            <button type="submit" class="btn btn-secondary">Simpan</button>
+                                        </div>
+                                    @endif
+
                                 </form>
                             </div>
                         </div>
