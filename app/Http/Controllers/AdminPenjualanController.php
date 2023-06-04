@@ -42,22 +42,19 @@ class AdminPenjualanController extends Controller
     {
         $existingCustomer = PenjualanSementara::where('kd_customer', $request->kd_customer)->first();
         $isTableEmpty = PenjualanSementara::count() === 0;
+
         if (!$existingCustomer) {
             if (!$isTableEmpty) {
                 return redirect()->back()->withErrors(['kd_customer' => 'Selesaikan Pembayaran Kode Customer Yang Sudah Ada Terlebih Dahulu']);
             }
         }
 
-        $kd_penjualan = Penjualan::orderBy('kd_penjualan', 'desc')->value('kd_penjualan');
-        $kd_penjualan = $kd_penjualan ? $kd_penjualan + 1 : 1;
-        $data['kd_penjualan'] = $kd_penjualan;
-
-        $barang = Barang::where('kd_barang', $request->kd_barang)->first();
+        $barang = Barang::where('id_barang', $request->id_barang)->first();
         if (!$barang) {
-            return redirect()->back()->withErrors(['kd_barang' => 'Kode Barang Tidak Ditemukan']);
+            return redirect()->back()->withErrors(['id_barang' => 'Kode Barang Tidak Ditemukan']);
         }
 
-        Session::flash('kd_barang', $request->kd_barang);
+        Session::flash('id_barang', $request->id_barang);
         Session::flash('kd_customer', $request->kd_customer);
         Session::flash('jumlah_barang', $request->jumlah_barang);
         Session::flash('masa_garansi', $request->masa_garansi);
@@ -66,13 +63,13 @@ class AdminPenjualanController extends Controller
 
         $request->validate(
             [
-                'kd_barang' => 'required',
+                'id_barang' => 'required',
                 'kd_customer' => 'required',
                 'jumlah_barang' => 'required',
                 'masa_garansi' => 'required',
             ],
             [
-                'kd_barang.required' => 'Kode Barang Wajib Diisi',
+                'id_barang.required' => 'Kode Barang Wajib Diisi',
                 'kd_customer.required' => 'Kode Customer Wajib Diisi',
                 'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
                 'masa_garansi.required' => 'Masa Garansi Wajib Diisi',
@@ -80,8 +77,7 @@ class AdminPenjualanController extends Controller
         );
 
         $data = [
-            'kd_penjualan' => $kd_penjualan,
-            'kd_barang' => $request->kd_barang,
+            'id_barang' => $request->id_barang,
             'kd_customer' => $request->kd_customer,
             'jumlah_barang' => $request->jumlah_barang,
             'total_harga' => $total_harga,
@@ -96,13 +92,12 @@ class AdminPenjualanController extends Controller
     public function store(Request $request)
     {
         $penjualansementara = PenjualanSementara::where('id_staf', Auth::user()->id)->first();
-        $kd_penjualan = $penjualansementara->kd_penjualan;
-        $kd_barang = $penjualansementara->kd_barang;
+        $id_barang = $penjualansementara->id_barang;
         $kd_customer = $penjualansementara->kd_customer;
         $masa_garansi = $penjualansementara->masa_garansi;
 
-        $total_harga = $penjualansementara->sum('total_harga');
-        $jumlah_barang = $penjualansementara->sum('jumlah_barang');
+        $total_harga = PenjualanSementara::where('id_staf', Auth::user()->id)->sum('total_harga');
+        $jumlah_barang = PenjualanSementara::where('id_staf', Auth::user()->id)->sum('jumlah_barang');
 
         Session::flash('total_bayar', $request->total_bayar);
 
@@ -140,23 +135,26 @@ class AdminPenjualanController extends Controller
         }
 
         $data_penjualan = [
-            'kd_penjualan' => $kd_penjualan,
-            'kd_barang' => $kd_barang,
+            'id_barang' => $id_barang,
             'kd_customer' => $kd_customer,
             'jumlah_barang' => $jumlah_barang,
             'total_harga' => $total_harga,
             'total_bayar' => $request->total_bayar,
             'masa_garansi' => $masa_garansi,
-            'tgl_penjualan' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+            'tgl_penjualan' => date('Y-m-d H:i:s', strtotime('now')),
             'status_pembayaran' => $status_pembayaran,
             'status_persetujuan'  => 'proses',
             'id_staf' => Auth::user()->id,
             'catatan' => $request->catatan,
         ];
+
+        // Menyimpan data penjualan baru ke dalam tabel Penjualan
         Penjualan::create($data_penjualan);
+        $penjualan = Penjualan::latest('kd_penjualan')->first();
 
         $data_pembayaran = [
-            'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+            'kd_penjualan' => $penjualan->kd_penjualan, // Menggunakan kd_penjualan yang baru dibuat
+            'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now')),
             'total_bayar' => $request->total_bayar,
             'sisa_bayar' => $sisa_bayar,
             'bukti_pembayaran' => $foto_nama,
@@ -164,13 +162,17 @@ class AdminPenjualanController extends Controller
             'id_staf' => Auth::user()->id,
             'catatan' => $request->catatan,
         ];
+
         Pembayaran::create($data_pembayaran);
+        PenjualanSementara::where('id_staf', Auth::user()->id)->delete();
         return redirect()->route('adminpenjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
     }
 
     public function show(string $id)
     {
         $user = User::all();
+        $spv = User::all();
+        $admin = User::all();
         $barang = Barang::all();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
@@ -178,7 +180,7 @@ class AdminPenjualanController extends Controller
         $pengembalian = Pengembalian::all();
         $data = Penjualan::where('kd_penjualan', $id)->first();
         return view('admin.penjualan.show', [
-            'data' => $data, 'user' => $user, 'barang' => $barang, 'customer' => $customer,
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
             'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
         ]);
     }
@@ -186,6 +188,8 @@ class AdminPenjualanController extends Controller
     public function edit(string $id)
     {
         $user = User::all();
+        $spv = User::all();
+        $admin = User::all();
         $barang = Barang::all();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
@@ -193,7 +197,7 @@ class AdminPenjualanController extends Controller
         $pengembalian = Pengembalian::all();
         $data = Penjualan::where('kd_penjualan', $id)->first();
         return view('admin.penjualan.edit', [
-            'data' => $data, 'user' => $user, 'barang' => $barang, 'customer' => $customer,
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
             'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
         ]);
     }
@@ -202,15 +206,14 @@ class AdminPenjualanController extends Controller
     {
         $data = [
             'status_persetujuan'  => 'persetujuanspv',
+            'id_admin'  => Auth::user()->id,
         ];
         Penjualan::where('kd_penjualan', $id)->update($data);
-        PenjualanSementara::where('kd_penjualan', $id)->delete();
         return redirect()->route('adminpenjualan.index')->with('success', 'Barang Berhasil Di Checking');
     }
 
     public function destroy(string $id)
     {
-        PenjualanSementara::where('kd_penjualan', $id)->delete();
         Penjualan::where('kd_penjualan', $id)->delete();
         return redirect()->route('adminpenjualan.index')->with('success', 'Berhasil Menghapus Data Penjualan');
     }

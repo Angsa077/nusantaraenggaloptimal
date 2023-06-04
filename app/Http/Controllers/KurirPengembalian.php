@@ -74,7 +74,7 @@ class KurirPengembalian extends Controller
 
         $data_pengembalian = [
             'kd_penjualan' => $request->kd_penjualan,
-            'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+            'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now')),
             'jumlah_barang' => $jumlah_barang,
             'bukti_pengembalian' => $foto_nama,
             'status_persetujuan'  => 'proses',
@@ -152,7 +152,7 @@ class KurirPengembalian extends Controller
 
             $data_pengembalian = [
                 'jumlah_barang' => $jumlah_barang,
-                'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+                'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now')),
                 'bukti_pengiriman' => $foto_nama,
                 'status_persetujuan'  => 'proses',
                 'catatan' => $request->catatan,

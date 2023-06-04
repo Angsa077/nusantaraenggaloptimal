@@ -39,7 +39,7 @@
                                         
                                         <div class="col-md-12 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="kd_barang">Kode Barang</label>
+                                                <label for="id_barang">Kode Barang</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -47,7 +47,7 @@
                                                                 <i data-feather="package"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" name="kd_barang" id="kd_barang"
+                                                        <input type="text" name="id_barang" id="id_barang"
                                                             class="form-control" readonly>
                                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                             data-target="#barangModal">
@@ -277,7 +277,7 @@
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-secondary"
                                                             data-dismiss="modal"
-                                                            onclick="selectBarang('{{ $b->kd_barang }}', '{{ $b->nama }}')">Pilih</button>
+                                                            onclick="selectBarang('{{ $b->id_barang }}', '{{ $b->nama }}')">Pilih</button>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -342,8 +342,8 @@
                 </div>
 
                 <script>
-                    function selectBarang(kd_barang) {
-                        document.getElementById('kd_barang').value = kd_barang;
+                    function selectBarang(id_barang) {
+                        document.getElementById('id_barang').value = id_barang;
                     }
                 </script>
 

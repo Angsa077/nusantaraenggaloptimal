@@ -32,6 +32,11 @@ class Pengiriman extends Model
     
     public function penjualan()
     {
-        return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+        return $this->hasMany(Penjualan::class);
     }
+
+    // public function penjualan()
+    // {
+    //     return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+    // }
 }

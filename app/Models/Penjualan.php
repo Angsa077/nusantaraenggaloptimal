@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\User;
 use App\Models\Barang;
 use App\Models\Customer;
@@ -14,8 +15,8 @@ class Penjualan extends Model
 {
     use HasFactory;
 
-    protected $table ="penjualan";
-    protected $fillable = 
+    protected $table = "penjualan";
+    protected $fillable =
     [
         'kd_penjualan',
         'id_barang',
@@ -62,16 +63,31 @@ class Penjualan extends Model
 
     public function pembayaran()
     {
-        return $this->belongsTo(Pembayaran::class, 'id_aset', 'id_aset');
+        return $this->belongsTo(Pembayaran::class, 'kd_penjualan', 'kd_penjualan');
     }
 
     public function pengembalian()
     {
-        return $this->belongsTo(Pengembalian::class, 'id_aset', 'id_aset');
+        return $this->belongsTo(Pengembalian::class, 'kd_penjualan', 'kd_penjualan');
     }
 
     public function pengiriman()
     {
-        return $this->belongsTo(Pengiriman::class, 'id_aset', 'id_aset');
+        return $this->belongsTo(Pengiriman::class, 'kd_penjualan', 'kd_penjualan');
     }
+
+    // public function pembayaran()
+    // {
+    //     return $this->hasMany(Pembayaran::class);
+    // }
+
+    // public function pengembalian()
+    // {
+    //     return $this->hasMany(Pengembalian::class);
+    // }
+
+    // public function pengiriman()
+    // {
+    //     return $this->hasMany(Pengiriman::class);
+    // }
 }

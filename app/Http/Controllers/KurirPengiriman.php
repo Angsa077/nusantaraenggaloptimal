@@ -63,7 +63,7 @@ class KurirPengiriman extends Controller
             ];
 
             $data_pengiriman = [
-                'tgl_pengiriman' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+                'tgl_pengiriman' => date('Y-m-d H:i:s', strtotime('now')),
                 'bukti_pengiriman' => $foto_nama_pengiriman,
                 'id_staf' => Auth::user()->id,
             ];
@@ -74,7 +74,7 @@ class KurirPengiriman extends Controller
             ];
 
             $data_pengiriman = [
-                'tgl_sampai' => date('Y-m-d H:i:s', strtotime('now +7 hours')),
+                'tgl_sampai' => date('Y-m-d H:i:s', strtotime('now')),
                 'nama_penerima' =>$request->nama_penerima,
                 'bukti_penerimaan' => $foto_nama_penerimaan,
                 'catatan' => $request->catatan,
