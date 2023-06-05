@@ -13,6 +13,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
+
                                     @if ($data->pembayaran->bukti_pembayaran)
                                         <div class="position-relative mb-3">
                                             <img src="{{ asset('bukti_pembayaran/' . $data->pembayaran->bukti_pembayaran) }}" width="100px"
@@ -155,7 +156,6 @@
                                         </div>
                                     @endif
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>

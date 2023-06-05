@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminBarangController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminManajemenuserController;
+use App\Http\Controllers\AdminPembayaran;
+use App\Http\Controllers\AdminPengembalian;
+use App\Http\Controllers\AdminPengiriman;
 use App\Http\Controllers\AdminPenjualanController;
 use App\Http\Controllers\ChangedPasswordController;
 use App\Http\Controllers\KepalaCabangBarangController;
@@ -13,10 +16,16 @@ use App\Http\Controllers\KurirPengiriman;
 use App\Http\Controllers\ProfiledController;
 use App\Http\Controllers\SalesBarangController;
 use App\Http\Controllers\SalesCustomerController;
+use App\Http\Controllers\SalesPembayaran;
+use App\Http\Controllers\SalesPengembalian;
+use App\Http\Controllers\SalesPengiriman;
 use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
 use App\Http\Controllers\SupervisorManajemenuserController;
+use App\Http\Controllers\SupervisorPembayaran;
+use App\Http\Controllers\SupervisorPengembalian;
+use App\Http\Controllers\SupervisorPengiriman;
 use App\Http\Controllers\SupervisorPenjualanController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +77,9 @@ Route::group(['middleware' => ['auth', 'level:admin']], function(){
     Route::resource('adminpenjualan', AdminPenjualanController::class);
     Route::post('adminpenjualan/sementara', [AdminPenjualanController::class,'sementara'])->name('adminpenjualan.sementara');
     Route::delete('adminpenjualan/create/{id}', [AdminPenjualanController::class, 'destroysementara'])->name('adminpenjualan.destroysementara');
+    Route::resource('adminpembayaran', AdminPembayaran::class);
+    Route::resource('adminpengiriman', AdminPengiriman::class);
+    Route::resource('adminpengembalian', AdminPengembalian::class);
 });
 
 Route::group(['middleware' => ['auth', 'level:kepalacabang']], function(){
@@ -81,12 +93,18 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
     Route::resource('supervisorbarang', SupervisorBarangController::class);
     Route::resource('supervisorcustomer', SupervisorCustomerController::class);
     Route::resource('supervisorpenjualan', SupervisorPenjualanController::class);
+    Route::resource('supervisorpembayaran', SupervisorPembayaran::class);
+    Route::resource('supervisorpengiriman', SupervisorPengiriman::class);
+    Route::resource('supervisorpengembalian', SupervisorPengembalian::class);
 });
 
 Route::group(['middleware' => ['auth', 'level:sales']], function(){
     Route::resource('salesbarang', SalesBarangController::class);
     Route::resource('salescustomer', SalesCustomerController::class);
     Route::resource('salespenjualan', SalesPenjualanController::class);
+    Route::resource('salespembayaran', SalesPembayaran::class);
+    Route::resource('salespengiriman', SalesPengiriman::class);
+    Route::resource('salespengembalian', SalesPengembalian::class);
     Route::post('salespenjualan/sementara', [SalesPenjualanController::class,'sementara'])->name('salespenjualan.sementara');
     Route::delete('salespenjualan/create/{id}', [SalesPenjualanController::class, 'destroysementara'])->name('salespenjualan.destroysementara');
 });

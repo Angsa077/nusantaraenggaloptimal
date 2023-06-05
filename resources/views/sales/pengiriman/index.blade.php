@@ -30,7 +30,7 @@
                                     <td class="text-left text-md">{{ $item->tgl_pengiriman ?? 'Belum Diambil' }}</td>
                                     <td class="text-left text-md">{{ $item->tgl_sampai ?? 'Belum Sampai' }} </td>
                                     <td class="text-left text-md">
-                                        <a href="{{ route('kurirpengiriman.edit', $item->kd_pengiriman) }}" class="btn">
+                                        <a href="{{ route('salespengiriman.show', $item->kd_pengiriman) }}" class="btn">
                                             <i data-feather="send"></i>
                                         </a>
                                     </td>

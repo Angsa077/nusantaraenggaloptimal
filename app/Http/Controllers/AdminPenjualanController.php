@@ -60,18 +60,21 @@ class AdminPenjualanController extends Controller
         Session::flash('masa_garansi', $request->masa_garansi);
 
         $total_harga = $barang->harga_jual * $request->jumlah_barang;
+        $jumlah_barang = $barang->jumlah;
 
         $request->validate(
             [
                 'id_barang' => 'required',
                 'kd_customer' => 'required',
-                'jumlah_barang' => 'required',
                 'masa_garansi' => 'required',
+                'jumlah_barang' => 'required|numeric|max:' . $jumlah_barang,
             ],
             [
                 'id_barang.required' => 'Kode Barang Wajib Diisi',
                 'kd_customer.required' => 'Kode Customer Wajib Diisi',
                 'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
+                'jumlah_barang.numeric' => 'Jumlah Barang harus berupa angka',
+                'jumlah_barang.max' => 'Jumlah Barang tidak boleh lebih dari Stok Barang',
                 'masa_garansi.required' => 'Masa Garansi Wajib Diisi',
             ]
         );

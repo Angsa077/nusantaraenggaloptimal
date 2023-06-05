@@ -97,7 +97,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -372,7 +371,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -394,7 +393,8 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" id="status_pengiriman" class="form-control"
-                                                        value="{{ $data->penjualan->status_pengiriman ?? 'Tidak ada' }}" readonly>
+                                                        value="{{ $data->penjualan->status_pengiriman ?? 'Tidak ada' }}"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -411,8 +411,8 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" id="status_persetujuan" class="form-control"
-                                                        name="status_persetujuan" value="{{ $data->status_persetujuan ?? 'Tidak ada' }}"
-                                                        readonly>
+                                                        name="status_persetujuan"
+                                                        value="{{ $data->status_persetujuan ?? 'Tidak ada' }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -422,108 +422,6 @@
                             </div>
                         </div>
                     </div>
-
-                    @if ($penjualan->status_pengiriman != 'selesai') 
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Pengiriman</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
-                                <form action="{{ route('kurirpengiriman.update', $data->kd_penjualan) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="row">
-
-                                        @if ($penjualan->status_pengiriman == 'barangsiap') 
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="bukti_pengiriman">Bukti Pengambilan Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="file-plus"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="file" id="bukti_pengiriman" class="form-control"
-                                                            placeholder="Silahkan Masukan Bukti Pengambilan Barang"
-                                                            name="bukti_pengiriman">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end mt-4">
-                                            <button type="submit" class="btn btn-secondary" name="simpan"
-                                                value="Kirim">Kirim</button>
-                                        </div>
-                                        @endif
-
-                                        @if ($penjualan->status_pengiriman == 'dikirim') 
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="nama_penerima">Nama Penerima</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="user"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="nama_penerima" class="form-control"
-                                                            placeholder="Silahkan Masukan Nama Penerima Barang"
-                                                            name="nama_penerima">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="bukti_penerimaan">Bukti Penerimaan Barang</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="file-plus"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="file" id="bukti_penerimaan" class="form-control"
-                                                            placeholder="Silahkan Masukan Bukti Penerimaan Barang"
-                                                            name="bukti_penerimaan">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="catatan">Catatan</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="clipboard"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="catatan" class="form-control"
-                                                            placeholder="Silahkan Masukan Catatan" name="catatan">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-end mt-4">
-                                            <button type="submit" class="btn btn-secondary" name="simpan"
-                                                value="Selesai">Selesai</button>
-                                        </div>
-                                        @endif
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
 
                 </div>
             </div>

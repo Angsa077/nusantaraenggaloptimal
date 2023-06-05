@@ -29,7 +29,8 @@
                                                         <input type="text" name="kd_penjualan" id="kd_penjualan"
                                                             class="form-control" readonly />
                                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                                            data-target="#penjualanModal" value="{{ Session::get('kd_penjualan') }}">
+                                                            data-target="#penjualanModal"
+                                                            value="{{ Session::get('kd_penjualan') }}">
                                                             Pilih Kode Penjualan
                                                         </button>
                                                     </div>
@@ -58,24 +59,6 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="bukti_pengembalian">Bukti Pengembalian</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="file-plus"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="file" id="bukti_pengembalian" class="form-control"
-                                                            placeholder="Silahkan Masukan Bukti Pengembalian"
-                                                            name="bukti_pengembalian" value="{{ Session::get('bukti_pengembalian') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group has-icon-left">
                                                 <label for="catatan">Alasan Pengembalian</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
@@ -85,8 +68,8 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="catatan" class="form-control"
-                                                            placeholder="Silahkan Masukan Alasan Pengembalian" name="catatan"
-                                                            value="{{ Session::get('catatan') }}">
+                                                            placeholder="Silahkan Masukan Alasan Pengembalian"
+                                                            name="catatan" value="{{ Session::get('catatan') }}">
                                                     </div>
                                                 </div>
                                             </div>

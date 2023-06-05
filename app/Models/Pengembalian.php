@@ -17,11 +17,14 @@ class Pengembalian extends Model
         'kd_pengembalian',
         'kd_penjualan',
         'tgl_pengembalian',
+        'tgl_penjemputan',
+        'tgl_selesai',
         'jumlah_barang',
         'bukti_pengembalian',
         'status_persetujuan',
         'catatan',
-        'id_staf'
+        'id_staf',
+        'id_spv',
     ];
     
     public function user()
@@ -29,13 +32,18 @@ class Pengembalian extends Model
         return $this->belongsTo(User::class, 'id_staf', 'id');
     }
 
-    public function penjualan()
+    public function spv()
     {
-        return $this->hasMany(Penjualan::class);
+        return $this->belongsTo(User::class, 'id_spv', 'id');
     }
 
     // public function penjualan()
     // {
-    //     return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+    //     return $this->hasMany(Penjualan::class);
     // }
+
+    public function penjualan()
+    {
+        return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+    }
 }

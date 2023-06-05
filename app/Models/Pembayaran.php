@@ -22,22 +22,26 @@ class Pembayaran extends Model
         'bukti_pembayaran',
         'status_persetujuan',
         'catatan',
-        'id_staf'
+        'id_staf',
+        'id_spv',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'id_staf', 'id');
     }
-
-    public function penjualan()
+    public function spv()
     {
-        return $this->hasMany(Penjualan::class);
+        return $this->belongsTo(User::class, 'id_spv', 'id');
     }
 
     // public function penjualan()
     // {
-    //     return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+    //     return $this->hasMany(Penjualan::class);
     // }
 
+    public function penjualan()
+    {
+        return $this->belongsTo(Penjualan::class, 'kd_penjualan', 'kd_penjualan');
+    }
 }

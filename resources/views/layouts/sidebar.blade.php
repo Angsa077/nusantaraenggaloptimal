@@ -49,21 +49,21 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-cards.html">
+                        <a class="sidebar-link" href="{{ route('adminpembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-typography.html">
+                        <a class="sidebar-link" href="{{ route('adminpengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="icons-feather.html">
+                        <a class="sidebar-link" href="{{ route('adminpengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -125,21 +125,21 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-cards.html">
+                        <a class="sidebar-link" href="{{ route('supervisorpembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-typography.html">
+                        <a class="sidebar-link" href="{{ route('supervisorpengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="icons-feather.html">
+                        <a class="sidebar-link" href="{{ route('supervisorpengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -172,21 +172,21 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-cards.html">
+                        <a class="sidebar-link" href="{{ route('salespembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-typography.html">
+                        <a class="sidebar-link" href="{{ route('salespengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="icons-feather.html">
+                        <a class="sidebar-link" href="{{ route('salespengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
