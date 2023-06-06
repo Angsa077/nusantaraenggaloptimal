@@ -423,7 +423,7 @@
                         </div>
                     </div>
 
-                    @if ($penjualan->status_pengiriman != 'selesai') 
+                    @if ($data->penjualan->status_pengiriman != 'selesai') 
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Pengiriman</h4>
@@ -436,7 +436,7 @@
                                     @method('PUT')
                                     <div class="row">
 
-                                        @if ($penjualan->status_pengiriman == 'barangsiap') 
+                                        @if ($data->penjualan->status_pengiriman == 'barangsiap') 
                                         <div class="col-md-12 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="bukti_pengiriman">Bukti Pengambilan Barang</label>
