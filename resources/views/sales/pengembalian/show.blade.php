@@ -296,8 +296,8 @@
                                                             <i data-feather="package"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="text" id="jumlah_barang" class="form-control"
-                                                        placeholder="Silahkan Masukan Jumlah Barang" name="jumlah_barang"
+                                                    <input type="text" id="jumlah" class="form-control"
+                                                        placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
                                                         value="{{ $data->jumlah_barang }} Barang" readonly>
                                                 </div>
                                             </div>
@@ -484,6 +484,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="status_pengembalian">Status Pengembalian</label>
@@ -519,33 +520,36 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <form action="{{ route('supervisorpengembalian.update', $data->kd_pengembalian) }}"
-                                        method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="row">
-                                            <div class="col-12 d-flex justify-content-end mt-3">
-                                                <button type="submit" class="btn btn-danger mr-2" name="simpan"
-                                                    value="Tolak">Tolak</button>
-                                                <button type="submit" class="btn btn-secondary" name="simpan"
-                                                    value="Setujui">Setujui</button>
-                                            </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="row">
+
+                                    @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
+                                        <div class="col-12 d-flex justify-content-end mt-3">
+                                            <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
+                                                action="{{ route('salespengembalian.destroy', $data->kd_pengembalian) }}"
+                                                class="d-inline" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit" name="submit">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </div>
-                                    </form>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
-                    @endif
-
+                    </div>
                 </div>
             </div>
         </section>

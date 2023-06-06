@@ -261,16 +261,34 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
+
                                     @if ($data->bukti_pengembalian)
-                                        <div class="position-relative mb-3">
-                                            <img src="{{ asset('bukti_pengembalian/' . $data->bukti_pengembalian) }}"
-                                                width="100px" height="100px" alt="">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Bukti Pengembalian</label>
+                                                <div class="position-relative mb-3">
+                                                    <img src="{{ asset('bukti_pengembalian/' . $data->bukti_pengembalian) }}"
+                                                        width="100px" height="100px" alt="Bukti Pengembalian">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if ($data->bukti_penyerahan)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Bukti Penyerahan</label>
+                                                <div class="position-relative mb-3">
+                                                    <img src="{{ asset('bukti_penyerahan/' . $data->bukti_penyerahan) }}"
+                                                        width="100px" height="100px" alt="Bukti Penyerahan">
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
 
                                     <div class="col-md-12 col-12">
                                         <div class="form-group has-icon-left">
-                                            <label for="jumlah_barang">Jumlah Barang Dikembalikan</label>
+                                            <label for="jumlah_barang">Barang Dikembalikan</label>
                                             <div class="position-relative">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
@@ -402,6 +420,44 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="id_kurir">Kurir</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="user"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="id_kurir" class="form-control"
+                                                        name="id_kurir"
+                                                        value="{{ $data->kurir ? $data->kurir->name : 'Tidak ada' }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="id_admin">Diterima Oleh</label>
+                                            <div class="position-relative">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i data-feather="user"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" id="id_admin" class="form-control"
+                                                        name="id_admin"
+                                                        value="{{ $data->admin ? $data->admin->name : 'Tidak ada' }}"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="timestamp">Waktu Input</label>
@@ -479,7 +535,7 @@
                                         @csrf
                                         @method('PUT')
 
-                                        @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->id_staf == Auth::user()->id)
+                                        @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->status_persetujuan == 'disetujui')
                                             <div class="col-md-12 col-12">
                                                 <div class="form-group has-icon-left">
                                                     <label for="bukti_pengembalian">Bukti Pengembalian</label>
@@ -501,14 +557,36 @@
                                             </div>
                                         @endif
 
+                                        @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_kurir == Auth::user()->id)
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="bukti_penyerahan">Bukti Penyerahan</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="file-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="file" id="bukti_penyerahan"
+                                                            class="form-control"
+                                                            placeholder="Silahkan Masukan Bukti Pengembalian"
+                                                            name="bukti_penyerahan"
+                                                            value="{{ Session::get('bukti_penyerahan') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                         <div class="col-12 d-flex justify-content-end mt-3">
-                                            @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->id_staf == Auth::user()->id)
+                                            @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->status_persetujuan == 'disetujui')
                                                 <button type="submit" class="btn btn-secondary" name="simpan"
                                                     value="Penjemputan">Penjemputan</button>
                                             @endif
-                                            @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_staf == Auth::user()->id)
+                                            @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_kurir == Auth::user()->id)
                                                 <button type="submit" class="btn btn-secondary" name="simpan"
-                                                    value="Selesai">Selesai</button>
+                                                    value="Serahkan">Serahkan</button>
                                             @endif
                                         </div>
                                     </form>

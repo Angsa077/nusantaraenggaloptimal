@@ -72,41 +72,58 @@ class KurirPengembalian extends Controller
     public function edit(string $id)
     {
         $user = User::all();
+        $kurir = User::all();
         $spv = User::all();
+        $admin = User::all();
         $pengiriman = Pengiriman::all();
         $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
         $data = Pengembalian::where('kd_pengembalian', $id)->first();
         return view('kurir.pengembalian.edit', [
-            'data' => $data, 'user' => $user, 'spv' => $spv, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
+            'data' => $data, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
         ]);
     }
 
     public function update(Request $request, string $id)
     {
         Session::flash('bukti_pengembalian', $request->bukti_pengembalian);
+        Session::flash('bukti_penyerahan', $request->bukti_penyerahan);
 
         $request->validate(
             [
-                'bukti_pengembalian' => 'required|mimes:jpeg,jpg,png,gif|max:1024',
+                'bukti_pengembalian' => 'mimes:jpeg,jpg,png,gif|max:1024',
+                'bukti_penyerahan' => 'mimes:jpeg,jpg,png,gif|max:1024',
             ],
             [
-                'bukti_pengembalian.required' => 'Bukti Pengembalian Wajib Diisi',
                 'bukti_pengembalian.mimes' => 'Bukti Pengembalian Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
                 'bukti_pengembalian.max' => 'Bukti Pengembalian Yang Diperbolehkan Maksimal 1MB',
+                'bukti_penyerahan.mimes' => 'Bukti Penyerahan Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
+                'bukti_penyerahan.max' => 'Bukti Penyerahan Yang Diperbolehkan Maksimal 1MB',
             ]
         );
 
         if ($request->hasFile('bukti_pengembalian')) {
-            $foto_file = $request->file('bukti_pengembalian');
-            if ($foto_file != null) {
-                $foto_ekstensi = $foto_file->extension();
-                $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
-                $foto_file->move(public_path('bukti_pengembalian'), $foto_nama);
-                Session::flash('bukti_pengembalian', 'bukti_pengembalian/' . $foto_nama); // Menyimpan path file dalam sesi
+            $foto_file_pengembalian = $request->file('bukti_pengembalian');
+            if ($foto_file_pengembalian != null) {
+                $foto_ekstensi_pengembalian = $foto_file_pengembalian->extension();
+                $foto_nama_pengembalian = date('ymdhis') . "." . $foto_ekstensi_pengembalian;
+                $foto_file_pengembalian->move(public_path('bukti_pengembalian'), $foto_nama_pengembalian);
+                Session::flash('bukti_pengembalian', 'bukti_pengembalian/' . $foto_nama_pengembalian); // Menyimpan path file dalam sesi
             } else {
-                $foto_nama = null;
+                $foto_nama_pengembalian = null;
             }
-        }        
+        }
+
+        if ($request->hasFile('bukti_penyerahan')) {
+            $foto_file_penyerahan = $request->file('bukti_penyerahan');
+            if ($foto_file_penyerahan != null) {
+                $foto_ekstensi_penyerahan = $foto_file_penyerahan->extension();
+                $foto_nama_penyerahan = date('ymdhis') . "." . $foto_ekstensi_penyerahan;
+                $foto_file_penyerahan->move(public_path('bukti_penyerahan'), $foto_nama_penyerahan);
+                Session::flash('bukti_penyerahan', 'bukti_penyerahan/' . $foto_nama_penyerahan); // Menyimpan path file dalam sesi
+            } else {
+                $foto_nama_penyerahan = null;
+            }
+        }
 
         $pengembalian = Pengembalian::where('kd_pengembalian', $id)->first();
 
@@ -118,15 +135,16 @@ class KurirPengembalian extends Controller
                 'status_pengembalian' => 'penjemputan',
             ];
             $data_pengembalian = [
-                'bukti_pengembalian' => $foto_nama,
+                'id_kurir' => Auth::user()->id,
+                'bukti_pengembalian' => $foto_nama_pengembalian,
                 'tgl_penjemputan' => date('Y-m-d H:i:s', strtotime('now')),
             ];
-        } elseif ($request->simpan == 'Selesai') {
+        } elseif ($request->simpan == 'Serahkan') {
             $data_penjualan = [
-                'status_pengembalian' => 'selesai',
+                'status_pengembalian' => 'serahkan',
             ];
             $data_pengembalian = [
-                'tgl_selesai' => date('Y-m-d H:i:s', strtotime('now')),
+                'bukti_penyerahan' => $foto_nama_penyerahan,
             ];
         }
 

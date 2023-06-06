@@ -22,12 +22,14 @@ class SupervisorPengembalian extends Controller
     public function edit(string $id)
     {
         $user = User::all();
+        $kurir = User::all();
         $spv = User::all();
+        $admin = User::all();
         $pengiriman = Pengiriman::all();
         $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
         $data = Pengembalian::where('kd_pengembalian', $id)->first();
         return view('supervisor.pengembalian.edit', [
-            'data' => $data, 'user' => $user, 'spv' => $spv, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
+            'data' => $data, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
         ]);
     }
 

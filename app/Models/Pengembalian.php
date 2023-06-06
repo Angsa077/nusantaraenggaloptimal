@@ -21,10 +21,13 @@ class Pengembalian extends Model
         'tgl_selesai',
         'jumlah_barang',
         'bukti_pengembalian',
+        'bukti_penyerahan',
         'status_persetujuan',
         'catatan',
         'id_staf',
+        'id_kurir',
         'id_spv',
+        'id_admin',
     ];
     
     public function user()
@@ -32,9 +35,19 @@ class Pengembalian extends Model
         return $this->belongsTo(User::class, 'id_staf', 'id');
     }
 
+    public function kurir()
+    {
+        return $this->belongsTo(User::class, 'id_kurir', 'id');
+    }
+
     public function spv()
     {
         return $this->belongsTo(User::class, 'id_spv', 'id');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class, 'id_admin', 'id');
     }
 
     // public function penjualan()

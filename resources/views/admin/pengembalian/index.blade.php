@@ -24,23 +24,23 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td class="text-left text-md">{{ $item->tgl_pengembalian ?? 'Tidak ada' }}</td>
-                                        <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
-                                        <td class="text-left text-md">
-                                            {{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}
-                                        </td>
-                                        <td class="text-left text-md">
-                                            {{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
+                                        <td class="text-left text-md">{{ $item->tgl_pengembalian  ?? 'Tidak ada' }}</td>
+                                        <td class="text-left text-md">{{ $item->penjualan->kd_penjualan  }}</td>
+                                        <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
+                                        <td class="text-left text-md">{{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->status_pengembalian }}</td>
                                         <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
-                                        <td class="text-left text-md">{{ $item->catatan ?? 'Tidak ada' }}</td>
-                                        <td class="text-left text-md"><a
-                                                href="{{ route('supervisorpengembalian.edit', $item->kd_pengembalian) }}"
+                                        <td class="text-left text-md">{{ $item->catatan  ?? 'Tidak ada' }}</td>
+                                        <td class="text-left text-md"><a href="{{ route('adminpengembalian.edit', $item->kd_pengembalian) }}"
                                                 class="btn"><i data-feather="send"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('adminpengembalian.create') }}"
+                                class="btn btn-secondary mr-3">
+                                Ajukan Pengembalian</a>
+                        </div>
                     </div>
                 </div>
             </div>

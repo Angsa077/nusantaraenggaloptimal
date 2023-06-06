@@ -15,7 +15,8 @@
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
                                     <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Nama Customer</th>
-                                    <th scope="col" class="text-left text-md">Status</th>
+                                    <th scope="col" class="text-left text-md">Status Pengembalian</th>
+                                    <th scope="col" class="text-left text-md">Status Persetujuan</th>
                                     <th scope="col" class="text-left text-md">Alasan</th>
                                     <th scope="col" class="text-left text-md">Proses</th>
                                 </tr>
@@ -28,6 +29,7 @@
                                         <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->status_pengembalian }}</td>
+                                        <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
                                         <td class="text-left text-md">{{ $item->catatan  ?? 'Tidak ada' }}</td>
                                         <td class="text-left text-md"><a href="{{ route('kurirpengembalian.edit', $item->kd_pengembalian) }}"
                                                 class="btn"><i data-feather="send"></i></a></td>

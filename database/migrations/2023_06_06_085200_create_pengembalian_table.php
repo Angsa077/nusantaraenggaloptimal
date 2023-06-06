@@ -19,12 +19,14 @@ return new class extends Migration
             $table->date('tgl_selesai')->nullable();
             $table->bigInteger('jumlah_barang')->nullable();
             $table->string('bukti_pengembalian')->nullable();
+            $table->string('bukti_penyerahan')->nullable();
             $table->string('status_persetujuan', 20)->nullable();
             $table->string('catatan')->nullable();
             $table->bigInteger('id_staf')->nullable();
+            $table->bigInteger('id_admin')->nullable();
+            $table->bigInteger('id_kurir')->nullable();
             $table->bigInteger('id_spv')->nullable();
             $table->timestamps();
-
         });
     }
 
