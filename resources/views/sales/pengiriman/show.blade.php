@@ -14,9 +14,9 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    @if ($penjualan->barang->gambar)
+                                    @if ($data->penjualan->barang->gambar)
                                         <div class="position-relative mb-3">
-                                            <img src="{{ asset('gambar_barang/' . $penjualan->barang->gambar) }}"
+                                            <img src="{{ asset('gambar_barang/' . $data->penjualan->barang->gambar) }}"
                                                 width="100px" height="100px" alt="">
                                         </div>
                                     @endif
@@ -33,7 +33,7 @@
                                                     </div>
                                                     <input type="text" id="kd_barang" class="form-control"
                                                         placeholder="Silahkan Masukan Kode Barang" name="kd_barang"
-                                                        value="{{ $penjualan->barang->kd_barang }}" readonly>
+                                                        value="{{ $data->penjualan->barang->kd_barang }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,7 +51,7 @@
                                                     </div>
                                                     <input type="text" id="nama" class="form-control"
                                                         placeholder="Silahkan Masukan Nama Barang" name="nama"
-                                                        value="{{ $penjualan->barang->nama }}" readonly>
+                                                        value="{{ $data->penjualan->barang->nama }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                                     </div>
                                                     <input type="text" id="merek" class="form-control"
                                                         placeholder="Silahkan Masukan Merek Barang" name="merek"
-                                                        value="{{ $penjualan->barang->merek }}" readonly>
+                                                        value="{{ $data->penjualan->barang->merek }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                                     </div>
                                                     <input type="text" id="jumlah" class="form-control"
                                                         placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                        value="{{ $penjualan->jumlah_barang }} Barang" readonly>
+                                                        value="{{ $data->penjualan->jumlah_barang }} Barang" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                                         </div>
                                                         <input type="text" id="nama_toko" class="form-control"
                                                             placeholder="Silahkan Masukan Nama Toko" name="nama_toko"
-                                                            value="{{ $penjualan->customer->nama_toko }}" readonly>
+                                                            value="{{ $data->penjualan->customer->nama_toko }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,7 +136,7 @@
                                                         <input type="text" id="nama_pemilik" class="form-control"
                                                             placeholder="Silahkan Masukan Nama Pemilik"
                                                             name="nama_pemilik"
-                                                            value="{{ $penjualan->customer->nama_pemilik }}" readonly>
+                                                            value="{{ $data->penjualan->customer->nama_pemilik }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,7 +153,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="no_hp" class="form-control"
-                                                            value="{{ $penjualan->customer->no_hp }}" readonly>
+                                                            value="{{ $data->penjualan->customer->no_hp }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,7 +170,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="alamat" class="form-control"
-                                                            value="{{ $penjualan->customer->alamat }}" readonly>
+                                                            value="{{ $data->penjualan->customer->alamat }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,7 +187,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="provinsi" class="form-control"
-                                                            value="{{ $penjualan->customer->provinces->name }}" readonly>
+                                                            value="{{ $data->penjualan->customer->provinces->name }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,7 +204,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="kabupaten" class="form-control"
-                                                            value="{{ $penjualan->customer->regencys->name }}" readonly>
+                                                            value="{{ $data->penjualan->customer->regencys->name }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,7 +221,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="kecamatan" class="form-control"
-                                                            value="{{ $penjualan->customer->districs->name }}" readonly>
+                                                            value="{{ $data->penjualan->customer->districs->name }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,7 +238,7 @@
                                                             </span>
                                                         </div>
                                                         <input type="text" id="desa" class="form-control"
-                                                            value="{{ $penjualan->customer->villages->name }}" readonly>
+                                                            value="{{ $data->penjualan->customer->villages->name }}" readonly>
                                                     </div>
                                                 </div>
                                             </div>

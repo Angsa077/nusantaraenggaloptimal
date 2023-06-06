@@ -65,9 +65,9 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    @if ($penjualan->barang->gambar)
+                                    @if ($data->penjualan->barang->gambar)
                                         <div class="position-relative mb-3">
-                                            <img src="{{ asset('gambar_barang/' . $penjualan->barang->gambar) }}"
+                                            <img src="{{ asset('gambar_barang/' . $data->penjualan->barang->gambar) }}"
                                                 width="100px" height="100px" alt="">
                                         </div>
                                     @endif
