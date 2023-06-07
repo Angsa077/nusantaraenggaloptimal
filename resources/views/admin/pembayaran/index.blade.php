@@ -15,21 +15,22 @@
                                     <th scope="col" class="text-left text-md">Nama Toko</th>
                                     <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Status Pembayaran</th>
-                                    <th scope="col" class="text-left text-md">Proses</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $key => $group)
-                                @php
-                                    $item = $group->first();
-                                @endphp
-                                    <tr>
-                                        <td class="text-left text-md">{{ $item->penjualan->kd_penjualan  }}</td>
-                                        <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
-                                        <td class="text-left text-md">{{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
+                                    @php
+                                        $item = $group->first();
+                                    @endphp
+                                    <tr
+                                        onclick="window.location='{{ route('adminpembayaran.show', $item->kd_penjualan) }}';">
+                                        <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
+                                        <td class="text-left text-md">
+                                            {{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}
+                                        </td>
+                                        <td class="text-left text-md">
+                                            {{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->status_pembayaran }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('adminpembayaran.show', $item->kd_penjualan) }}"
-                                                class="btn"><i data-feather="send"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

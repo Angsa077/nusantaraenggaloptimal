@@ -144,6 +144,31 @@
                                 class="align-middle">Pengembalian</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Laporan
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('supervisorlaporanpenjualan.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Penjualan</span>
+                        </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="maps-google.html">
+                            <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
+                                Pendapatan</span>
+                        </a>
+                    </li>
+    
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="maps-google.html">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Laporan Stok
+                                Barang</span>
+                        </a>
+                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'sales')
@@ -212,31 +237,6 @@
                     </a>
                 </li>
             @endif
-
-                <li class="sidebar-header">
-                    Laporan
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="charts-chartjs.html">
-                        <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
-                            Penjualan</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="maps-google.html">
-                        <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
-                            Pendapatan</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="maps-google.html">
-                        <i class="align-middle" data-feather="package"></i> <span class="align-middle">Laporan Stok
-                            Barang</span>
-                    </a>
-                </li>
             </ul>
 
         </div>

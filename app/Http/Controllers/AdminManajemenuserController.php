@@ -16,7 +16,7 @@ class AdminManajemenuserController extends Controller
     public function index()
     {
         $data = User::orderBy('id')->get();
-        return view('admin.manajemenuser.index', ['data'=>$data]);
+        return view('admin.manajemenuser.index', ['data' => $data]);
     }
 
     /**
@@ -80,30 +80,29 @@ class AdminManajemenuserController extends Controller
                 'jk.required' => 'Jenis Kelamin Wajib Diisi',
                 'tgl_masuk.required' => 'Tanggal Masuk Kerja Wajib Diisi',
             ]
-            );
+        );
 
-            $data = [
-                'name' => $request->name,
-                'level' => $request->level,
-                'email' => $request->email,
-                'password' => Hash::make('NEO2023'),
-                'nip' => $request->nip,
-                'nik' => $request->nik,
-                'npwp' => $request->npwp,
-                'no_hp' => $request->no_hp,
-                'alamat' => $request->alamat,
-                'tp_lahir' => $request->tp_lahir,
-                'tg_lahir' => $request->tg_lahir,
-                'jk' => $request->jk,
-                'tgl_masuk' => $request->tgl_masuk,
-                'tgl_keluar' => $request->tgl_keluar,
-                'status_akun' => 'nonaktif',
-                'id_admin' => Auth::user()->id,
-            ];
+        $data = [
+            'name' => $request->name,
+            'level' => $request->level,
+            'email' => $request->email,
+            'password' => Hash::make('NEO2023'),
+            'nip' => $request->nip,
+            'nik' => $request->nik,
+            'npwp' => $request->npwp,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'tp_lahir' => $request->tp_lahir,
+            'tg_lahir' => $request->tg_lahir,
+            'jk' => $request->jk,
+            'tgl_masuk' => $request->tgl_masuk,
+            'tgl_keluar' => $request->tgl_keluar,
+            'status_akun' => 'nonaktif',
+            'id_admin' => Auth::user()->id,
+        ];
 
         User::create($data);
-        return redirect()->route('adminmanajemenuser.index')->with('success','Berhasil Mengisi Biodata User');
-    
+        return redirect()->route('adminmanajemenuser.index')->with('success', 'Berhasil Mengisi Biodata User');
     }
 
     /**
@@ -113,7 +112,7 @@ class AdminManajemenuserController extends Controller
     {
         $user = User::all();
         $data = User::where('id', $id)->first();
-        return view('admin.manajemenuser.show', ['data'=>$data, 'user' => $user]);
+        return view('admin.manajemenuser.show', ['data' => $data, 'user' => $user]);
     }
 
     /**
@@ -122,7 +121,7 @@ class AdminManajemenuserController extends Controller
     public function edit(string $id)
     {
         $data = User::where('id', $id)->first();
-        return view('admin.manajemenuser.edit', ['data'=>$data]);
+        return view('admin.manajemenuser.edit', ['data' => $data]);
     }
 
     /**
@@ -164,8 +163,9 @@ class AdminManajemenuserController extends Controller
                 'jk.required' => 'Jenis Kelamin Wajib Diisi',
                 'tgl_masuk.required' => 'Tanggal Masuk Kerja Wajib Diisi',
             ]
-            );
+        );
 
+        if ($request->simpan == 'Submit') {
             $data = [
                 'name' => $request->name,
                 'level' => $request->level,
@@ -184,13 +184,12 @@ class AdminManajemenuserController extends Controller
                 'status_akun' => 'nonaktif',
                 'id_admin' => Auth::user()->id,
             ];
-
-        if ($request->simpan == 'Hapus') {
+        } elseif ($request->simpan == 'Hapus') {
             $data['status_akun'] = 'hapus';
         }
 
         User::where('id', $id)->update($data);
-        return redirect()->route('adminmanajemenuser.index')->with('success','Berhasil Memperbarui Data User');
+        return redirect()->route('adminmanajemenuser.index')->with('success', 'Berhasil Memperbarui Data User');
     }
 
     /**

@@ -17,27 +17,24 @@
                                     <th scope="col" class="text-left text-md">Jabatan</th>
                                     <th scope="col" class="text-left text-md">No HP</th>
                                     <th scope="col" class="text-left text-md">Status Akun</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
                                 @foreach ($data as $item)
-                                    <tr>
+                                    <tr onclick="window.location='{{ route('adminmanajemenuser.show', $item->id) }}';">
                                         <td class="text-left text-md">{{ $no++ }}</td>
                                         <td class="text-left text-md">{{ $item->name }}</td>
                                         <td class="text-left text-md">{{ $item->nip }}</td>
                                         <td class="text-left text-md">{{ $item->level }}</td>
                                         <td class="text-left text-md">{{ $item->no_hp }}</td>
                                         <td class="text-left text-md">{{ $item->status_akun }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('adminmanajemenuser.show', $item->id) }}"
-                                                class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('adminmanajemenuser.create') }}"
-                                class="btn btn-secondary mr-3">
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a
+                                href="{{ route('adminmanajemenuser.create') }}" class="btn btn-secondary mr-3">
                                 Tambah Data User</a>
                         </div>
                     </div>

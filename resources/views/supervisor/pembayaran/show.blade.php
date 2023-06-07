@@ -17,13 +17,12 @@
                                     <th scope="col" class="text-left text-md">Sisa Bayar</th>
                                     <th scope="col" class="text-left text-md">Status Pembayaran</th>
                                     <th scope="col" class="text-left text-md">Status Persetujuan</th>
-                                    <th scope="col" class="text-left text-md">Proses</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pembayaran as $item)
                                     @if ($item->kd_penjualan == $data->kd_penjualan)
-                                        <tr>
+                                    <tr onclick="window.location='{{ route('supervisorpembayaran.edit', $item->kd_pembayaran) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>
@@ -34,9 +33,6 @@
                                                 {{ 'Rp ' . number_format($sisa_bayar, 2, ',', '.') }}</td>
                                             <td class="text-left text-md">{{ $item->penjualan->status_pembayaran }}</td>
                                             <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
-                                            <td class="text-left text-md"><a
-                                                    href="{{ route('supervisorpembayaran.edit', $item->kd_pembayaran) }}"
-                                                    class="btn"><i data-feather="send"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach

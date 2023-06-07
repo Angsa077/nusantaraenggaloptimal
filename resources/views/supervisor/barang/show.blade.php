@@ -93,14 +93,13 @@
                                     <th scope="col" class="text-left text-md">Harga Beli</th>
                                     <th scope="col" class="text-left text-md">Harga Jual</th>
                                     <th scope="col" class="text-left text-md">Status Barang</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $totalJumlah = 0; ?> <!-- Tambahkan variabel totalJumlah -->
                                 @foreach ($barang as $item)
                                     @if ($item->kd_barang == $data->kd_barang)
-                                        <tr>
+                                    <tr onclick="window.location='{{ route('supervisorbarang.edit', $item->id_barang) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
                                             <td class="text-left text-md">
@@ -108,9 +107,6 @@
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
                                             <td class="text-left text-md">{{ $item->status_barang }}</td>
-                                            <td class="text-left text-md"><a
-                                                    href="{{ route('supervisorbarang.edit', $item->id_barang) }}"
-                                                    class="btn"><i data-feather="more-horizontal"></i></a></td>
                                         </tr>
                                         <?php $totalJumlah += $item->jumlah; ?> <!-- Tambahkan jumlah ke totalJumlah -->
                                     @endif
@@ -118,7 +114,6 @@
                                 <tr>
                                     <td class="text-left text-md"><strong>Total Barang</strong></td>
                                     <td class="text-left text-md"><strong>{{ $totalJumlah }} Barang</strong></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

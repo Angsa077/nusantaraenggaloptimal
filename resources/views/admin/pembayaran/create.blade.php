@@ -124,13 +124,13 @@
                                             <th scope="col" class="text-left text-md">Nama Customer</th>
                                             <th scope="col" class="text-left text-md">Total Harga</th>
                                             <th scope="col" class="text-left text-md">Total Bayar</th>
-                                            <th scope="col" class="text-left text-md">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($penjualan as $p)
                                             @if ($p->status_pembayaran == 'utang')
-                                                <tr>
+                                                <tr data-dismiss="modal"
+                                                    onclick="selectPenjualan('{{ $p->kd_penjualan }}', '{{ $p->nama }}')">
                                                     <td class="text-left text-md">{{ $p->tgl_penjualan }}</td>
                                                     <td class="text-left text-md">{{ $p->kd_penjualan }}</td>
                                                     <td class="text-left text-md">{{ $p->barang->nama }}</td>
@@ -139,11 +139,6 @@
                                                         {{ 'Rp ' . number_format($p->total_harga, 2, ',', '.') }}</td>
                                                     <td class="text-left text-md">
                                                         {{ 'Rp ' . number_format($p->total_bayar, 2, ',', '.') }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-sm btn-secondary"
-                                                            data-dismiss="modal"
-                                                            onclick="selectPenjualan('{{ $p->kd_penjualan }}', '{{ $p->nama }}')">Pilih</button>
-                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach

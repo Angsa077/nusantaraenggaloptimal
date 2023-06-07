@@ -291,13 +291,13 @@
                                             <th scope="col" class="text-left text-md">Merek</th>
                                             <th scope="col" class="text-left text-md">Jumlah</th>
                                             <th scope="col" class="text-left text-md">Harga</th>
-                                            <th scope="col" class="text-left text-md">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($barang as $b)
                                             @if ($b->status_barang == 'tersedia')
-                                                <tr>
+                                                <tr data-dismiss="modal"
+                                                    onclick="selectBarang('{{ $b->id_barang }}', '{{ $b->nama }}')">
                                                     <td class="text-left text-md">{{ $b->created_at }}</td>
                                                     <td class="text-left text-md">{{ $b->kd_barang }}</td>
                                                     <td class="text-left text-md">{{ $b->nama }}</td>
@@ -305,11 +305,6 @@
                                                     <td class="text-left text-md">{{ $b->jumlah }}</td>
                                                     <td class="text-left text-md">
                                                         {{ 'Rp ' . number_format($b->harga_jual, 2, ',', '.') }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-sm btn-secondary"
-                                                            data-dismiss="modal"
-                                                            onclick="selectBarang('{{ $b->id_barang }}', '{{ $b->nama }}')">Pilih</button>
-                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -341,12 +336,11 @@
                                             <th scope="col" class="text-left text-md">No HP</th>
                                             <th scope="col" class="text-left text-md">Alamat</th>
                                             <th scope="col" class="text-left text-md">Utang</th>
-                                            <th scope="col" class="text-left text-md">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($customer as $c)
-                                            <tr>
+                                            <tr data-dismiss="modal" onclick="selectCustomer('{{ $c->kd_customer }}')">
                                                 <td class="text-left text-md">{{ $c->kd_customer }}</td>
                                                 <td class="text-left text-md">{{ $c->nama_toko }}</td>
                                                 <td class="text-left text-md">{{ $c->nama_pemilik }}</td>
@@ -354,11 +348,7 @@
                                                 <td class="text-left text-md">{{ $c->alamat }}</td>
                                                 <td class="text-left text-md">
                                                     {{ 'Rp ' . number_format($c->utang, 2, ',', '.') }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-secondary"
-                                                        data-dismiss="modal"
-                                                        onclick="selectCustomer('{{ $c->kd_customer }}')">Pilih</button>
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>

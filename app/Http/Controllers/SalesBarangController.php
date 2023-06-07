@@ -17,7 +17,7 @@ class SalesBarangController extends Controller
     public function show(string $id)
     {
         $user = User::all();
-        $data = Barang::where('kd_barang', $id)->first();
+        $data = Barang::where('id_barang', $id)->first();
         return view('sales.barang.show', ['data'=>$data, 'user' => $user]);
     }
 }

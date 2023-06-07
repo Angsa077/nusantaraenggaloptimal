@@ -22,6 +22,7 @@ use App\Http\Controllers\SalesPengiriman;
 use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
+use App\Http\Controllers\SupervisorLaporanPenjualan;
 use App\Http\Controllers\SupervisorManajemenuserController;
 use App\Http\Controllers\SupervisorPembayaran;
 use App\Http\Controllers\SupervisorPengembalian;
@@ -96,6 +97,7 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
     Route::resource('supervisorpembayaran', SupervisorPembayaran::class);
     Route::resource('supervisorpengiriman', SupervisorPengiriman::class);
     Route::resource('supervisorpengembalian', SupervisorPengembalian::class);
+    Route::resource('supervisorlaporanpenjualan', SupervisorLaporanPenjualan::class);
 });
 
 Route::group(['middleware' => ['auth', 'level:sales']], function(){

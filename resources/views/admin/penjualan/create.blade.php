@@ -36,7 +36,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-12 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="id_barang">Kode Barang</label>
@@ -113,7 +113,8 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('adminpenjualan.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('adminpenjualan.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12 col-12">
@@ -126,7 +127,9 @@
                                                                 <i data-feather="dollar-sign"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="total_bayar" class="form-control" placeholder="Silahkan Masukan Total Pembayaran" name="total_bayar" value="{{ Session::get('total_bayar') }}">
+                                                        <input type="number" id="total_bayar" class="form-control"
+                                                            placeholder="Silahkan Masukan Total Pembayaran"
+                                                            name="total_bayar" value="{{ Session::get('total_bayar') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +144,9 @@
                                                                 <i data-feather="file-plus"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="file" id="bukti_pembayaran" class="form-control" placeholder="Silahkan Masukan Bukti Pembayaran" name="bukti_pembayaran">
+                                                        <input type="file" id="bukti_pembayaran" class="form-control"
+                                                            placeholder="Silahkan Masukan Bukti Pembayaran"
+                                                            name="bukti_pembayaran">
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,13 +161,16 @@
                                                                 <i data-feather="clipboard"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="catatan" class="form-control" placeholder="Silahkan Masukan Catatan" name="catatan" value="{{ Session::get('catatan') }}">
+                                                        <input type="text" id="catatan" class="form-control"
+                                                            placeholder="Silahkan Masukan Catatan" name="catatan"
+                                                            value="{{ Session::get('catatan') }}">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end mt-2">
-                                            <button type="submit" name="simpan" class="btn btn-secondary" {{ $penjualansementara->isEmpty() ? 'disabled' : '' }}>Bayar</button>
+                                            <button type="submit" name="simpan" class="btn btn-secondary"
+                                                {{ $penjualansementara->isEmpty() ? 'disabled' : '' }}>Bayar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -170,7 +178,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- Review Penjualan Table --}}
                 <div class="main-content container-fluid mt-5">
                     <section class="section">
@@ -193,27 +201,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $no_pensem = 1; $total_jumlah_barang = 0; $total_harga = 0; ?>
+                                            <?php $no_pensem = 1;
+                                            $total_jumlah_barang = 0;
+                                            $total_harga = 0; ?>
                                             @forelse ($penjualansementara as $pensem)
                                                 @if ($pensem->id_staf == Auth::user()->id)
                                                     <tr>
                                                         <td class="text-left text-md">{{ $no_pensem++ }}</td>
-                                                        <td class="text-left text-md">{{ $pensem->customer->nama_toko }}</td>
+                                                        <td class="text-left text-md">{{ $pensem->customer->nama_toko }}
+                                                        </td>
                                                         <td class="text-left text-md">{{ $pensem->barang->nama }}</td>
-                                                        <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->barang->harga_jual, 2, ',', '.') }}</td>
-                                                        <td class="text-left text-md">{{ $pensem->jumlah_barang }} Unit</td>
-                                                        <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->total_harga, 2, ',', '.') }}</td>
+                                                        <td class="text-left text-md">
+                                                            {{ 'Rp ' . number_format($pensem->barang->harga_jual, 2, ',', '.') }}
+                                                        </td>
+                                                        <td class="text-left text-md">{{ $pensem->jumlah_barang }} Unit
+                                                        </td>
+                                                        <td class="text-left text-md">
+                                                            {{ 'Rp ' . number_format($pensem->total_harga, 2, ',', '.') }}
+                                                        </td>
                                                         <td class="text-center">
-                                                            <form action="{{ route('adminpenjualan.destroysementara', $pensem->kd_penjualansementara) }}" method="POST">
+                                                            <form
+                                                                action="{{ route('adminpenjualan.destroysementara', $pensem->kd_penjualansementara) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                                    onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
                                                             </form>
                                                         </td>
                                                     </tr>
                                                     <?php
-                                                        $total_jumlah_barang += $pensem->jumlah_barang;
-                                                        $total_harga += $pensem->total_harga;
+                                                    $total_jumlah_barang += $pensem->jumlah_barang;
+                                                    $total_harga += $pensem->total_harga;
                                                     ?>
                                                 @endif
                                             @empty
@@ -223,15 +242,19 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td colspan="7" class="text-center">Tidak ada penjualan sementara.</td>
+                                                    <td colspan="7" class="text-center">Tidak ada penjualan sementara.
+                                                    </td>
                                                     <td></td>
                                                 </tr>
                                             @endforelse
                                             @if (!$penjualansementara->isEmpty())
                                                 <tr>
                                                     <td class="text-right text-md"><strong>Total</strong></td>
-                                                    <td class="text-left text-md"><strong>{{ $total_jumlah_barang }} Unit</strong></td>
-                                                    <td class="text-left text-md"><strong>{{ 'Rp ' . number_format($total_harga, 2, ',', '.') }}</strong></td>
+                                                    <td class="text-left text-md"><strong>{{ $total_jumlah_barang }}
+                                                            Unit</strong></td>
+                                                    <td class="text-left text-md">
+                                                        <strong>{{ 'Rp ' . number_format($total_harga, 2, ',', '.') }}</strong>
+                                                    </td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -267,13 +290,13 @@
                                             <th scope="col" class="text-left text-md">Merek</th>
                                             <th scope="col" class="text-left text-md">Jumlah</th>
                                             <th scope="col" class="text-left text-md">Harga</th>
-                                            <th scope="col" class="text-left text-md">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($barang as $b)
                                             @if ($b->status_barang == 'tersedia')
-                                                <tr>
+                                                <tr data-dismiss="modal"
+                                                    onclick="selectBarang('{{ $b->id_barang }}', '{{ $b->nama }}')">
                                                     <td class="text-left text-md">{{ $b->created_at }}</td>
                                                     <td class="text-left text-md">{{ $b->kd_barang }}</td>
                                                     <td class="text-left text-md">{{ $b->nama }}</td>
@@ -281,11 +304,7 @@
                                                     <td class="text-left text-md">{{ $b->jumlah }}</td>
                                                     <td class="text-left text-md">
                                                         {{ 'Rp ' . number_format($b->harga_jual, 2, ',', '.') }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-sm btn-secondary"
-                                                            data-dismiss="modal"
-                                                            onclick="selectBarang('{{ $b->id_barang }}', '{{ $b->nama }}')">Pilih</button>
-                                                    </td>
+
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -317,12 +336,11 @@
                                             <th scope="col" class="text-left text-md">No HP</th>
                                             <th scope="col" class="text-left text-md">Alamat</th>
                                             <th scope="col" class="text-left text-md">Utang</th>
-                                            <th scope="col" class="text-left text-md">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($customer as $c)
-                                            <tr>
+                                            <tr data-dismiss="modal" onclick="selectCustomer('{{ $c->kd_customer }}')">
                                                 <td class="text-left text-md">{{ $c->kd_customer }}</td>
                                                 <td class="text-left text-md">{{ $c->nama_toko }}</td>
                                                 <td class="text-left text-md">{{ $c->nama_pemilik }}</td>
@@ -330,11 +348,6 @@
                                                 <td class="text-left text-md">{{ $c->alamat }}</td>
                                                 <td class="text-left text-md">
                                                     {{ 'Rp ' . number_format($c->utang, 2, ',', '.') }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-secondary"
-                                                        data-dismiss="modal"
-                                                        onclick="selectCustomer('{{ $c->kd_customer }}')">Pilih</button>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -18,40 +18,34 @@
                                     <th scope="col" class="text-left text-md">Nama</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
                                     <th scope="col" class="text-left text-md">Jumlah</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
                                 @foreach ($data as $key => $item)
                                     <?php
-                                        // Check if it's the first occurrence of kd_barang or not
-                                        $firstOccurrence = ($key === 0 || $item->kd_barang !== $data[$key - 1]->kd_barang);
+                                    // Check if it's the first occurrence of kd_barang or not
+                                    $firstOccurrence = $key === 0 || $item->kd_barang !== $data[$key - 1]->kd_barang;
                                     ?>
                                     @if ($firstOccurrence)
-                                        <tr>
+                                        <tr onclick="window.location='{{ route('adminbarang.show', $item->kd_barang) }}';">
                                             <td class="text-left text-md">{{ $no++ }}</td>
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>
                                             <td class="text-left text-md">{{ $item->merek }}</td>
                                             <td class="text-left text-md">
                                                 <?php
-                                                    $totalJumlah = $item->jumlah;
-                                                    // Loop through subsequent items with the same kd_barang
-                                                    for ($i = $key + 1; $i < count($data); $i++) {
-                                                        if ($data[$i]->kd_barang === $item->kd_barang) {
-                                                            $totalJumlah += $data[$i]->jumlah;
-                                                        } else {
-                                                            break; // Exit the loop when kd_barang changes
-                                                        }
+                                                $totalJumlah = $item->jumlah;
+                                                // Loop through subsequent items with the same kd_barang
+                                                for ($i = $key + 1; $i < count($data); $i++) {
+                                                    if ($data[$i]->kd_barang === $item->kd_barang) {
+                                                        $totalJumlah += $data[$i]->jumlah;
+                                                    } else {
+                                                        break; // Exit the loop when kd_barang changes
                                                     }
-                                                    echo $totalJumlah . ' Barang';
+                                                }
+                                                echo $totalJumlah . ' Barang';
                                                 ?>
-                                            </td>
-                                            <td class="text-left text-md">
-                                                <a href="{{ route('adminbarang.show', $item->kd_barang) }}" class="btn">
-                                                    <i data-feather="more-horizontal"></i>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endif

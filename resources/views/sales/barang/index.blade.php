@@ -18,22 +18,20 @@
                                     <th scope="col" class="text-left text-md">Merek</th>
                                     <th scope="col" class="text-left text-md">Jumlah</th>
                                     <th scope="col" class="text-left text-md">Harga</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                @if ($item->status_barang == 'tersedia')
-                                    <tr>
-                                        <td class="text-left text-md">{{ $item->created_at  }}</td>
-                                        <td class="text-left text-md">{{ $item->kd_barang  }}</td>
-                                        <td class="text-left text-md">{{ $item->nama }}</td>
-                                        <td class="text-left text-md">{{ $item->merek }}</td>
-                                        <td class="text-left text-md">{{ $item->jumlah }}</td>
-                                        <td class="text-left text-md">{{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('salesbarang.show', $item->kd_barang) }}"
-                                                class="btn"><i data-feather="more-horizontal"></i></a></td>
-                                    </tr>
+                                    @if ($item->status_barang == 'tersedia')
+                                        <tr onclick="window.location='{{ route('salesbarang.show', $item->id_barang) }}';">
+                                            <td class="text-left text-md">{{ $item->created_at }}</td>
+                                            <td class="text-left text-md">{{ $item->kd_barang }}</td>
+                                            <td class="text-left text-md">{{ $item->nama }}</td>
+                                            <td class="text-left text-md">{{ $item->merek }}</td>
+                                            <td class="text-left text-md">{{ $item->jumlah }}</td>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
+                                        </tr>
                                     @endif
                                 @endforeach
                             </tbody>

@@ -17,21 +17,19 @@
                                     <th scope="col" class="text-left text-md">Jabatan</th>
                                     <th scope="col" class="text-left text-md">No HP</th>
                                     <th scope="col" class="text-left text-md">Status Akun</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
                                 @foreach ($data as $item)
-                                    <tr>
+                                <tr
+                                onclick="window.location='{{ route('kepalacabangmanajemenuser.edit', $item->id) }}';">
                                         <td class="text-left text-md">{{ $no++ }}</td>
                                         <td class="text-left text-md">{{ $item->name }}</td>
                                         <td class="text-left text-md">{{ $item->nip }}</td>
                                         <td class="text-left text-md">{{ $item->level }}</td>
                                         <td class="text-left text-md">{{ $item->no_hp }}</td>
                                         <td class="text-left text-md">{{ $item->status_akun }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('kepalacabangmanajemenuser.edit', $item->id) }}"
-                                                class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

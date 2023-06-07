@@ -17,19 +17,18 @@
                                     <th scope="col" class="text-left text-md">Nama Pemilik</th>
                                     <th scope="col" class="text-left text-md">Alamat</th>
                                     <th scope="col" class="text-left text-md">Utang</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    <tr>
-                                        <td class="text-left text-md">{{ $item->kd_customer  }}</td>
+                                    <tr
+                                        onclick="window.location='{{ route('supervisorcustomer.show', $item->kd_customer) }}';">
+                                        <td class="text-left text-md">{{ $item->kd_customer }}</td>
                                         <td class="text-left text-md">{{ $item->nama_toko }}</td>
                                         <td class="text-left text-md">{{ $item->nama_pemilik }}</td>
                                         <td class="text-left text-md">{{ $item->alamat }}</td>
-                                        <td class="text-left text-md">{{ 'Rp ' . number_format($item->utang, 2, ',', '.') }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('supervisorcustomer.show', $item->kd_customer) }}"
-                                                class="btn"><i data-feather="more-horizontal"></i></a></td>
+                                        <td class="text-left text-md">{{ 'Rp ' . number_format($item->utang, 2, ',', '.') }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

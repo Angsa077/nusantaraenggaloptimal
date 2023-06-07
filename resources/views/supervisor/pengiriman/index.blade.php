@@ -17,23 +17,17 @@
                                     <th scope="col" class="text-left text-md">Status</th>
                                     <th scope="col" class="text-left text-md">Tgl Pengambilan Barang</th>
                                     <th scope="col" class="text-left text-md">Tgl Barang Sampai</th>
-                                    <th scope="col" class="text-left text-md">Proses</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                <tr>
+                                <tr onclick="window.location='{{ route('supervisorpengiriman.show', $item->kd_pengiriman) }}';">
                                     <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                     <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
                                     <td class="text-left text-md">{{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
                                     <td class="text-left text-md">{{ $item->penjualan->status_pengiriman }}</td>
                                     <td class="text-left text-md">{{ $item->tgl_pengiriman ?? 'Belum Diambil' }}</td>
                                     <td class="text-left text-md">{{ $item->tgl_sampai ?? 'Belum Sampai' }} </td>
-                                    <td class="text-left text-md">
-                                        <a href="{{ route('supervisorpengiriman.show', $item->kd_pengiriman) }}" class="btn">
-                                            <i data-feather="send"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                             @endforeach
                             

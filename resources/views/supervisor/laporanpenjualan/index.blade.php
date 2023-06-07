@@ -14,16 +14,15 @@
                                     <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
                                     <th scope="col" class="text-left text-md">Nama Barang</th>
-                                    <th scope="col" class="text-left text-md">Nama Customer</th>
+                                    <th scope="col" class="text-left text-md">Nama Toko</th>
                                     <th scope="col" class="text-left text-md">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    <tr
-                                        onclick="window.location='{{ route('adminpenjualan.edit', $item->kd_penjualan) }}';">
-                                        <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
-                                        <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
+                                    <tr onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
+                                        <td class="text-left text-md">{{ $item->tgl_penjualan  }}</td>
+                                        <td class="text-left text-md">{{ $item->kd_penjualan  }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
                                         <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
@@ -31,10 +30,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('adminpenjualan.create') }}"
-                                class="btn btn-secondary mr-3">
-                                Tambah Pesanan</a>
-                        </div>
                     </div>
                 </div>
             </div>

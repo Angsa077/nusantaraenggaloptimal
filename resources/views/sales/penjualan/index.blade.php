@@ -16,19 +16,17 @@
                                     <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Nama Customer</th>
                                     <th scope="col" class="text-left text-md">Status</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    <tr>
-                                        <td class="text-left text-md">{{ $item->tgl_penjualan  }}</td>
-                                        <td class="text-left text-md">{{ $item->kd_penjualan  }}</td>
+                                    <tr
+                                        onclick="window.location='{{ route('salespenjualan.show', $item->kd_penjualan) }}';">
+                                        <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
+                                        <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
                                         <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
-                                        <td class="text-left text-md"><a href="{{ route('salespenjualan.show', $item->kd_penjualan) }}"
-                                                class="btn"><i data-feather="more-horizontal"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -18,7 +18,6 @@
                                     <th scope="col" class="text-left text-md">Nama</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
                                     <th scope="col" class="text-left text-md">Jumlah</th>
-                                    <th scope="col" class="text-left text-md">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,7 +28,7 @@
                                         $firstOccurrence = ($key === 0 || $item->kd_barang !== $data[$key - 1]->kd_barang);
                                     ?>
                                     @if ($firstOccurrence)
-                                        <tr>
+                                    <tr onclick="window.location='{{ route('kepalacabangbarang.show', $item->kd_barang) }}';">
                                             <td class="text-left text-md">{{ $no++ }}</td>
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>
@@ -47,11 +46,6 @@
                                                     }
                                                     echo $totalJumlah . ' Barang';
                                                 ?>
-                                            </td>
-                                            <td class="text-left text-md">
-                                                <a href="{{ route('kepalacabangbarang.show', $item->kd_barang) }}" class="btn">
-                                                    <i data-feather="more-horizontal"></i>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endif

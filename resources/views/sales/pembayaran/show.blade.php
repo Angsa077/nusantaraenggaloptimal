@@ -17,13 +17,13 @@
                                     <th scope="col" class="text-left text-md">Sisa Bayar</th>
                                     <th scope="col" class="text-left text-md">Status Pembayaran</th>
                                     <th scope="col" class="text-left text-md">Status Persetujuan</th>
-                                    <th scope="col" class="text-left text-md">Proses</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pembayaran as $item)
                                     @if ($item->kd_penjualan == $data->kd_penjualan)
-                                        <tr>
+                                        <tr
+                                            onclick="window.location='{{ route('salespembayaran.edit', $item->kd_pembayaran) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>
@@ -34,9 +34,6 @@
                                                 {{ 'Rp ' . number_format($sisa_bayar, 2, ',', '.') }}</td>
                                             <td class="text-left text-md">{{ $item->penjualan->status_pembayaran }}</td>
                                             <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
-                                            <td class="text-left text-md"><a
-                                                    href="{{ route('salespembayaran.edit', $item->kd_pembayaran) }}"
-                                                    class="btn"><i data-feather="send"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -156,7 +153,8 @@
                                                     </div>
                                                     <input type="text" id="total_harga" class="form-control"
                                                         placeholder="Silahkan Masukan Total Harga" name="total_harga"
-                                                        value="{{ 'Rp ' . number_format($data->penjualan->total_harga, 2, ',', '.') }}" readonly>
+                                                        value="{{ 'Rp ' . number_format($data->penjualan->total_harga, 2, ',', '.') }}"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +172,8 @@
                                                     </div>
                                                     <input type="text" id="total_bayar" class="form-control"
                                                         placeholder="Silahkan Masukan Total Bayar" name="total_bayar"
-                                                        value="{{ 'Rp ' . number_format($data->penjualan->total_bayar, 2, ',', '.') }}" readonly>
+                                                        value="{{ 'Rp ' . number_format($data->penjualan->total_bayar, 2, ',', '.') }}"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +195,8 @@
                                                     </div>
                                                     <input type="text" id="sisa_bayar" class="form-control"
                                                         placeholder="Silahkan Masukan Sisa Bayar" name="sisa_bayar"
-                                                        value="{{ 'Rp ' . number_format($sisa_bayar_kolom, 2, ',', '.') }}" readonly>
+                                                        value="{{ 'Rp ' . number_format($sisa_bayar_kolom, 2, ',', '.') }}"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -315,7 +315,8 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" id="provinsi" class="form-control"
-                                                        value="{{ $data->penjualan->customer->provinces->name }}" readonly>
+                                                        value="{{ $data->penjualan->customer->provinces->name }}"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
