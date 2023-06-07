@@ -2,63 +2,92 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Pembayaran;
+use App\Models\Penjualan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class SupervisorPembayaran extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $data = Pembayaran::with('penjualan')->get()->groupBy('penjualan.kd_penjualan');
+        return view('supervisor.pembayaran.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $user = User::all();
+        $spv = User::all();
+        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $pembayaran = Pembayaran::all();
+        $data = Pembayaran::where('kd_penjualan', $id)->first();
+        return view('supervisor.pembayaran.show', [
+            'data' => $data, 'pembayaran' => $pembayaran, 'user' => $user, 'spv' => $spv, 'penjualan' => $penjualan
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $user = User::all();
+        $spv = User::all();
+        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $data = Pembayaran::where('kd_pembayaran', $id)->first();
+        return view('supervisor.pembayaran.edit', [
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'penjualan' => $penjualan
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $pembayaran = Pembayaran::where('kd_pembayaran', $id)->first();
+        $penjualan = Penjualan::where('kd_penjualan', $pembayaran->kd_penjualan)->first();
+        $customer = Customer::where('kd_customer', $penjualan->kd_customer)->first();
+        $total_bayar = $penjualan->total_bayar + $pembayaran->total_bayar;
+        $sisa_bayar = $penjualan->total_harga - $total_bayar;
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        if ($penjualan->total_harga  == $total_bayar) {
+            $status_pembayaran = "lunas";
+        } elseif ($penjualan->total_harga > $total_bayar) {
+            $status_pembayaran = "utang";
+        }
+
+        $data_customer = [];
+        $data_penjualan = [];
+        $data_pembayaran = [];
+
+        if ($request->simpan == 'Setujui') {
+            $data_customer = [
+                'utang' => $customer->utang - $pembayaran->total_bayar,
+            ];
+
+            $data_penjualan = [
+                'status_pembayaran' => $status_pembayaran,
+                'total_bayar'  => $total_bayar,
+            ];
+
+            $data_pembayaran = [
+                'sisa_bayar'  => $sisa_bayar,
+                'status_persetujuan'  => 'disetujui',
+                'id_spv' => Auth::user()->id,
+            ];
+        } elseif ($request->simpan == 'Tolak') {
+            $data_pembayaran = [
+                'status_persetujuan' => 'ditolak',
+                'id_spv' => Auth::user()->id,
+            ];
+        }
+
+        Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
+        Penjualan::where('kd_penjualan', $pembayaran->kd_penjualan)->update($data_penjualan);
+        Pembayaran::where('kd_pembayaran', $id)->update($data_pembayaran);
+        return redirect()->route('salespembayaran.index')->with('success', 'Berhasil memperbarui Data Pembayaran');
     }
 }

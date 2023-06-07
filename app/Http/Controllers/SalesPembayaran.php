@@ -37,14 +37,6 @@ class SalesPembayaran extends Controller
         $penjualan = Penjualan::where('kd_penjualan', $request->kd_penjualan)->first();
         $sisa_bayar = $penjualan->total_harga - $penjualan->total_bayar;
 
-        $customer = Customer::where('kd_customer', $penjualan->kd_customer)->first();
-
-        if ($sisa_bayar  == $request->total_bayar) {
-            $status_pembayaran = "lunas";
-        } elseif ($sisa_bayar > $request->total_bayar) {
-            $status_pembayaran = "utang";
-        }
-
         $request->validate(
             [
                 'kd_penjualan' => 'required',
@@ -75,27 +67,16 @@ class SalesPembayaran extends Controller
             }
         }
 
-        $data_customer = [
-            'utang' => $customer->utang - $request->total_bayar,
-        ];
-
-        $data_penjualan = [
-            'status_pembayaran' => $status_pembayaran,
-        ];
-
         $data_pembayaran = [
             'kd_penjualan' => $request->kd_penjualan,
             'tgl_pembayaran' => date('Y-m-d H:i:s', strtotime('now')),
             'total_bayar' => $request->total_bayar,
-            'sisa_bayar' => $sisa_bayar,
             'bukti_pembayaran' => $foto_nama,
             'status_persetujuan'  => 'proses',
             'id_staf' => Auth::user()->id,
             'catatan' => $request->catatan,
         ];
 
-        Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
-        Penjualan::where('kd_penjualan', $request->kd_penjualan)->update($data_penjualan);
         Pembayaran::create($data_pembayaran);
         return redirect()->route('salespembayaran.index')->with('success', 'Berhasil Mengisi Pembayaran');
     }
@@ -121,75 +102,6 @@ class SalesPembayaran extends Controller
         return view('sales.pembayaran.edit', [
             'data' => $data, 'user' => $user, 'spv' => $spv, 'penjualan' => $penjualan
         ]);
-    }
-
-    public function update(Request $request, string $id)
-    {
-        Session::flash('total_bayar', $request->total_bayar);
-        Session::flash('catatan', $request->catatan);
-
-        $penjualan = Penjualan::where('kd_penjualan', $request->kd_penjualan)->first();
-        $sisa_bayar = $penjualan->total_harga - $penjualan->total_bayar;
-
-        $customer = Customer::where('kd_customer', $penjualan->kd_customer)->first();
-
-        if ($sisa_bayar  == $request->total_bayar) {
-            $status_pembayaran = "lunas";
-        } elseif ($sisa_bayar > $request->total_bayar) {
-            $status_pembayaran = "utang";
-        }
-
-        $request->validate(
-            [
-                'total_bayar' => 'required|numeric|max:' . $sisa_bayar,
-                'bukti_pembayaran' => 'required|mimes:jpeg,jpg,png,gif|max:1024',
-                'catatan' => 'required',
-            ],
-            [
-                'total_bayar.required' => 'Total Pembayaran Wajib Diisi',
-                'total_bayar.numeric' => 'Total Pembayaran harus berupa angka',
-                'total_bayar.max' => 'Total Pembayarantidak boleh lebih dari Sisa Bayar',
-                'bukti_pembayaran.required' => 'Bukti Pembayaran Wajib Diisi',
-                'bukti_pembayaran.mimes' => 'Bukti Pembayaran Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
-                'bukti_pembayaran.max' => 'Bukti Pembayaran Yang Diperbolehkan Maksimal 1MB',
-                'catatan.required' => 'Alasan Pengembalian Wajib Diisi',
-            ]
-        );
-
-        if ($request->hasFile('bukti_pembayaran')) {
-            $foto_file = $request->file('bukti_pembayaran');
-            if ($foto_file != null) {
-                $foto_ekstensi = $foto_file->extension();
-                $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
-                $foto_file->move(public_path('bukti_pembayaran'), $foto_nama);
-
-                $data = Pembayaran::where('kd_pembayaran', $id)->first();
-                File::delete(public_path('bukti_pembayaran') . '/' . $data->gambar);
-            } else {
-                $foto_nama = null;
-            }
-
-            $data_customer = [
-                'utang' => $customer->utang - $request->total_bayar,
-            ];
-    
-            $data_penjualan = [
-                'status_pembayaran' => $status_pembayaran,
-            ];
-
-            $data_pembayaran = [
-                'total_bayar' => $request->total_bayar,
-                'sisa_bayar' => $sisa_bayar,
-                'bukti_pembayaran' => $foto_nama,
-                'status_persetujuan'  => 'proses',
-                'catatan' => $request->catatan,
-            ];
-        }
-
-        Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
-        Penjualan::where('kd_penjualan', $request->kd_penjualan)->update($data_penjualan);
-        Pembayaran::where('kd_pembayaran', $id)->update($data_pembayaran);
-        return redirect()->route('salespembayaran.index')->with('success', 'Berhasil memperbarui Data Pembayaran');
     }
 
     public function destroy(string $id)

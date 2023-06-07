@@ -382,7 +382,7 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-12 col-12">
                                         <div class="form-group has-icon-left">
                                             <label for="status_pengiriman">Status Pengiriman</label>
                                             <div class="position-relative">
@@ -395,24 +395,6 @@
                                                     <input type="text" id="status_pengiriman" class="form-control"
                                                         value="{{ $data->penjualan->status_pengiriman ?? 'Tidak ada' }}"
                                                         readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="status_persetujuan">Status Persetujuan</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="status_persetujuan" class="form-control"
-                                                        name="status_persetujuan"
-                                                        value="{{ $data->status_persetujuan ?? 'Tidak ada' }}" readonly>
                                                 </div>
                                             </div>
                                         </div>

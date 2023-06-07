@@ -180,13 +180,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive-sm">
-                                    <table class="table table-bordered table-hover" id="ReviewPenjualanTable">
+                                    <table class="table table-hover" id="ReviewPenjualanTable">
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-left text-md">No</th>
                                                 <th scope="col" class="text-left text-md">Nama Customer</th>
                                                 <th scope="col" class="text-left text-md">Nama Barang</th>
-                                                <th scope="col" class="text-left text-md">Masa Garansi</th>
                                                 <th scope="col" class="text-left text-md">Harga Barang</th>
                                                 <th scope="col" class="text-left text-md">Jumlah Barang</th>
                                                 <th scope="col" class="text-left text-md">Total Harga</th>
@@ -201,7 +200,6 @@
                                                         <td class="text-left text-md">{{ $no_pensem++ }}</td>
                                                         <td class="text-left text-md">{{ $pensem->customer->nama_toko }}</td>
                                                         <td class="text-left text-md">{{ $pensem->barang->nama }}</td>
-                                                        <td class="text-left text-md">{{ $pensem->masa_garansi }} Hari</td>
                                                         <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->barang->harga_jual, 2, ',', '.') }}</td>
                                                         <td class="text-left text-md">{{ $pensem->jumlah_barang }} Unit</td>
                                                         <td class="text-left text-md">{{ 'Rp ' . number_format($pensem->total_harga, 2, ',', '.') }}</td>
@@ -212,7 +210,6 @@
                                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
                                                             </form>
                                                         </td>
-                                                        
                                                     </tr>
                                                     <?php
                                                         $total_jumlah_barang += $pensem->jumlah_barang;
@@ -221,14 +218,24 @@
                                                 @endif
                                             @empty
                                                 <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td colspan="7" class="text-center">Tidak ada penjualan sementara.</td>
+                                                    <td></td>
                                                 </tr>
                                             @endforelse
                                             @if (!$penjualansementara->isEmpty())
                                                 <tr>
-                                                    <td colspan="5" class="text-right text-md"><strong>Total</strong></td>
+                                                    <td class="text-right text-md"><strong>Total</strong></td>
                                                     <td class="text-left text-md"><strong>{{ $total_jumlah_barang }} Unit</strong></td>
                                                     <td class="text-left text-md"><strong>{{ 'Rp ' . number_format($total_harga, 2, ',', '.') }}</strong></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -333,7 +340,7 @@
                                     </tbody>
                                 </table>
                                 <div class="col-3 col-md-3 order-md-2 order-last"> <a
-                                        href="{{ route('salescustomer.create') }}" class="btn btn-sm btn-secondary">
+                                        href="{{ route('admincustomer.create') }}" class="btn btn-sm btn-secondary">
                                         Tambah Customer</a>
                                 </div>
                             </div>

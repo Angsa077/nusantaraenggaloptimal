@@ -35,17 +35,13 @@
                                             <td class="text-left text-md">{{ $item->penjualan->status_pembayaran }}</td>
                                             <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
                                             <td class="text-left text-md"><a
-                                                    href="{{ route('salespembayaran.edit', $item->kd_pembayaran) }}"
+                                                    href="{{ route('supervisorpembayaran.edit', $item->kd_pembayaran) }}"
                                                     class="btn"><i data-feather="send"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('salespembayaran.create') }}"
-                                class="btn btn-secondary mr-3">
-                                Pembayaran</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -377,7 +373,6 @@
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </section>

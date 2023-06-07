@@ -142,3 +142,17 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#ReviewPenjualanTable').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            "language": {
+                "paginate": {
+                    "previous": '<i class="fas fa-chevron-left text-white"></i>',
+                    "next": '<i class="fas fa-chevron-right text-white"></i>',
+                }
+            },
+        });
+    });
+</script>

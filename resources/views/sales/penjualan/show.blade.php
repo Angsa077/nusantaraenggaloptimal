@@ -359,7 +359,7 @@
                 </div>
 
 
-<div class="col-6">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Data Customer</h4>
