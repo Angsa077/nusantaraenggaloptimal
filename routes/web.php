@@ -22,7 +22,10 @@ use App\Http\Controllers\SalesPengiriman;
 use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
+use App\Http\Controllers\SupervisorLaporanPendapatan;
 use App\Http\Controllers\SupervisorLaporanPenjualan;
+use App\Http\Controllers\SupervisorLaporanStokbarang;
+use App\Http\Controllers\SupervisorLaporanStokbarangPengembalian;
 use App\Http\Controllers\SupervisorManajemenuserController;
 use App\Http\Controllers\SupervisorPembayaran;
 use App\Http\Controllers\SupervisorPengembalian;
@@ -93,11 +96,24 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
     Route::resource('supervisormanajemenuser', SupervisorManajemenuserController::class);
     Route::resource('supervisorbarang', SupervisorBarangController::class);
     Route::resource('supervisorcustomer', SupervisorCustomerController::class);
-    Route::resource('supervisorpenjualan', SupervisorPenjualanController::class);
     Route::resource('supervisorpembayaran', SupervisorPembayaran::class);
     Route::resource('supervisorpengiriman', SupervisorPengiriman::class);
     Route::resource('supervisorpengembalian', SupervisorPengembalian::class);
+
+    Route::resource('supervisorpenjualan', SupervisorPenjualanController::class);
+    Route::get('supervisorpenjualan/pdf/{id}', [SupervisorPenjualanController::class,'generatePDF'])->name('supervisorpenjualan.pdf');
+
     Route::resource('supervisorlaporanpenjualan', SupervisorLaporanPenjualan::class);
+    Route::get('supervisorlaporanpenjualan/pdf', [SupervisorLaporanPenjualan::class,'generatePDF'])->name('supervisorlaporanpenjualan.pdf');
+
+    Route::resource('supervisorlaporanpendapatan', SupervisorLaporanPendapatan::class);
+    Route::get('supervisorlaporanpendapatan/pdf', [SupervisorLaporanPendapatan::class,'generatePDF'])->name('supervisorlaporanpendapatan.pdf');
+
+    Route::resource('supervisorstokbarang', SupervisorLaporanStokbarang::class);
+    Route::get('supervisorstokbarang/pdf', [SupervisorLaporanStokbarang::class,'generatePDF'])->name('supervisorstokbarang.pdf');
+
+    Route::resource('supervisorstokbarangpengembalian', SupervisorLaporanStokbarangPengembalian::class);
+    Route::get('supervisorstokbarangpengembalian/pdf', [SupervisorLaporanStokbarangPengembalian::class,'generatePDF'])->name('supervisorstokbarangpengembalian.pdf');
 });
 
 Route::group(['middleware' => ['auth', 'level:sales']], function(){

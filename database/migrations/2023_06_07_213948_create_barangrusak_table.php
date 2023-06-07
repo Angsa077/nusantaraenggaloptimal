@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('gambar')->nullable();
             $table->string('catatan')->nullable();
             $table->bigInteger('id_staf')->nullable();
+            $table->date('tgl_barangpengembalian')->nullable();
             $table->timestamps();
         });
     }

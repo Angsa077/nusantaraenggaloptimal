@@ -124,7 +124,8 @@
                                                     </div>
                                                     <input type="text" id="jumlah" class="form-control"
                                                         placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                        value="{{ $data->pengembalian->jumlah_barang ?? 'Tidak ada' }} Barang" readonly>
+                                                        value="{{ $data->pengembalian->jumlah_barang ?? 'Tidak ada' }} Barang"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,10 +171,22 @@
 
                                     @if ($data->status_persetujuan == 'persetujuanspv')
                                         <div class="col-12 d-flex justify-content-end mt-3">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-toggle="modal" data-target="#listDataModal">Periksa Barang</button>
+                                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                data-target="#listDataModal">Periksa Barang</button>
                                         </div>
                                     @endif
+
+                                    <div class="col-12 d-flex justify-content-end mt-3">
+                                        <form method="GET" action="{{ route('supervisorpenjualan.index') }}"
+                                            class="form-inline mb-3">
+                                            <div class="d-flex justify-content-end ml-2">
+                                                <a href="{{ route('supervisorpenjualan.pdf', $data->kd_penjualan) }}"
+                                                    class="btn btn-secondary"><i class="fa fa-file-pdf"></i>Cetak
+                                                    Invoice</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -194,15 +207,15 @@
                                                                 <i data-feather="user"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="status_persetujuan" class="form-control"
-                                                            name="status_persetujuan"
+                                                        <input type="text" id="status_persetujuan"
+                                                            class="form-control" name="status_persetujuan"
                                                             value="{{ $data->status_persetujuan ? $data->status_persetujuan : 'Tidak ada' }}"
                                                             readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_pembayaran">Status Pembayaran</label>
@@ -221,7 +234,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_pengiriman">Status Pengiriman</label>
@@ -240,7 +253,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_pengembalian">Status Pengembalian</label>
@@ -251,22 +264,22 @@
                                                                 <i data-feather="clock"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" id="status_pengembalian" class="form-control"
-                                                            name="status_pengembalian"
+                                                        <input type="text" id="status_pengembalian"
+                                                            class="form-control" name="status_pengembalian"
                                                             value="{{ $data->status_pengembalian ? $data->status_pengembalian : 'Tidak ada' }}"
                                                             readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-    
+
+
                     <div class="col-12">
                         <div class="card">
                             <div class="card-content">
@@ -288,7 +301,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="id_admin">Diperiksa Oleh</label>
@@ -307,7 +320,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="id_spv">Disetujui Oleh</label>
@@ -326,7 +339,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="timestamp">Waktu Input</label>
@@ -343,7 +356,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                     </div>
                                 </div>
                             </div>

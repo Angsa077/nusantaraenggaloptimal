@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
 
 class SupervisorPenjualanController extends Controller
 {
@@ -56,7 +58,7 @@ class SupervisorPenjualanController extends Controller
         $data_pengiriman = [];
         $data_barang = [];
         $data_customer = [];
-    
+
         if ($request->simpan == 'Setujui') {
             $data_penjualan = [
                 'status_persetujuan' => 'disetujui',
@@ -87,7 +89,7 @@ class SupervisorPenjualanController extends Controller
                     'jumlah' => $barang->jumlah - $penjualan->jumlah_barang,
                 ];
             }
-            
+
 
             if (is_null($customer->utang)) {
                 $data_customer = [
@@ -98,23 +100,90 @@ class SupervisorPenjualanController extends Controller
                     'utang' => $customer->utang + $pembayaran->sisa_bayar,
                 ];
             }
-
         } elseif ($request->simpan == 'Tolak') {
             $data_penjualan = [
                 'status_persetujuan' => 'ditolak',
                 'catatan' => $request->catatan,
             ];
         }
-    
+
         Penjualan::where('kd_penjualan', $id)->update($data_penjualan);
         Pembayaran::where('kd_pembayaran', $pembayaran->kd_pembayaran)->update($data_pembayaran);
         Barang::where('id_barang', $penjualan->id_barang)->update($data_barang);
         Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
-    
+
         if (!empty($data_pengiriman)) {
             Pengiriman::create($data_pengiriman);
         }
-    
+
         return redirect()->route('supervisorpenjualan.index')->with('success', 'Barang Berhasil Di Checking');
+    }
+
+    public function show(Request $request, string $id)
+    {
+        $user = User::all();
+        $spv = User::all();
+        $admin = User::all();
+        $barang = Barang::all();
+        $customer = Customer::all();
+        $pembayaran = Pembayaran::all();
+        $pengiriman = Pengiriman::all();
+        $pengembalian = Pengembalian::all();
+        $data = Penjualan::where('kd_penjualan', $id)->first();
+
+        // Membuat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Menyusun tampilan PDF menggunakan blade view
+        $html = view('supervisor.penjualan.pdf', [
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
+            'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
+        ])->render();
+
+        // Mengambil format HTML dan merender ke PDF
+        $dompdf->loadHtml($html);
+
+        // Mengatur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render tampilan PDF
+        $dompdf->render();
+
+        // Menghasilkan file PDF dan menyimpannya ke dalam server
+        $dompdf->stream("invoice_penjualan.pdf", ["Attachment" => false]);
+    }
+
+    public function generatePDF(Request $request, string $id)
+    {
+        $user = User::all();
+        $spv = User::all();
+        $admin = User::all();
+        $barang = Barang::all();
+        $customer = Customer::all();
+        $pembayaran = Pembayaran::all();
+        $pengiriman = Pengiriman::all();
+        $pengembalian = Pengembalian::all();
+        $data = Penjualan::where('kd_penjualan', $id)->first();
+
+        // Membuat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Menyusun tampilan PDF menggunakan blade view
+        $html = view('supervisor.penjualan.pdf', [
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
+            'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
+        ])->render();
+
+        // Mengambil format HTML dan merender ke PDF
+        $dompdf->loadHtml($html);
+
+        // Mengatur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render tampilan PDF
+        $dompdf->render();
+
+        // Menghasilkan file PDF dan menyimpannya ke dalam server
+        $dompdf->stream("invoice_penjualan.pdf", ["Attachment" => false]);
     }
 }

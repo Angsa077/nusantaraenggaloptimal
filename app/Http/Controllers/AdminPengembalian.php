@@ -131,6 +131,7 @@ class AdminPengembalian extends Controller
                 'gambar' => $foto_nama,
                 'catatan' => $request->catatan,
                 'id_staf' => Auth::user()->id,
+                'tgl_barangpengembalian' => date('Y-m-d H:i:s', strtotime('now')),
             ];
 
             $data_penjualan = [

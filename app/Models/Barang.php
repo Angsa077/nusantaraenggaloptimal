@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\BarangRusak;
 use App\Models\Penjualan;
 use App\Models\PenjualanSementara;
 
 class Barang extends Model
 {
     use HasFactory;
-    protected $table ="barang";
-    protected $fillable = ['id_barang','kd_barang','nama','merek','harga_beli','harga_jual','jumlah','expired','status_barang','gambar','catatan','id_staf','id_spv'];
+    protected $table = "barang";
+    protected $fillable = ['id_barang', 'kd_barang', 'nama', 'merek', 'harga_beli', 'harga_jual', 'jumlah', 'expired', 'status_barang', 'gambar', 'catatan', 'id_staf', 'id_spv'];
 
     public function user()
     {
@@ -28,6 +29,17 @@ class Barang extends Model
     {
         return $this->hasMany(Penjualan::class);
     }
+
+    public function barangrusak()
+    {
+        return $this->hasMany(BarangRusak::class);
+    }
+
+    public function penjualanbarang()
+    {
+        return $this->belongsTo(Penjualan::class, 'id_barang', 'id_barang');
+    }
+
 
     public function penjualansementara()
     {

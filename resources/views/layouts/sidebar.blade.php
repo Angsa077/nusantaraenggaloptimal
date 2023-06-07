@@ -148,25 +148,35 @@
                     <li class="sidebar-header">
                         Laporan
                     </li>
-    
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('supervisorlaporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
                         </a>
                     </li>
-    
+
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="maps-google.html">
-                            <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
+                        <a class="sidebar-link" href="{{ route('supervisorlaporanpendapatan.index') }}">
+                            <i class="align-middle" data-feather="dollar-sign"></i> <span
+                                class="align-middle">Laporan
                                 Pendapatan</span>
                         </a>
                     </li>
-    
+
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="maps-google.html">
-                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Laporan Stok
+                        <a class="sidebar-link" href="{{ route('supervisorstokbarang.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
                                 Barang</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('supervisorstokbarangpengembalian.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
+                                Barang Pengembalian</span>
                         </a>
                     </li>
                 @endif
@@ -174,7 +184,8 @@
                 @if (Auth::user()->level == 'sales')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('salesbarang.index') }}">
-                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Barang</span>
+                            <i class="align-middle" data-feather="package"></i> <span
+                                class="align-middle">Barang</span>
                         </a>
                     </li>
 
@@ -219,24 +230,24 @@
                 @endif
 
                 @if (Auth::user()->level == 'kurir')
-                <li class="sidebar-header">
-                    Penjualan
-                </li>
+                    <li class="sidebar-header">
+                        Penjualan
+                    </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('kurirpengiriman.index') }}">
-                        <i class="align-middle" data-feather="map-pin"></i> <span
-                            class="align-middle">pengiriman</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kurirpengiriman.index') }}">
+                            <i class="align-middle" data-feather="map-pin"></i> <span
+                                class="align-middle">pengiriman</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('kurirpengembalian.index') }}">
-                        <i class="align-middle" data-feather="shopping-bag"></i> <span
-                            class="align-middle">Pengembalian</span>
-                    </a>
-                </li>
-            @endif
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kurirpengembalian.index') }}">
+                            <i class="align-middle" data-feather="shopping-bag"></i> <span
+                                class="align-middle">Pengembalian</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
 
         </div>

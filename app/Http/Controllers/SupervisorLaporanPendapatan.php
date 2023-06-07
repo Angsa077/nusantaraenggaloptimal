@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengembalian;
+use App\Models\Barang;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\View;
 
-
-class SupervisorLaporanPenjualan extends Controller
+class SupervisorLaporanPendapatan extends Controller
 {
     public function index(Request $request)
     {
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $pengembalian = Pengembalian::all();
+        $barang = Barang::all();
         $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
         }
-        return view('supervisor.laporanpenjualan.index', ['data' => $data, 'pengembalian' => $pengembalian, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir]);
+        return view('supervisor.laporanpendapatan.index', ['data' => $data, 'barang' => $barang, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir]);
     }
 
     public function generatePDF(Request $request)
@@ -40,7 +39,7 @@ class SupervisorLaporanPenjualan extends Controller
         $dompdf = new Dompdf();
 
         // Menyusun tampilan PDF menggunakan blade view
-        $html = view('supervisor.laporanpenjualan.pdf', ['data' => $data, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir])->render();
+        $html = view('supervisor.laporanpendapatan.pdf', ['data' => $data, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir])->render();
 
         // Mengambil format HTML dan merender ke PDF
         $dompdf->loadHtml($html);
@@ -52,7 +51,7 @@ class SupervisorLaporanPenjualan extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("laporan_penjualan.pdf", ["Attachment" => false]);
+        $dompdf->stream("laporan_pendapatan.pdf", ["Attachment" => false]);
     }
 
     public function show(Request $request)
@@ -67,7 +66,7 @@ class SupervisorLaporanPenjualan extends Controller
         }
 
         // Mengatur tampilan PDF dengan menggunakan view
-        $pdf = View::make('supervisor.laporanpenjualan.pdf', [
+        $pdf = View::make('supervisor.laporanpendapatan.pdf', [
             'data' => $data,
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir
@@ -83,6 +82,6 @@ class SupervisorLaporanPenjualan extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("laporan_penjualan.pdf");
+        $dompdf->stream("laporan_pendapatan.pdf");
     }
 }
