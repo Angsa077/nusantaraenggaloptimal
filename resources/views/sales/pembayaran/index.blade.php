@@ -13,7 +13,9 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
                                     <th scope="col" class="text-left text-md">Nama Toko</th>
-                                    <th scope="col" class="text-left text-md">Nama Barang</th>
+                                    <th scope="col" class="text-left text-md">Total Harga</th>
+                                    <th scope="col" class="text-left text-md">Total Bayar</th>
+                                    <th scope="col" class="text-left text-md">Sisa Bayar</th>
                                     <th scope="col" class="text-left text-md">Status Pembayaran</th>
                                 </tr>
                             </thead>
@@ -29,7 +31,14 @@
                                             {{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}
                                         </td>
                                         <td class="text-left text-md">
-                                            {{ $item->penjualan->barang ? $item->penjualan->barang->nama : '' }}</td>
+                                            {{ 'Rp ' . number_format($item->penjualan->total_harga, 2, ',', '.') }}</td>
+                                        <td class="text-left text-md">
+                                            {{ 'Rp ' . number_format($item->penjualan->total_bayar, 2, ',', '.') }}</td>
+                                        @php
+                                            $sisa_bayar = $item->penjualan->total_harga - $item->penjualan->total_bayar;
+                                        @endphp
+                                        <td class="text-left text-md">
+                                            {{ 'Rp ' . number_format($sisa_bayar, 2, ',', '.') }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->status_pembayaran }}</td>
                                     </tr>
                                 @endforeach

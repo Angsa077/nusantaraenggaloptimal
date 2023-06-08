@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Support\Facades\View;
 
 class SupervisorPenjualanController extends Controller
@@ -129,18 +130,22 @@ class SupervisorPenjualanController extends Controller
         $spv = User::all();
         $admin = User::all();
         $barang = Barang::all();
+        $barangterjual = BarangTerjual::all();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
         $pengiriman = Pengiriman::all();
         $pengembalian = Pengembalian::all();
         $data = Penjualan::where('kd_penjualan', $id)->first();
 
-        // Membuat objek Dompdf
-        $dompdf = new Dompdf();
+
+        // Membuat objek Dompdf dengan opsi
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
 
         // Menyusun tampilan PDF menggunakan blade view
         $html = view('supervisor.penjualan.pdf', [
-            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'barangterjual' => $barangterjual, 'customer' => $customer,
             'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
         ])->render();
 
@@ -154,7 +159,11 @@ class SupervisorPenjualanController extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("invoice_penjualan.pdf", ["Attachment" => false]);
+        $output = $dompdf->output();
+        $filePath = public_path('invoice_penjualan.pdf');
+        file_put_contents($filePath, $output);
+
+        return response()->download($filePath)->deleteFileAfterSend(true);
     }
 
     public function generatePDF(Request $request, string $id)
@@ -163,18 +172,22 @@ class SupervisorPenjualanController extends Controller
         $spv = User::all();
         $admin = User::all();
         $barang = Barang::all();
+        $barangterjual = BarangTerjual::all();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
         $pengiriman = Pengiriman::all();
         $pengembalian = Pengembalian::all();
         $data = Penjualan::where('kd_penjualan', $id)->first();
 
-        // Membuat objek Dompdf
-        $dompdf = new Dompdf();
+
+        // Membuat objek Dompdf dengan opsi
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
 
         // Menyusun tampilan PDF menggunakan blade view
         $html = view('supervisor.penjualan.pdf', [
-            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'barangterjual' => $barangterjual, 'customer' => $customer,
             'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
         ])->render();
 
@@ -188,6 +201,10 @@ class SupervisorPenjualanController extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("invoice_penjualan.pdf", ["Attachment" => false]);
+        $output = $dompdf->output();
+        $filePath = public_path('invoice_penjualan.pdf');
+        file_put_contents($filePath, $output);
+
+        return response()->download($filePath)->deleteFileAfterSend(true);
     }
 }

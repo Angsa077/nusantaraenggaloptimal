@@ -16,7 +16,7 @@ class SupervisorPembayaran extends Controller
 
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pembayaran::with('penjualan')->get()->groupBy('penjualan.kd_penjualan');
         return view('supervisor.pembayaran.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
@@ -25,7 +25,7 @@ class SupervisorPembayaran extends Controller
     {
         $user = User::all();
         $spv = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $pembayaran = Pembayaran::all();
         $data = Pembayaran::where('kd_penjualan', $id)->first();
         return view('supervisor.pembayaran.show', [
@@ -37,7 +37,7 @@ class SupervisorPembayaran extends Controller
     {
         $user = User::all();
         $spv = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pembayaran::where('kd_pembayaran', $id)->first();
         return view('supervisor.pembayaran.edit', [
             'data' => $data, 'user' => $user, 'spv' => $spv, 'penjualan' => $penjualan

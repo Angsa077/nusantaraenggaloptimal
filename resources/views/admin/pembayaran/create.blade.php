@@ -120,8 +120,7 @@
                                         <tr>
                                             <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                             <th scope="col" class="text-left text-md">Kode Penjualan</th>
-                                            <th scope="col" class="text-left text-md">Nama Barang</th>
-                                            <th scope="col" class="text-left text-md">Nama Customer</th>
+                                            <th scope="col" class="text-left text-md">Nama Toko</th>
                                             <th scope="col" class="text-left text-md">Total Harga</th>
                                             <th scope="col" class="text-left text-md">Total Bayar</th>
                                         </tr>
@@ -133,7 +132,6 @@
                                                     onclick="selectPenjualan('{{ $p->kd_penjualan }}', '{{ $p->nama }}')">
                                                     <td class="text-left text-md">{{ $p->tgl_penjualan }}</td>
                                                     <td class="text-left text-md">{{ $p->kd_penjualan }}</td>
-                                                    <td class="text-left text-md">{{ $p->barang->nama }}</td>
                                                     <td class="text-left text-md">{{ $p->customer->nama_toko }}</td>
                                                     <td class="text-left text-md">
                                                         {{ 'Rp ' . number_format($p->total_harga, 2, ',', '.') }}</td>

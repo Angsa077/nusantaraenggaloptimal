@@ -149,6 +149,7 @@
                                             <button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
                                                 data-target="#listDataModal">Periksa Barang</button>
                                         @endif
+
                                         @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                                 action="{{ route('adminpenjualan.destroy', $data->kd_penjualan) }}"
@@ -158,6 +159,16 @@
                                                 <button class="btn btn-danger" type="submit" name="submit">
                                                     Delete
                                                 </button>
+                                            </form>
+                                        @endif
+
+                                        @if ($data->status_persetujuan == 'disetujui')
+                                            <form method="GET" action="{{ route('adminpenjualan.index') }}"
+                                                class="form-inline mb-3">
+                                                <div class="d-flex justify-content-end ml-2">
+                                                    <a href="{{ route('adminpenjualan.pdf', $data->kd_penjualan) }}"
+                                                        class="btn btn-secondary">Cetak Invoice</a>
+                                                </div>
                                             </form>
                                         @endif
                                     </div>

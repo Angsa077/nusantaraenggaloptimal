@@ -155,6 +155,19 @@
                                             </form>
                                         </div>
                                     @endif
+
+                                    @if ($data->status_persetujuan == 'disetujui')
+                                    <div class="col-12 d-flex justify-content-end mt-3">
+                                        <form method="GET" action="{{ route('salespenjualan.index') }}"
+                                            class="form-inline mb-3">
+                                            <div class="d-flex justify-content-end ml-2">
+                                                <a href="{{ route('salespenjualan.pdf', $data->kd_penjualan) }}"
+                                                    class="btn btn-secondary">Cetak Invoice</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

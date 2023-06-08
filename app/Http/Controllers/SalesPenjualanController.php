@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
 
 class SalesPenjualanController extends Controller
 {
@@ -214,5 +217,47 @@ class SalesPenjualanController extends Controller
     {
         PenjualanSementara::where('kd_penjualansementara', $id)->delete();
         return redirect()->back()->with('success', 'Berhasil Menghapus Penjualan Sementara');
+    }
+
+    public function generatePDF(Request $request, string $id)
+    {
+        $user = User::all();
+        $spv = User::all();
+        $admin = User::all();
+        $barang = Barang::all();
+        $barangterjual = BarangTerjual::all();
+        $customer = Customer::all();
+        $pembayaran = Pembayaran::all();
+        $pengiriman = Pengiriman::all();
+        $pengembalian = Pengembalian::all();
+        $data = Penjualan::where('kd_penjualan', $id)->first();
+
+
+        // Membuat objek Dompdf dengan opsi
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
+
+        // Menyusun tampilan PDF menggunakan blade view
+        $html = view('sales.penjualan.pdf', [
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'barangterjual' => $barangterjual, 'customer' => $customer,
+            'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
+        ])->render();
+
+        // Mengambil format HTML dan merender ke PDF
+        $dompdf->loadHtml($html);
+
+        // Mengatur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render tampilan PDF
+        $dompdf->render();
+
+        // Menghasilkan file PDF dan menyimpannya ke dalam server
+        $output = $dompdf->output();
+        $filePath = public_path('invoice_penjualan.pdf');
+        file_put_contents($filePath, $output);
+
+        return response()->download($filePath)->deleteFileAfterSend(true);
     }
 }
