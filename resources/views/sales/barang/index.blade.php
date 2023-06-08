@@ -28,7 +28,7 @@
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>
                                             <td class="text-left text-md">{{ $item->merek }}</td>
-                                            <td class="text-left text-md">{{ $item->jumlah }}</td>
+                                            <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->harga_jual, 2, ',', '.') }}</td>
                                         </tr>

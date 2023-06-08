@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id('kd_penjualan');
-            $table->bigInteger('id_barang')->nullable();
             $table->string('kd_customer', 20)->nullable();
             $table->bigInteger('jumlah_barang')->nullable();
             $table->double('total_bayar')->nullable();
             $table->double('total_harga')->nullable();
-            $table->string('masa_garansi', 20)->nullable();
             $table->date('tgl_penjualan')->nullable();
             $table->string('status_pembayaran', 20)->nullable();
             $table->string('status_pengiriman', 20)->nullable();

@@ -151,23 +151,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="catatan">Catatan</label>
-                                                <div class="position-relative">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i data-feather="clipboard"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" id="catatan" class="form-control"
-                                                            placeholder="Silahkan Masukan Catatan" name="catatan"
-                                                            value="{{ Session::get('catatan') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-12 d-flex justify-content-end mt-2">
                                             <button type="submit" name="simpan" class="btn btn-secondary"
                                                 {{ $penjualansementara->isEmpty() ? 'disabled' : '' }}>Bayar</button>
@@ -188,7 +171,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive-sm">
-                                    <table class="table table-hover" id="ReviewPenjualanTable">
+                                    <table class="table table-bordered table-hover table-sm">
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="text-left text-md">No</th>
@@ -214,7 +197,7 @@
                                                         <td class="text-left text-md">
                                                             {{ 'Rp ' . number_format($pensem->barang->harga_jual, 2, ',', '.') }}
                                                         </td>
-                                                        <td class="text-left text-md">{{ $pensem->jumlah_barang }} Unit
+                                                        <td class="text-left text-md">{{ $pensem->jumlah_barang }} Barang
                                                         </td>
                                                         <td class="text-left text-md">
                                                             {{ 'Rp ' . number_format($pensem->total_harga, 2, ',', '.') }}
@@ -238,28 +221,18 @@
                                                 @endif
                                             @empty
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
                                                     <td colspan="7" class="text-center">Tidak ada penjualan sementara.
                                                     </td>
-                                                    <td></td>
                                                 </tr>
                                             @endforelse
                                             @if (!$penjualansementara->isEmpty())
                                                 <tr>
-                                                    <td class="text-right text-md"><strong>Total</strong></td>
+                                                    <td colspan="4" class="text-right text-md"><strong>Total</strong></td>
                                                     <td class="text-left text-md"><strong>{{ $total_jumlah_barang }}
-                                                            Unit</strong></td>
+                                                            Barang</strong></td>
                                                     <td class="text-left text-md">
                                                         <strong>{{ 'Rp ' . number_format($total_harga, 2, ',', '.') }}</strong>
                                                     </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
                                                 </tr>
                                             @endif
                                         </tbody>

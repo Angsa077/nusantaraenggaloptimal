@@ -1,7 +1,60 @@
 @extends('layouts.app')
 @section('content')
     <div class="main-content container-fluid mt-5">
+        <section class="section">
+            <div class="card">
+                <div class="card-header text-center font-weight-bold">
+                    Tabel Daftar Barang
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive-sm">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead class="table">
+                                <tr>
+                                    <th scope="col" class="text-left text-md">Kode Barang</th>
+                                    <th scope="col" class="text-left text-md">Nama</th>
+                                    <th scope="col" class="text-left text-md">Merek</th>
+                                    <th scope="col" class="text-left text-md">Jumlah</th>
+                                    <th scope="col" class="text-left text-md">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $jumlahBarang = 0;
+                                    $jumlahHarga = 0;
+                                @endphp
+                                @foreach ($barangterjual as $item)
+                                    @php
+                                        $jumlahBar = $item->jumlah;
+                                        $jumlahBarang += $jumlahBar;
+                                        
+                                        $jumlahHar = $item->jumlah * $item->barang->harga_jual;
+                                        $jumlahHarga += $jumlahHar;
+                                    @endphp
+                                    <tr onclick="window.location='{{ route('salesbarang.show', $item->id_barang) }}';">
+                                        <td class="text-left text-md">{{ $item->kd_barang }}</td>
+                                        <td class="text-left text-md">{{ $item->barang->nama }}</td>
+                                        <td class="text-left text-md">{{ $item->barang->merek }}</td>
+                                        <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
+                                        <td class="text-left text-md">
+                                            {{ 'Rp ' . number_format($jumlahHar, 2, ',', '.') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tr>
+                                <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                                <td class="text-left">{{ $jumlahBarang }} Barang</td>
+                                <td class="text-left">
+                                    {{ 'Rp ' . number_format($jumlahHarga, 2, ',', '.') }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
+    <div class="main-content container-fluid">
         <section id="multiple-column-form">
             <div class="row match-height">
                 <div class="col-6">
@@ -13,85 +66,6 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <div class="row">
-
-                                    @if ($data->pembayaran->bukti_pembayaran)
-                                        <div class="position-relative mb-3">
-                                            <img src="{{ asset('bukti_pembayaran/' . $data->pembayaran->bukti_pembayaran) }}"
-                                                width="100px" height="100px" alt="">
-                                        </div>
-                                    @endif
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="kd_barang">Kode Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="kd_barang" class="form-control"
-                                                        placeholder="Silahkan Masukan Kode Barang" name="kd_barang"
-                                                        value="{{ $data->barang->kd_barang }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="nama">Nama Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="nama" class="form-control"
-                                                        placeholder="Silahkan Masukan Nama Barang" name="nama"
-                                                        value="{{ $data->barang->nama }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="merek">Merek Barang</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="merek" class="form-control"
-                                                        placeholder="Silahkan Masukan Merek Barang" name="merek"
-                                                        value="{{ $data->barang->merek }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group has-icon-left">
-                                            <label for="masa_garansi">Masa Garansi</label>
-                                            <div class="position-relative">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i data-feather="package"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" id="masa_garansi" class="form-control"
-                                                        placeholder="Silahkan Masukan Masa Garansi" name="masa_garansi"
-                                                        value="{{ $data->masa_garansi }} Hari" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group has-icon-left">
@@ -168,7 +142,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($data->status_persetujuan == 'proses')
+                                    @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                                 action="{{ route('salespenjualan.destroy', $data->kd_penjualan) }}"

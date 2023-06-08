@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BarangTerjual;
 use App\Models\Customer;
 use App\Models\Pembayaran;
 use App\Models\Pengembalian;
@@ -22,7 +23,7 @@ class SupervisorPenjualanController extends Controller
 
     public function index()
     {
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
         return view('supervisor.penjualan.index', ['data' => $data]);
     }
 
@@ -32,13 +33,14 @@ class SupervisorPenjualanController extends Controller
         $spv = User::all();
         $admin = User::all();
         $barang = Barang::all();
+        $barangterjual = BarangTerjual::all();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
         $pengiriman = Pengiriman::all();
         $pengembalian = Pengembalian::all();
         $data = Penjualan::where('kd_penjualan', $id)->first();
         return view('supervisor.penjualan.edit', [
-            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'customer' => $customer,
+            'data' => $data, 'user' => $user, 'spv' => $spv, 'admin' => $admin, 'barang' => $barang, 'barangterjual' => $barangterjual, 'customer' => $customer,
             'pembayaran' => $pembayaran, 'pengiriman' => $pengiriman, 'pengembalian' => $pengembalian
         ]);
     }
@@ -46,10 +48,10 @@ class SupervisorPenjualanController extends Controller
     public function update(Request $request, string $id)
     {
         $penjualan = Penjualan::where('kd_penjualan', $id)->first();
-        $id_barang = $penjualan->id_barang;
         $kd_customer = $penjualan->kd_customer;
 
-        $barang = Barang::where('id_barang', $id_barang)->first();
+        $barangterjual = BarangTerjual::where('kd_penjualan', $id)->get();
+
         $customer = Customer::where('kd_customer', $kd_customer)->first();
         $pembayaran = Pembayaran::where('kd_penjualan', $id)->first();
 
@@ -79,17 +81,20 @@ class SupervisorPenjualanController extends Controller
                 'kd_penjualan' => $penjualan->kd_penjualan,
             ];
 
-            if ($barang->jumlah - $penjualan->jumlah_barang === 0) {
-                $data_barang = [
-                    'jumlah' => $barang->jumlah - $penjualan->jumlah_barang,
-                    'status_barang' => 'habis',
-                ];
-            } else {
-                $data_barang = [
-                    'jumlah' => $barang->jumlah - $penjualan->jumlah_barang,
-                ];
+            foreach ($barangterjual as $item) {
+                $barang = Barang::where('id_barang', $item->id_barang)->first();
+                if ($barang->jumlah - $item->jumlah === 0) {
+                    $data_barang = [
+                        'jumlah' => $barang->jumlah - $item->jumlah,
+                        'status_barang' => 'habis',
+                    ];
+                } else {
+                    $data_barang = [
+                        'jumlah' => $barang->jumlah - $item->jumlah,
+                    ];
+                }
+                Barang::where('id_barang', $item->id_barang)->update($data_barang);
             }
-
 
             if (is_null($customer->utang)) {
                 $data_customer = [
@@ -109,7 +114,6 @@ class SupervisorPenjualanController extends Controller
 
         Penjualan::where('kd_penjualan', $id)->update($data_penjualan);
         Pembayaran::where('kd_pembayaran', $pembayaran->kd_pembayaran)->update($data_pembayaran);
-        Barang::where('id_barang', $penjualan->id_barang)->update($data_barang);
         Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
 
         if (!empty($data_pengiriman)) {

@@ -16,14 +16,14 @@ class SalesPembayaran extends Controller
 
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pembayaran::with('penjualan')->get()->groupBy('penjualan.kd_penjualan');
         return view('sales.pembayaran.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
 
     public function create()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pembayaran::with('penjualan')->get();
         return view('sales.pembayaran.create', ['data' => $data, 'penjualan' => $penjualan]);
     }
@@ -85,7 +85,7 @@ class SalesPembayaran extends Controller
     {
         $user = User::all();
         $spv = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $pembayaran = Pembayaran::all();
         $data = Pembayaran::where('kd_penjualan', $id)->first();
         return view('sales.pembayaran.show', [
@@ -97,7 +97,7 @@ class SalesPembayaran extends Controller
     {
         $user = User::all();
         $spv = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pembayaran::where('kd_pembayaran', $id)->first();
         return view('sales.pembayaran.edit', [
             'data' => $data, 'user' => $user, 'spv' => $spv, 'penjualan' => $penjualan

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Barang;
+use App\Models\BarangTerjual;
 use App\Models\Customer;
 use App\Models\Pembayaran;
 use App\Models\Pengembalian;
@@ -19,12 +20,10 @@ class Penjualan extends Model
     protected $fillable =
     [
         'kd_penjualan',
-        'id_barang',
         'kd_customer',
         'jumlah_barang',
         'total_bayar',
         'total_harga',
-        'masa_garansi',
         'tgl_penjualan',
         'status_pembayaran',
         'status_pengiriman',
@@ -51,9 +50,9 @@ class Penjualan extends Model
         return $this->belongsTo(User::class, 'id_spv', 'id');
     }
 
-    public function barang()
+    public function barangterjual()
     {
-        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
+        return $this->belongsTo(BarangTerjual::class, 'kd_penjualan', 'kd_penjualan');
     }
 
     public function customer()

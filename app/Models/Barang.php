@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\BarangRusak;
+use App\Models\BarangTerjual;
 use App\Models\Penjualan;
 use App\Models\PenjualanSementara;
 
@@ -35,11 +36,15 @@ class Barang extends Model
         return $this->hasMany(BarangRusak::class);
     }
 
-    public function penjualanbarang()
+    public function barangterjual()
     {
-        return $this->belongsTo(Penjualan::class, 'id_barang', 'id_barang');
+        return $this->hasMany(BarangTerjual::class);
     }
 
+    public function penjualanbarang()
+    {
+        return $this->belongsTo(Penjualan::class, 'kd_barang', 'kd_barang');
+    }
 
     public function penjualansementara()
     {

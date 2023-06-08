@@ -13,8 +13,9 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
-                                    <th scope="col" class="text-left text-md">Nama Barang</th>
-                                    <th scope="col" class="text-left text-md">Nama Customer</th>
+                                    <th scope="col" class="text-left text-md">Nama Toko</th>
+                                    <th scope="col" class="text-left text-md">Jumlah Barang</th>
+                                    <th scope="col" class="text-left text-md">Total Harga</th>
                                     <th scope="col" class="text-left text-md">Status</th>
                                 </tr>
                             </thead>
@@ -24,8 +25,10 @@
                                         onclick="window.location='{{ route('salespenjualan.show', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
                                         <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
-                                        <td class="text-left text-md">{{ $item->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
+                                        <td class="text-left text-md">{{ $item->jumlah_barang }} Barang</td>
+                                        <td class="text-left text-md">
+                                            {{ 'Rp ' . number_format($item->total_harga, 2, ',', '.') }}</td>
                                         <td class="text-left text-md">{{ $item->status_persetujuan }}</td>
                                     </tr>
                                 @endforeach

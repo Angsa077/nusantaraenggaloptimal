@@ -15,7 +15,6 @@ class PenjualanSementara extends Model
     protected $fillable = 
     [
         'kd_penjualansementara',
-        'kd_penjualan',
         'id_barang',
         'kd_customer',
         'jumlah_barang',

@@ -42,10 +42,10 @@
                                     $totalPendapatan = 0;
                                 @endphp
                                 @foreach ($data as $item)
-                                    <?php
-                                    $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang;
-                                    $totalPendapatan += $pendapatan;
-                                    ?>
+                                    @php
+                                        $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang;
+                                        $totalPendapatan += $pendapatan;
+                                    @endphp
                                     <tr
                                         onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
