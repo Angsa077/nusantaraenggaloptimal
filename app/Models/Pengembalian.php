@@ -16,6 +16,7 @@ class Pengembalian extends Model
     [
         'kd_pengembalian',
         'kd_penjualan',
+        'id_barangterjual',
         'tgl_pengembalian',
         'tgl_penjemputan',
         'tgl_selesai',
@@ -29,6 +30,11 @@ class Pengembalian extends Model
         'id_spv',
         'id_admin',
     ];
+
+    public function barangterjual()
+    {
+        return $this->belongsTo(BarangTerjual::class, 'id_barangterjual', 'id_barangterjual');
+    }
     
     public function user()
     {

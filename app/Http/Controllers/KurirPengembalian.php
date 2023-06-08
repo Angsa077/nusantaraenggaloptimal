@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\BarangRusak;
+use App\Models\BarangTerjual;
 use App\Models\Pengembalian;
 use App\Models\Pengiriman;
 use App\Models\Penjualan;
@@ -14,51 +17,68 @@ class KurirPengembalian extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pengembalian::with('penjualan')->get();
         return view('kurir.pengembalian.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
 
     public function create()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $barang = Barang::all();
+        $barangterjual = BarangTerjual::all();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pengembalian::with('penjualan')->get();
-        return view('kurir.pengembalian.create', ['data' => $data, 'penjualan' => $penjualan]);
+        return view('kurir.pengembalian.create', ['data' => $data, 'barang' => $barang, 'barangterjual' => $barangterjual, 'penjualan' => $penjualan]);
     }
 
     public function store(Request $request)
     {
-        Session::flash('kd_penjualan', $request->kd_penjualan);
-        Session::flash('jumlah_barang', $request->jumlah_barang);
+        Session::flash('id_barangterjual', $request->id_barangterjual);
+        Session::flash('jumlah', $request->jumlah);
         Session::flash('catatan', $request->catatan);
 
-        $penjualan = Penjualan::where('kd_penjualan', $request->kd_penjualan)->first();
-        $jumlah_barang = $penjualan->jumlah_barang;
+        $barangterjual = BarangTerjual::where('id_barangterjual', $request->id_barangterjual)->first();
+        $jumlah = $barangterjual->jumlah;
 
         $request->validate(
             [
-                'kd_penjualan' => 'required',
-                'jumlah_barang' => 'required|numeric|max:' . $jumlah_barang,
+                'id_barangterjual' => 'required',
+                'jumlah' => 'required|numeric|max:' . $jumlah,
+                'bukti_pengembalian' => 'mimes:jpeg,jpg,png,gif|max:1024',
                 'catatan' => 'required',
             ],
             [
-                'kd_penjualan.required' => 'Kode Penjualan Wajib Diisi',
-                'jumlah_barang.required' => 'Jumlah Barang Wajib Diisi',
-                'jumlah_barang.numeric' => 'Jumlah Barang harus berupa angka',
-                'jumlah_barang.max' => 'Jumlah Barang tidak boleh lebih dari Harga Total',
-               
+                'id_barangterjual.required' => 'Kode Penjualan Wajib Diisi',
+                'jumlah.required' => 'Jumlah Barang Wajib Diisi',
+                'jumlah.numeric' => 'Jumlah Barang harus berupa angka',
+                'jumlah.max' => 'Jumlah Barang tidak boleh lebih dari Harga Total',
+                'bukti_pengembalian.mimes' => 'Bukti Pengembalian Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
+                'bukti_pengembalian.max' => 'Bukti Pengembalian Yang Diperbolehkan Maksimal 1MB',
                 'catatan.required' => 'Alasan Pengembalian Wajib Diisi',
             ]
         );
+
+        if ($request->hasFile('bukti_pengembalian')) {
+            $foto_file_pengembalian = $request->file('bukti_pengembalian');
+            if ($foto_file_pengembalian != null) {
+                $foto_ekstensi_pengembalian = $foto_file_pengembalian->extension();
+                $foto_nama_pengembalian = date('ymdhis') . "." . $foto_ekstensi_pengembalian;
+                $foto_file_pengembalian->move(public_path('bukti_pengembalian'), $foto_nama_pengembalian);
+            } else {
+                $foto_nama_pengembalian = null;
+            }
+        }
 
         $data_penjualan = [
             'status_pengembalian' => 'proses',
         ];
 
         $data_pengembalian = [
-            'kd_penjualan' => $request->kd_penjualan,
+            'id_barangterjual' => $request->id_barangterjual,
+            'kd_penjualan' => $barangterjual->kd_penjualan,
             'tgl_pengembalian' => date('Y-m-d H:i:s', strtotime('now')),
-            'jumlah_barang' => $request->jumlah_barang,
+            'jumlah_barang' => $request->jumlah,
+            'bukti_pengembalian' => $foto_nama_pengembalian, 
             'status_persetujuan'  => 'proses',
             'id_staf' => Auth::user()->id,
             'catatan' => $request->catatan,
@@ -76,42 +96,29 @@ class KurirPengembalian extends Controller
         $spv = User::all();
         $admin = User::all();
         $pengiriman = Pengiriman::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pengembalian::where('kd_pengembalian', $id)->first();
+        $barangterjual = BarangTerjual::where('id_barangterjual', $data->id_barangterjual)->first();
+        $barang = Barang::where('id_barang', $barangterjual->id_barang)->first();
+
         return view('kurir.pengembalian.edit', [
-            'data' => $data, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
+            'data' => $data, 'barangterjual' => $barangterjual, 'barang' => $barang, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
         ]);
     }
 
     public function update(Request $request, string $id)
     {
-        Session::flash('bukti_pengembalian', $request->bukti_pengembalian);
         Session::flash('bukti_penyerahan', $request->bukti_penyerahan);
 
         $request->validate(
             [
-                'bukti_pengembalian' => 'mimes:jpeg,jpg,png,gif|max:1024',
                 'bukti_penyerahan' => 'mimes:jpeg,jpg,png,gif|max:1024',
             ],
             [
-                'bukti_pengembalian.mimes' => 'Bukti Pengembalian Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
-                'bukti_pengembalian.max' => 'Bukti Pengembalian Yang Diperbolehkan Maksimal 1MB',
                 'bukti_penyerahan.mimes' => 'Bukti Penyerahan Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
                 'bukti_penyerahan.max' => 'Bukti Penyerahan Yang Diperbolehkan Maksimal 1MB',
             ]
         );
-
-        if ($request->hasFile('bukti_pengembalian')) {
-            $foto_file_pengembalian = $request->file('bukti_pengembalian');
-            if ($foto_file_pengembalian != null) {
-                $foto_ekstensi_pengembalian = $foto_file_pengembalian->extension();
-                $foto_nama_pengembalian = date('ymdhis') . "." . $foto_ekstensi_pengembalian;
-                $foto_file_pengembalian->move(public_path('bukti_pengembalian'), $foto_nama_pengembalian);
-                Session::flash('bukti_pengembalian', 'bukti_pengembalian/' . $foto_nama_pengembalian); // Menyimpan path file dalam sesi
-            } else {
-                $foto_nama_pengembalian = null;
-            }
-        }
 
         if ($request->hasFile('bukti_penyerahan')) {
             $foto_file_penyerahan = $request->file('bukti_penyerahan');
@@ -136,7 +143,6 @@ class KurirPengembalian extends Controller
             ];
             $data_pengembalian = [
                 'id_kurir' => Auth::user()->id,
-                'bukti_pengembalian' => $foto_nama_pengembalian,
                 'tgl_penjemputan' => date('Y-m-d H:i:s', strtotime('now')),
             ];
         } elseif ($request->simpan == 'Serahkan') {

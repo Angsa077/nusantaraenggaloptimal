@@ -14,9 +14,9 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    @if ($data->penjualan->barang->gambar)
+                                    @if ($barang->gambar)
                                         <div class="position-relative mb-3">
-                                            <img src="{{ asset('gambar_barang/' . $data->penjualan->barang->gambar) }}"
+                                            <img src="{{ asset('gambar_barang/' . $barang->gambar) }}"
                                                 width="100px" height="100px" alt="">
                                         </div>
                                     @endif
@@ -33,7 +33,7 @@
                                                     </div>
                                                     <input type="text" id="kd_barang" class="form-control"
                                                         placeholder="Silahkan Masukan Kode Barang" name="kd_barang"
-                                                        value="{{ $data->penjualan->barang->kd_barang }}" readonly>
+                                                        value="{{ $barang->kd_barang }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,7 +51,7 @@
                                                     </div>
                                                     <input type="text" id="nama" class="form-control"
                                                         placeholder="Silahkan Masukan Nama Barang" name="nama"
-                                                        value="{{ $data->penjualan->barang->nama }}" readonly>
+                                                        value="{{ $barang->nama }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                                     </div>
                                                     <input type="text" id="merek" class="form-control"
                                                         placeholder="Silahkan Masukan Merek Barang" name="merek"
-                                                        value="{{ $data->penjualan->barang->merek }}" readonly>
+                                                        value="{{ $barang->merek }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                                     </div>
                                                     <input type="text" id="jumlah" class="form-control"
                                                         placeholder="Silahkan Masukan Jumlah Barang" name="jumlah"
-                                                        value="{{ $data->penjualan->jumlah_barang }} Barang" readonly>
+                                                        value="{{ $barangterjual->jumlah }} Barang" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +96,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="col-12">
                         <div class="card">
@@ -536,28 +535,6 @@
                                         @method('PUT')
 
                                         @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->status_persetujuan == 'disetujui')
-                                            <div class="col-md-12 col-12">
-                                                <div class="form-group has-icon-left">
-                                                    <label for="bukti_pengembalian">Bukti Pengembalian</label>
-                                                    <div class="position-relative">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">
-                                                                    <i data-feather="file-plus"></i>
-                                                                </span>
-                                                            </div>
-                                                            <input type="file" id="bukti_pengembalian"
-                                                                class="form-control"
-                                                                placeholder="Silahkan Masukan Bukti Pengembalian"
-                                                                name="bukti_pengembalian"
-                                                                value="{{ Session::get('bukti_pengembalian') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_kurir == Auth::user()->id)
                                         <div class="col-md-12 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="bukti_penyerahan">Bukti Penyerahan</label>
@@ -577,6 +554,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
+
+                                        @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_kurir == Auth::user()->id)
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="gambar">Gambar Barang</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="file-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="file" id="gambar" class="form-control"
+                                                            placeholder="Silahkan Masukan Gambar Barang"
+                                                            name="gambar" value="{{ Session::get('gambar') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
 
                                         <div class="col-12 d-flex justify-content-end mt-3">
@@ -591,7 +588,7 @@
                                         </div>
                                     </form>
 
-                                    @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
+                                    @if ($data->id_staf == Auth::user()->id && $data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                                 action="{{ route('kurirpengembalian.destroy', $data->kd_pengembalian) }}"

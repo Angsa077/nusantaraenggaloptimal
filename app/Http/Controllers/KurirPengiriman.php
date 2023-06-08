@@ -34,6 +34,7 @@ class KurirPengiriman extends Controller
         $penjualan = Penjualan::where('kd_penjualan', $id)->first();
         $data_penjualan = [];
         $data_pengiriman = [];
+        $data_barangterjual = [];
 
         if ($request->hasFile('bukti_pengiriman')) {
             $foto_file_pengiriman = $request->file('bukti_pengiriman');
@@ -79,8 +80,13 @@ class KurirPengiriman extends Controller
                 'bukti_penerimaan' => $foto_nama_penerimaan,
                 'catatan' => $request->catatan,
             ];
+
+            $data_barangterjual = [
+                'tgl_barangterjual' => date('Y-m-d H:i:s', strtotime('now')),
+            ];
         }
 
+        BarangTerjual::where('kd_penjualan', $id)->update($data_barangterjual);
         Penjualan::where('kd_penjualan', $id)->update($data_penjualan);
         Pengiriman::where('kd_penjualan', $id)->update($data_pengiriman);
 

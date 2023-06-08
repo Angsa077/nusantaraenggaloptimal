@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\BarangTerjual;
 use App\Models\Pengembalian;
 use App\Models\Pengiriman;
 use App\Models\Penjualan;
@@ -14,7 +16,7 @@ class SupervisorPengembalian extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pengembalian::with('penjualan')->get();
         return view('supervisor.pengembalian.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
@@ -26,10 +28,13 @@ class SupervisorPengembalian extends Controller
         $spv = User::all();
         $admin = User::all();
         $pengiriman = Pengiriman::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pengembalian::where('kd_pengembalian', $id)->first();
+        $barangterjual = BarangTerjual::where('id_barangterjual', $data->id_barangterjual)->first();
+        $barang = Barang::where('id_barang', $barangterjual->id_barang)->first();
+
         return view('supervisor.pengembalian.edit', [
-            'data' => $data, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
+            'data' => $data, 'barangterjual' => $barangterjual, 'barang' => $barang, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
         ]);
     }
 

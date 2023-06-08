@@ -173,7 +173,6 @@ class AdminPenjualanController extends Controller
                 'kd_penjualan' => $lastKdPenjualan,
                 'jumlah' => $item->jumlah_barang,
                 'masa_garansi' => $item->masa_garansi,
-                'tgl_barangterjual' => date('Y-m-d H:i:s', strtotime('now')),
             ];
             BarangTerjual::create($barangTerjual);
         }

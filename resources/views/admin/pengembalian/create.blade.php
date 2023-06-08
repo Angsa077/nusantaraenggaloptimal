@@ -18,7 +18,7 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="kd_penjualan">Kode Penjualan</label>
+                                                <label for="id_barangterjual">ID Barang</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -26,12 +26,12 @@
                                                                 <i data-feather="user"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" name="kd_penjualan" id="kd_penjualan"
+                                                        <input type="text" name="id_barangterjual" id="id_barangterjual"
                                                             class="form-control" readonly />
                                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                             data-target="#penjualanModal"
-                                                            value="{{ Session::get('kd_penjualan') }}">
-                                                            Pilih Kode Penjualan
+                                                            value="{{ Session::get('id_barangterjual') }}">
+                                                            Pilih ID Barang
                                                         </button>
                                                     </div>
                                                 </div>
@@ -40,7 +40,7 @@
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
-                                                <label for="jumlah_barang">Jumlah Barang</label>
+                                                <label for="jumlah">Jumlah Barang</label>
                                                 <div class="position-relative">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -48,10 +48,27 @@
                                                                 <i data-feather="package"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="jumlah_barang" class="form-control"
-                                                            placeholder="Silahkan Masukan Jumlah Barang"
-                                                            name="jumlah_barang"
-                                                            value="{{ Session::get('jumlah_barang') }}">
+                                                        <input type="number" id="jumlah" class="form-control"
+                                                            placeholder="Silahkan Masukan jumlah Barang" name="jumlah"
+                                                            value="{{ Session::get('jumlah') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="bukti_pengembalian">Bukti Pengembalian</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="file-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="file" id="bukti_pengembalian" class="form-control"
+                                                            placeholder="Silahkan Masukan Bukti Pengembalian"
+                                                            name="bukti_pengembalian">
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,7 +108,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="penjualanModalLabel">Pilih Penjualan</h5>
+                                <h5 class="modal-title" id="penjualanModalLabel">Pilih ID Barang</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -100,26 +117,28 @@
                                 <table class="table table-hover" id="penjualanTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                             <th scope="col" class="text-left text-md">Kode Penjualan</th>
-                                            <th scope="col" class="text-left text-md">Nama Barang</th>
-                                            <th scope="col" class="text-left text-md">Nama Customer</th>
+                                            <th scope="col" class="text-left text-md">Kode Barang</th>
+                                            <th scope="col" class="text-left text-md">Nama Toko</th>
                                             <th scope="col" class="text-left text-md">Jumlah</th>
                                             <th scope="col" class="text-left text-md">Harga</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($penjualan as $p)
-                                            @if ($p->status_pengiriman == 'selesai')
+                                        @foreach ($barangterjual as $b)
+                                            @if ($b->tgl_barangterjual != null)
                                                 <tr data-dismiss="modal"
-                                                    onclick="selectPenjualan('{{ $p->kd_penjualan }}', '{{ $p->nama }}')">
-                                                    <td class="text-left text-md">{{ $p->tgl_penjualan }}</td>
-                                                    <td class="text-left text-md">{{ $p->kd_penjualan }}</td>
-                                                    <td class="text-left text-md">{{ $p->barang->nama }}</td>
-                                                    <td class="text-left text-md">{{ $p->customer->nama_toko }}</td>
-                                                    <td class="text-left text-md">{{ $p->jumlah_barang }}</td>
+                                                    onclick="selectPenjualan('{{ $b->id_barangterjual }}')">
+                                                    <td class="text-left text-md">{{ $b->kd_penjualan }}</td>
+                                                    <td class="text-left text-md">{{ $b->kd_barang }}</td>
+                                                    <td class="text-left text-md">{{ $b->penjualan->customer->nama_toko }}
+                                                    </td>
+                                                    <td class="text-left text-md">{{ $b->jumlah }}</td>
+                                                    @php
+                                                        $total_hargabarang = $b->jumlah * $b->barang->harga_jual;
+                                                    @endphp
                                                     <td class="text-left text-md">
-                                                        {{ 'Rp ' . number_format($p->total_harga, 2, ',', '.') }}</td>
+                                                        {{ 'Rp ' . number_format($total_hargabarang, 2, ',', '.') }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -131,8 +150,8 @@
                 </div>
 
                 <script>
-                    function selectPenjualan(kd_penjualan) {
-                        document.getElementById('kd_penjualan').value = kd_penjualan;
+                    function selectPenjualan(id_barangterjual) {
+                        document.getElementById('id_barangterjual').value = id_barangterjual;
                     }
                 </script>
 

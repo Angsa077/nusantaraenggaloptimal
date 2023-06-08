@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->id('kd_pengembalian');
             $table->bigInteger('kd_penjualan')->nullable();
+            $table->string('id_barangterjual', 100)->nullable();
             $table->date('tgl_pengembalian')->nullable();
             $table->date('tgl_penjemputan')->nullable();
             $table->date('tgl_selesai')->nullable();
