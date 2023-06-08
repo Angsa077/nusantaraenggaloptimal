@@ -11,6 +11,7 @@
                         <table class="table table-bordered table-hover table-sm">
                             <thead class="table">
                                 <tr>
+                                    <th scope="col" class="text-left text-md">Gambar</th>
                                     <th scope="col" class="text-left text-md">Kode Barang</th>
                                     <th scope="col" class="text-left text-md">Nama</th>
                                     <th scope="col" class="text-left text-md">Merek</th>
@@ -32,6 +33,7 @@
                                         $jumlahHarga += $jumlahHar;
                                     @endphp
                                     <tr onclick="window.location='{{ route('supervisorbarang.show', $item->kd_barang) }}';">
+                                        <td class="text-left text-md"> <img src="{{ asset('gambar_barang/' . $item->barang->gambar) }}" width="100px"></td>
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->barang->merek }}</td>
@@ -42,7 +44,7 @@
                                 @endforeach
                             </tbody>
                             <tr>
-                                <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                                <td colspan="4" class="text-right"><strong>Total:</strong></td>
                                 <td class="text-left">{{ $jumlahBarang }} Barang</td>
                                 <td class="text-left">
                                     {{ 'Rp ' . number_format($jumlahHarga, 2, ',', '.') }}</td>

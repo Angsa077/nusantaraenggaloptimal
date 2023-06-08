@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangTerjual;
 use App\Models\Pengiriman;
 use App\Models\Penjualan;
 use App\Models\User;
@@ -10,12 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class KurirPengiriman extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pengiriman::with('penjualan')->get();
 
         return view('kurir.pengiriman.index', ['data' => $data, 'penjualan' => $penjualan]);
@@ -24,9 +22,11 @@ class KurirPengiriman extends Controller
     public function edit(string $id)
     {
         $user = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pengiriman::where('kd_pengiriman', $id)->first();
-        return view('kurir.pengiriman.edit', ['data' => $data, 'user' => $user, 'penjualan' => $penjualan]);
+
+        $barangterjual = BarangTerjual::where('kd_penjualan', $data->kd_penjualan)->get();
+        return view('kurir.pengiriman.edit', ['data' => $data, 'barangterjual' => $barangterjual, 'user' => $user, 'penjualan' => $penjualan]);
     }
 
     public function update(Request $request, string $id)

@@ -193,7 +193,7 @@ class SalesPenjualanController extends Controller
         $spv = User::all();
         $admin = User::all();
         $barang = Barang::all();
-        $barangterjual = BarangTerjual::all();
+        $barangterjual = BarangTerjual::where('kd_penjualan', $id)->get();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
         $pengiriman = Pengiriman::all();
@@ -225,7 +225,7 @@ class SalesPenjualanController extends Controller
         $spv = User::all();
         $admin = User::all();
         $barang = Barang::all();
-        $barangterjual = BarangTerjual::all();
+        $barangterjual = BarangTerjual::where('kd_penjualan', $id)->get();
         $customer = Customer::all();
         $pembayaran = Pembayaran::all();
         $pengiriman = Pengiriman::all();

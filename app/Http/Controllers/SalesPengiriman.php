@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangTerjual;
 use App\Models\Pengiriman;
 use App\Models\Penjualan;
 use App\Models\User;
@@ -11,7 +12,7 @@ class SalesPengiriman extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->get();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->get();
         $data = Pengiriman::with('penjualan')->get();
         return view('sales.pengiriman.index', ['data' => $data, 'penjualan' => $penjualan]);
     }
@@ -19,8 +20,10 @@ class SalesPengiriman extends Controller
     public function show(string $id)
     {
         $user = User::all();
-        $penjualan = Penjualan::with(['barang', 'customer', 'user'])->first();
+        $penjualan = Penjualan::with(['barangterjual', 'customer', 'user'])->first();
         $data = Pengiriman::where('kd_pengiriman', $id)->first();
-        return view('sales.pengiriman.show', ['data' => $data, 'user' => $user, 'penjualan' => $penjualan]);
+
+        $barangterjual = BarangTerjual::where('kd_penjualan', $data->kd_penjualan)->get();
+        return view('sales.pengiriman.show', ['data' => $data, 'barangterjual' => $barangterjual, 'user' => $user, 'penjualan' => $penjualan]);
     }
 }

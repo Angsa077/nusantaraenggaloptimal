@@ -12,8 +12,20 @@ use App\Models\Pengembalian;
 class BarangRusak extends Model
 {
     use HasFactory;
-    protected $table ="barangrusak";
-    protected $fillable = ['id_barang','kd_barang','kd_penjualan','kd_pengembalian','jumlah','gambar','catatan','id_staf','tgl_barangpengembalian'];
+    protected $table = "barangrusak";
+    protected $fillable =
+    [
+        'id_barangrusak', 
+        'id_barang', 
+        'kd_barang', 
+        'kd_penjualan', 
+        'kd_pengembalian', 
+        'jumlah', 
+        'gambar', 
+        'catatan', 
+        'id_staf', 
+        'tgl_barangpengembalian'
+    ];
 
     public function user()
     {
