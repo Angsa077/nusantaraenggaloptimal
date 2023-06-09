@@ -219,13 +219,13 @@ class AdminPenjualanController extends Controller
         BarangTerjual::where('kd_penjualan', $id)->delete();
         Pembayaran::where('kd_penjualan', $id)->delete();
         Penjualan::where('kd_penjualan', $id)->delete();
-        return redirect()->route('admin.penjualan.index')->with('success', 'Berhasil Menghapus Data Penjualan');
+        return redirect()->route('admin.penjualan.index')->with('error', 'Berhasil Menghapus Data Penjualan');
     }
 
     public function destroysementara($id)
     {
         PenjualanSementara::where('kd_penjualansementara', $id)->delete();
-        return redirect()->back()->with('success', 'Berhasil Menghapus Penjualan Sementara');
+        return redirect()->back()->with('error', 'Berhasil Menghapus Penjualan Sementara');
     }
 
     public function show(Request $request, string $id)

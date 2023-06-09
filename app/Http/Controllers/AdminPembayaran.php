@@ -110,6 +110,6 @@ class AdminPembayaran extends Controller
         File::delete(public_path('bukti_pembayaran') . '/' . $data->bukti_pembayaran);
 
         Pembayaran::where('kd_pembayaran', $id)->delete();
-        return redirect()->route('admin.pembayaran.index')->with('success', 'Berhasil Menghapus Data Pembayaran');
+        return redirect()->route('admin.pembayaran.index')->with('error', 'Berhasil Menghapus Data Pembayaran');
     }
 }

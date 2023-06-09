@@ -227,6 +227,6 @@ class SalesCustomerController extends Controller
         File::delete(public_path('gambar_customer') . '/' . $data->gambar);
 
         Customer::where('kd_customer', $id)->delete();
-        return redirect()->route('sales.customer.index')->with('success', 'Berhasil Menghapus Data Customer');
+        return redirect()->route('sales.customer.index')->with('error', 'Berhasil Menghapus Data Customer');
     }
 }

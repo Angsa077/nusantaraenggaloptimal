@@ -148,6 +148,6 @@ class AdminPengembalian extends Controller
     public function destroy(string $id)
     {
         Pengembalian::where('kd_pengembalian', $id)->delete();
-        return redirect()->route('admin.pengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
+        return redirect()->route('admin.pengembalian.index')->with('error', 'Berhasil Menghapus Pengajuan Pengembalian');
     }
 }

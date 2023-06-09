@@ -112,6 +112,6 @@ class SalesPengembalian extends Controller
     public function destroy(string $id)
     {
         Pengembalian::where('kd_pengembalian', $id)->delete();
-        return redirect()->route('sales.pengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
+        return redirect()->route('sales.pengembalian.index')->with('error', 'Berhasil Menghapus Pengajuan Pengembalian');
     }
 }

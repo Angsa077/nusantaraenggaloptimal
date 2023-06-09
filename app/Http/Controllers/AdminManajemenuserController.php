@@ -198,6 +198,6 @@ class AdminManajemenuserController extends Controller
     public function destroy(string $id)
     {
         User::where('id', $id)->delete();
-        return redirect()->route('admin.manajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
+        return redirect()->route('admin.manajemenuser.index')->with('error', 'Berhasil Menghapus Biodata User');
     }
 }

@@ -11,7 +11,7 @@
                         <i class="align-middle" data-feather="settings"></i>
                     </a>
                     
-                    <span class="text-dark">Hi... {{ Auth::user()->name }}</span>
+                    <span class="text-dark">{{ Auth::user()->name }}</span>
                     <a class="nav-link d-sm-inline-block" data-bs-toggle="dropdown">
                         <img class="user-avatar rounded-circle"
                         src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" width="30px" height="30px">

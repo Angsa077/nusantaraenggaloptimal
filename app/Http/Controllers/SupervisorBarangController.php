@@ -45,7 +45,7 @@ class SupervisorBarangController extends Controller
 
         if ($request->simpan == 'Hapus') {
             Barang::where('id_barang', $id)->delete();
-            return redirect()->route('supervisor.barang.index')->with('success','Berhasil Menghapus Data Barang');
+            return redirect()->route('supervisor.barang.index')->with('error','Berhasil Menghapus Data Barang');
         } elseif ($request->simpan == 'Batal') {
             $data['status_barang'] = 'tolak';
         }
@@ -57,7 +57,7 @@ class SupervisorBarangController extends Controller
         ];
         } elseif ($request->simpan == 'Tidak') {
             Barang::where('id_barang', $id)->delete();
-            return redirect()->route('supervisor.barang.index')->with('success','Berhasil Menghapus Data Barang');
+            return redirect()->route('supervisor.barang.index')->with('error','Berhasil Menghapus Data Barang');
         }
 
         Barang::where('id_barang', $id)->update($data);

@@ -195,7 +195,7 @@ class AdminBarangController extends Controller
         File::delete(public_path('gambar_barang') . '/' . $data->gambar);
 
         Barang::where('id_barang', $id)->delete();
-        return redirect()->route('admin.barang.index')->with('success', 'Berhasil Menghapus Data Barang');
+        return redirect()->route('admin.barang.index')->with('error', 'Berhasil Menghapus Data Barang');
     }
 
     public function tambahStok(string $id)

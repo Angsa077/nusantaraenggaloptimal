@@ -32,7 +32,7 @@ class KepalaCabangManajemenuserController extends Controller
 
         if ($request->simpan == 'Hapus') {
             User::where('id', $id)->delete();
-            return redirect()->route('kepalacabang.manajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
+            return redirect()->route('kepalacabang.manajemenuser.index')->with('error', 'Berhasil Menghapus Biodata User');
         } elseif ($request->simpan == 'Batal') {
             $data['status_akun'] = 'nonaktif';
         }
