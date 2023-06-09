@@ -28,37 +28,46 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $totalJumlahBarang = 0;
-                                    $totalBarangTerjual = 0;
-                                    $totalBarangDikembalikan = 0;
+                                    $totalSeluruhJumlahBarang = 0;
+                                    $totalSeluruhBarangTerjual = 0;
+                                    $totalSeluruhBarangDikembalikan = 0;
                                 @endphp
-                                @foreach ($data as $item)
-                                    <?php
-                                    $jumlah_barang = $item->jumlah ?? 0;
-                                    $barang_terjual = $item->penjualanbarang->jumlah_barang ?? 0;
-                                    $barang_dikembalikan = $item->pengembalian->jumlah_barang ?? 0;
-                                    
-                                    $totalJumlahBarang += $jumlah_barang;
-                                    $totalBarangTerjual += $barang_terjual;
-                                    $totalBarangDikembalikan += $barang_dikembalikan;
-                                    ?>
+                                @foreach ($data->unique('kd_barang') as $item)
+                                    @php
+                                        $totalJumlahBarang = $totalJumlah->where('kd_barang', $item->kd_barang)->first();
+                                        $totalBarangTerjual = $totalJumlahterjual->where('kd_barang', $item->kd_barang)->first();
+                                        $totalBarangDikembalikan = $totalJumlahrusak->where('kd_barang', $item->kd_barang)->first();
+                                        
+                                        $totalSeluruhJumlahBarang += $totalJumlahBarang ? $totalJumlahBarang->total_jumlah : 0;
+                                        $totalSeluruhBarangTerjual += $totalBarangTerjual ? $totalBarangTerjual->total_jumlahterjual : 0;
+                                        $totalSeluruhBarangDikembalikan += $totalBarangDikembalikan ? $totalBarangDikembalikan->total_jumlahrusak : 0;
+                                    @endphp
                                     <tr onclick="window.location='{{ route('supervisorbarang.show', $item->kd_barang) }}';">
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
-                                        <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
-                                        <td class="text-left text-md">{{ $item->penjualanbarang->jumlah_barang ?? 0 }}
-                                            Barang</td>
-                                        <td class="text-left text-md">{{ $item->pengembalian->jumlah_barang ?? 0 }} Barang
+                                        <td class="text-left text-md">
+                                            {{ $totalJumlahBarang ? $totalJumlahBarang->total_jumlah : 0 }} Barang</td>
+                                        <td class="text-left text-md">
+                                            {{ $totalBarangTerjual ? $totalBarangTerjual->total_jumlahterjual : 0 }} Barang
                                         </td>
+                                        <td class="text-left text-md">
+                                            {{ $totalBarangDikembalikan ? $totalBarangDikembalikan->total_jumlahrusak : 0 }}
+                                            Barang</td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <tr>
-                                <td colspan="2" class="text-right"><strong>Total Barang:</strong></td>
-                                <td class="text-left">{{ $totalJumlahBarang }} Barang</td>
-                                <td class="text-left">{{ $totalBarangTerjual }} Barang</td>
-                                <td class="text-left">{{ $totalBarangDikembalikan }} Barang</td>
-                            </tr>
+                            <tfoot>
+                                <tr>
+                                    <th scope="col" class="text-left text-md">Total</th>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="text-left text-md" id="total-jumlah-barang">
+                                        {{ $totalSeluruhJumlahBarang }} Barang</th>
+                                    <th scope="col" class="text-left text-md" id="total-barang-terjual">
+                                        {{ $totalSeluruhBarangTerjual }} Barang</th>
+                                    <th scope="col" class="text-left text-md" id="total-barang-dikembalikan">
+                                        {{ $totalSeluruhBarangDikembalikan }} Barang</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

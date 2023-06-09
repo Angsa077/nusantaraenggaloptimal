@@ -26,8 +26,8 @@
             <tr>
                 <th>Tanggal Penjualan</th>
                 <th>Kode Penjualan</th>
-                <th>Nama Barang</th>
                 <th>Nama Toko</th>
+                <th>Nama Barang</th>
                 <th>Barang Terjual</th>
                 <th>Harga Beli</th>
                 <th>Harga Jual</th>
@@ -40,18 +40,18 @@
             @endphp
             @foreach ($data as $item)
                 <?php
-                $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang;
+                $pendapatan = ($item->barangterjual->barang->harga_jual - $item->barangterjual->barang->harga_beli) * $item->jumlah_barang;
                 $totalPendapatan += $pendapatan;
                 ?>
                 <tr>
                     <td>{{ $item->tgl_penjualan }}</td>
                     <td>{{ $item->kd_penjualan }}</td>
-                    <td>{{ $item->barang->nama }}</td>
                     <td>{{ $item->customer->nama_toko }}</td>
+                    <td>{{ $item->barangterjual->barang->nama }} Barang</td>
                     <td>{{ $item->jumlah_barang }} Barang</td>
-                    <?php $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang; ?>
-                    <td>{{ 'Rp ' . number_format($item->barang->harga_beli, 2, ',', '.') }}</td>
-                    <td>{{ 'Rp ' . number_format($item->barang->harga_jual, 2, ',', '.') }}</td>
+                    <?php $pendapatan = ($item->barangterjual->barang->harga_jual - $item->barangterjual->barang->harga_beli) * $item->jumlah_barang; ?>
+                    <td>{{ 'Rp ' . number_format($item->barangterjual->barang->harga_beli, 2, ',', '.') }}</td>
+                    <td>{{ 'Rp ' . number_format($item->barangterjual->barang->harga_jual, 2, ',', '.') }}</td>
                     <td>{{ 'Rp ' . number_format($pendapatan, 2, ',', '.') }}</td>
                 </tr>
             @endforeach

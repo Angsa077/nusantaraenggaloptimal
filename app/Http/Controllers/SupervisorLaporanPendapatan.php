@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BarangTerjual;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
@@ -15,13 +16,12 @@ class SupervisorLaporanPendapatan extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $barang = Barang::all();
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
         }
-        return view('supervisor.laporanpendapatan.index', ['data' => $data, 'barang' => $barang, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir]);
+        return view('supervisor.laporanpendapatan.index', ['data' => $data, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir]);
     }
 
     public function generatePDF(Request $request)
@@ -29,7 +29,7 @@ class SupervisorLaporanPendapatan extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
@@ -59,7 +59,7 @@ class SupervisorLaporanPendapatan extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();

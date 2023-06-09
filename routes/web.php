@@ -113,9 +113,6 @@ Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
 
     Route::resource('supervisorstokbarang', SupervisorLaporanStokbarang::class);
     Route::get('supervisorstokbarang/pdf', [SupervisorLaporanStokbarang::class,'generatePDF'])->name('supervisorstokbarang.pdf');
-
-    Route::resource('supervisorstokbarangpengembalian', SupervisorLaporanStokbarangPengembalian::class);
-    Route::get('supervisorstokbarangpengembalian/pdf', [SupervisorLaporanStokbarangPengembalian::class,'generatePDF'])->name('supervisorstokbarangpengembalian.pdf');
 });
 
 Route::group(['middleware' => ['auth', 'level:sales']], function(){

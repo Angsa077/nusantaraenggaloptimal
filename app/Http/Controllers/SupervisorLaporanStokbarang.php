@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BarangRusak;
+use App\Models\BarangTerjual;
 use App\Models\Pengiriman;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
@@ -14,23 +16,49 @@ class SupervisorLaporanStokbarang extends Controller
 
     public function index()
     {
-        $pengiriman = Pengiriman::all();
-        $penjualanbarang = Penjualan::all();
         $data = Barang::all();
-        return view('supervisor.stokbarang.index', ['data' => $data, 'penjualanbarang' => $penjualanbarang, 'pengiriman' => $pengiriman]);
+        $barangterjual = BarangTerjual::all();
+        $barangrusak = BarangRusak::all();
+
+        // Mengambil jumlah total berdasarkan kd_barang
+        $totalJumlah = Barang::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlah')->get();
+        $totalJumlahterjual = BarangTerjual::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahterjual')->get();
+        $totalJumlahrusak = BarangRusak::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahrusak')->get();
+
+        return view('supervisor.stokbarang.index', [
+            'data' => $data,
+            'barangterjual' => $barangterjual,
+            'barangrusak' => $barangrusak,
+            'totalJumlah' => $totalJumlah,
+            'totalJumlahterjual' => $totalJumlahterjual,
+            'totalJumlahrusak' => $totalJumlahrusak,
+        ]);
     }
+
 
     public function generatePDF(Request $request)
     {
-        $pengiriman = Pengiriman::all();
-        $penjualanbarang = Penjualan::all();
         $data = Barang::all();
+        $barangterjual = BarangTerjual::all();
+        $barangrusak = BarangRusak::all();
+
+        // Mengambil jumlah total berdasarkan kd_barang
+        $totalJumlah = Barang::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlah')->get();
+        $totalJumlahterjual = BarangTerjual::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahterjual')->get();
+        $totalJumlahrusak = BarangRusak::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahrusak')->get();
 
         // Membuat objek Dompdf
         $dompdf = new Dompdf();
 
         // Menyusun tampilan PDF menggunakan blade view
-        $html = view('supervisor.stokbarang.pdf', ['data' => $data, 'pengiriman' => $pengiriman, 'penjualanbarang' => $penjualanbarang])->render();
+        $html = view('supervisor.stokbarang.pdf', [
+            'data' => $data,
+            'barangterjual' => $barangterjual,
+            'barangrusak' => $barangrusak,
+            'totalJumlah' => $totalJumlah,
+            'totalJumlahterjual' => $totalJumlahterjual,
+            'totalJumlahrusak' => $totalJumlahrusak
+        ])->render();
 
         // Mengambil format HTML dan merender ke PDF
         $dompdf->loadHtml($html);
@@ -47,15 +75,27 @@ class SupervisorLaporanStokbarang extends Controller
 
     public function show(Request $request)
     {
-        $pengiriman = Pengiriman::all();
-        $penjualanbarang = Penjualan::all();
         $data = Barang::all();
+        $barangterjual = BarangTerjual::all();
+        $barangrusak = BarangRusak::all();
+
+        // Mengambil jumlah total berdasarkan kd_barang
+        $totalJumlah = Barang::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlah')->get();
+        $totalJumlahterjual = BarangTerjual::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahterjual')->get();
+        $totalJumlahrusak = BarangRusak::groupBy('kd_barang')->selectRaw('kd_barang, sum(jumlah) as total_jumlahrusak')->get();
 
         // Membuat objek Dompdf
         $dompdf = new Dompdf();
 
         // Menyusun tampilan PDF menggunakan blade view
-        $html = view('supervisor.stokbarang.pdf', ['data' => $data, 'pengiriman' => $pengiriman, 'penjualanbarang' => $penjualanbarang])->render();
+        $html = view('supervisor.stokbarang.pdf', [
+            'data' => $data,
+            'barangterjual' => $barangterjual,
+            'barangrusak' => $barangrusak,
+            'totalJumlah' => $totalJumlah,
+            'totalJumlahterjual' => $totalJumlahterjual,
+            'totalJumlahrusak' => $totalJumlahrusak
+        ])->render();
 
         // Mengambil format HTML dan merender ke PDF
         $dompdf->loadHtml($html);

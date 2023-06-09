@@ -38,10 +38,9 @@
             <tr>
                 <th>Tanggal Penjualan</th>
                 <th>Kode Penjualan</th>
-                <th>Nama Barang</th>
                 <th>Nama Toko</th>
+                <th>Nama Barang</th>
                 <th>Jumlah Barang</th>
-                <th>Barang Dikembalikan</th>
                 <th>Total Harga</th>
                 <th>Total Dibayar</th>
             </tr>
@@ -53,10 +52,9 @@
                         <tr>
                             <td>{{ $item->tgl_penjualan }}</td>
                             <td>{{ $item->kd_penjualan }}</td>
-                            <td>{{ $item->barang->nama }}</td>
                             <td>{{ $item->customer->nama_toko }}</td>
+                            <td>{{ $item->barangterjual->barang->nama }}</td>
                             <td>{{ $item->jumlah_barang }} Barang</td>
-                            <td>{{ $item->pengembalian->jumlah_barang ?? 'Tidak ada' }}</td>
                             <td>{{ 'Rp ' . number_format($item->total_harga, 2, ',', '.') }}</td>
                             <td>{{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>
                         </tr>

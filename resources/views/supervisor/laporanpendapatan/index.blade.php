@@ -29,8 +29,8 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
-                                    <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Nama Toko</th>
+                                    <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Barang Terjual</th>
                                     <th scope="col" class="text-left text-md">Harga Beli</th>
                                     <th scope="col" class="text-left text-md">Harga Jual</th>
@@ -42,25 +42,30 @@
                                     $totalPendapatan = 0;
                                 @endphp
                                 @foreach ($data as $item)
-                                    @php
-                                        $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang;
-                                        $totalPendapatan += $pendapatan;
-                                    @endphp
-                                    <tr
-                                        onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
-                                        <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
-                                        <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
-                                        <td class="text-left text-md">{{ $item->barang->nama }}</td>
-                                        <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
-                                        <td class="text-left text-md">{{ $item->jumlah_barang }} Barang</td>
-                                        <?php $pendapatan = ($item->barang->harga_jual - $item->barang->harga_beli) * $item->jumlah_barang; ?>
-                                        <td class="text-left text-md">
-                                            {{ 'Rp ' . number_format($item->barang->harga_beli, 2, ',', '.') }}</td>
-                                        <td class="text-left text-md">
-                                            {{ 'Rp ' . number_format($item->barang->harga_jual, 2, ',', '.') }}</td>
-                                        <td class="text-left text-md">{{ 'Rp ' . number_format($pendapatan, 2, ',', '.') }}
-                                        </td>
-                                    </tr>
+                                    @if ($item->status_pengiriman == 'selesai')
+                                        @php
+                                            $pendapatan = ($item->barangterjual->barang->harga_jual - $item->barangterjual->barang->harga_beli) * $item->jumlah_barang;
+                                            $totalPendapatan += $pendapatan;
+                                        @endphp
+                                        <tr
+                                            onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
+                                            <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
+                                            <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
+                                            <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
+                                            <td class="text-left text-md">{{ $item->barangterjual->barang->nama }}</td>
+                                            <td class="text-left text-md">{{ $item->jumlah_barang }} Barang</td>
+                                            <?php $pendapatan = ($item->barangterjual->barang->harga_jual - $item->barangterjual->barang->harga_beli) * $item->jumlah_barang; ?>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($item->barangterjual->barang->harga_beli, 2, ',', '.') }}
+                                            </td>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($item->barangterjual->barang->harga_jual, 2, ',', '.') }}
+                                            </td>
+                                            <td class="text-left text-md">
+                                                {{ 'Rp ' . number_format($pendapatan, 2, ',', '.') }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                             <tr>

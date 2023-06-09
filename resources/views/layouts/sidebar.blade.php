@@ -171,14 +171,6 @@
                                 Barang</span>
                         </a>
                     </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('supervisorstokbarangpengembalian.index') }}">
-                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
-                                Stok
-                                Barang Pengembalian</span>
-                        </a>
-                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'sales')

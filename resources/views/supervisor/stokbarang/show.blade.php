@@ -32,35 +32,35 @@
         </thead>
         <tbody>
             @php
-                $totalJumlahBarang = 0;
-                $totalBarangTerjual = 0;
-                $totalBarangDikembalikan = 0;
+                $totalSeluruhJumlahBarang = 0;
+                $totalSeluruhBarangTerjual = 0;
+                $totalSeluruhBarangDikembalikan = 0;
             @endphp
-            @foreach ($data as $item)
-                <?php
-                $jumlah_barang = $item->jumlah ?? 0;
-                $barang_terjual = $item->penjualanbarang->jumlah_barang ?? 0;
-                $barang_dikembalikan = $item->pengembalian->jumlah_barang ?? 0;
-                
-                $totalJumlahBarang += $jumlah_barang;
-                $totalBarangTerjual += $barang_terjual;
-                $totalBarangDikembalikan += $barang_dikembalikan;
-                ?>
+            @foreach ($data->unique('kd_barang') as $item)
+                @php
+                    $totalJumlahBarang = $totalJumlah->where('kd_barang', $item->kd_barang)->first();
+                    $totalBarangTerjual = $totalJumlahterjual->where('kd_barang', $item->kd_barang)->first();
+                    $totalBarangDikembalikan = $totalJumlahrusak->where('kd_barang', $item->kd_barang)->first();
+                    
+                    $totalSeluruhJumlahBarang += $totalJumlahBarang ? $totalJumlahBarang->total_jumlah : 0;
+                    $totalSeluruhBarangTerjual += $totalBarangTerjual ? $totalBarangTerjual->total_jumlahterjual : 0;
+                    $totalSeluruhBarangDikembalikan += $totalBarangDikembalikan ? $totalBarangDikembalikan->total_jumlahrusak : 0;
+                @endphp
                 <tr>
                     <td>{{ $item->kd_barang }}</td>
                     <td>{{ $item->nama }}</td>
-                    <td>{{ $item->jumlah }} Barang</td>
-                    <td>{{ $item->penjualanbarang->jumlah_barang ?? 0 }}
+                    <td>{{ $totalJumlahBarang ? $totalJumlahBarang->total_jumlah : 0 }} Barang</td>
+                    <td>{{ $totalBarangTerjual ? $totalBarangTerjual->total_jumlahterjual : 0 }} Barang</td>
+                    <td>{{ $totalBarangDikembalikan ? $totalBarangDikembalikan->total_jumlahrusak : 0 }}
                         Barang</td>
-                    <td>{{ $item->pengembalian->jumlah_barang ?? 0 }} Barang</td>
                 </tr>
             @endforeach
         </tbody>
         <tr>
             <td colspan="2" class="text-right"><strong>Total Barang:</strong></td>
-            <td class="text-left">{{ $totalJumlahBarang }} Barang</td>
-            <td class="text-left">{{ $totalBarangTerjual }} Barang</td>
-            <td class="text-left">{{ $totalBarangDikembalikan }} Barang</td>
+            <td class="text-left">{{ $totalSeluruhJumlahBarang }} Barang</td>
+            <td class="text-left">{{ $totalSeluruhBarangTerjual }} Barang</td>
+            <td class="text-left">{{ $totalSeluruhBarangDikembalikan }} Barang</td>
         </tr>
     </table>
 </body>

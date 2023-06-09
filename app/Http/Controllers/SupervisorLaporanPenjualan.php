@@ -17,7 +17,7 @@ class SupervisorLaporanPenjualan extends Controller
         $tanggalAkhir = $request->input('tanggal_akhir');
 
         $pengembalian = Pengembalian::all();
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
@@ -30,7 +30,7 @@ class SupervisorLaporanPenjualan extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
@@ -60,7 +60,7 @@ class SupervisorLaporanPenjualan extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
 
-        $data = Penjualan::with(['barang', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
         if ($tanggalAwal && $tanggalAkhir) {
             $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();

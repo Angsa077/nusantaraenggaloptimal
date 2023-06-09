@@ -28,30 +28,29 @@
                                 <tr>
                                     <th scope="col" class="text-left text-md">Tanggal Penjualan</th>
                                     <th scope="col" class="text-left text-md">Kode Penjualan</th>
-                                    <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Nama Toko</th>
+                                    <th scope="col" class="text-left text-md">Nama Barang</th>
                                     <th scope="col" class="text-left text-md">Jumlah Barang</th>
-                                    <th scope="col" class="text-left text-md">Barang Dikembalikan</th>
                                     <th scope="col" class="text-left text-md">Total Harga</th>
                                     <th scope="col" class="text-left text-md">Total Dibayar</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
+                                    @if ($item->status_pengiriman == 'selesai')
                                     <tr
                                         onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
                                         <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
-                                        <td class="text-left text-md">{{ $item->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>
+                                        <td class="text-left text-md">{{ $item->barangterjual->barang->nama }}</td>
                                         <td class="text-left text-md">{{ $item->jumlah_barang }} Barang</td>
-                                        <td class="text-left text-md">
-                                            {{ $item->pengembalian->jumlah_barang ?? 'Tidak ada' }}</td>
                                         <td class="text-left text-md">
                                             {{ 'Rp ' . number_format($item->total_harga, 2, ',', '.') }}</td>
                                         <td class="text-left text-md">
                                             {{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
