@@ -68,10 +68,12 @@
                                     @endif
                                 @endforeach
                             </tbody>
-                            <tr>
-                                <td colspan="7" class="text-right"><strong>Total Pendapatan:</strong></td>
-                                <td class="text-left">{{ 'Rp ' . number_format($totalPendapatan, 2, ',', '.') }}</td>
-                            </tr>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7" class="text-right"><strong>Total Pendapatan:</strong></td>
+                                    <td class="text-left">{{ 'Rp ' . number_format($totalPendapatan, 2, ',', '.') }}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

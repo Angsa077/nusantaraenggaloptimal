@@ -156,3 +156,15 @@
         });
     });
 </script>
+
+<script>
+    function showNotification() {
+        Swal.fire({
+            title: 'Notifikasi',
+            text: 'Data telah ditambahkan pada tabel',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000 // Durasi tampilan notifikasi dalam milidetik (misal: 2000 untuk 2 detik)
+        });
+    }
+</script>
