@@ -10,9 +10,12 @@
             $total = 0;
             $ada_transaksi = false;
             ?>
-            @foreach ($penjualan as $item)
-                <?php $total += $item->total_harga; ?>
-            @endforeach
+
+            @if (isset($penjualan))
+                @foreach ($penjualan as $item)
+                    <?php $total += $item->total_harga; ?>
+                @endforeach
+            @endif
 
             <div class="row">
                 <div class="col-12 d-flex">
@@ -57,9 +60,11 @@
                                             <?php
                                             $total_penjualan = 0;
                                             ?>
-                                            @foreach ($penjualan as $pen)
-                                                <?php $total_penjualan++; ?>
-                                            @endforeach
+                                            @if (isset($penjualan))
+                                                @foreach ($penjualan as $pen)
+                                                    <?php $total_penjualan++; ?>
+                                                @endforeach
+                                            @endif
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
                                                     <i class="align-middle" data-feather="shopping-cart"></i>
@@ -85,9 +90,11 @@
                                             <?php
                                             $total_pembayaran = 0;
                                             ?>
-                                            @foreach ($pembayaran as $pem)
-                                                <?php $total_pembayaran++; ?>
-                                            @endforeach
+                                            @if (isset($pembayaran))
+                                                @foreach ($pembayaran as $pem)
+                                                    <?php $total_pembayaran++; ?>
+                                                @endforeach
+                                            @endif
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
                                                     <i class="align-middle" data-feather="dollar-sign"></i>
@@ -113,9 +120,11 @@
                                             <?php
                                             $total_pengiriman = 0;
                                             ?>
-                                            @foreach ($pengiriman as $ngirim)
-                                                <?php $total_pengiriman++; ?>
-                                            @endforeach
+                                            @if (isset($pengiriman))
+                                                @foreach ($pengiriman as $ngirim)
+                                                    <?php $total_pengiriman++; ?>
+                                                @endforeach
+                                            @endif
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
                                                     <i class="align-middle" data-feather="truck"></i>
@@ -141,9 +150,11 @@
                                             <?php
                                             $total_pengembalian = 0;
                                             ?>
-                                            @foreach ($pengembalian as $balian)
-                                                <?php $total_pengembalian++; ?>
-                                            @endforeach
+                                            @if (isset($pengembalian))
+                                                @foreach ($pengembalian as $balian)
+                                                    <?php $total_pengembalian++; ?>
+                                                @endforeach
+                                            @endif
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
                                                     <i class="align-middle" data-feather="truck"></i>
