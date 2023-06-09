@@ -86,7 +86,7 @@ class AdminPengembalian extends Controller
 
         Penjualan::where('kd_penjualan', $request->kd_penjualan)->update($data_penjualan);
         Pengembalian::create($data_pengembalian);
-        return redirect()->route('adminpengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
+        return redirect()->route('admin.pengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 
     public function edit(string $id)
@@ -142,12 +142,12 @@ class AdminPengembalian extends Controller
         Pengembalian::where('kd_pengembalian', $id)->update($data_pengembalian);
         Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->update($data_penjualan);
         BarangRusak::where('id_barangrusak', $barangrusak->id_barangrusak)->update($data_barangrusak);
-        return redirect()->route('kurirpengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
+        return redirect()->route('kurir.pengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 
     public function destroy(string $id)
     {
         Pengembalian::where('kd_pengembalian', $id)->delete();
-        return redirect()->route('adminpengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
+        return redirect()->route('admin.pengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
     }
 }

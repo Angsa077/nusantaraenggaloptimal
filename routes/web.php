@@ -72,11 +72,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/changed-password', [ChangedPasswordController::class, 'showChangedPasswordForm'])->name('password.changed');
 Route::post('/changed-password', [ChangedPasswordController::class, 'changedPassword'])->name('password.updated');
 
-Route::group(['middleware' => ['auth']], function(){
-    Route::get('/', function (){ return view('dashboard'); });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
     // Route::get('dashboard', function (){ return view('dashboard'); })->name('dashboard');
     Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
-
     Route::get('/change-profile', [ProfiledController::class, 'showProfile'])->name('profile.changed');
     Route::put('/change-profile', [ProfiledController::class, 'changeprofile'])->name('profile.updated');
     Route::post('/getkabupaten', [AdminCustomerController::class, 'getkabupaten'])->name(('getkabupaten'));
@@ -84,92 +85,77 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/getdesa', [AdminCustomerController::class, 'getdesa'])->name(('getdesa'));
 });
 
-Route::group(['middleware' => ['auth', 'level:admin']], function(){
-    Route::resource('adminmanajemenuser', AdminManajemenuserController::class);
-    Route::resource('adminbarang', AdminBarangController::class);
-    Route::get('/adminbarang/{id}/tambahstok', [AdminBarangController::class, 'tambahStok'])->name('adminbarang.tambahstok');
-    Route::post('/adminbarang/{id}/tambahstok', [AdminBarangController::class,'storeStok'])->name('adminbarang.storestok');
-    Route::resource('admincustomer', AdminCustomerController::class);
-    Route::resource('adminpembayaran', AdminPembayaran::class);
-    Route::resource('adminpengiriman', AdminPengiriman::class);
-    Route::resource('adminpengembalian', AdminPengembalian::class);
-
-    Route::resource('adminpenjualan', AdminPenjualanController::class);
-    Route::post('adminpenjualan/sementara', [AdminPenjualanController::class,'sementara'])->name('adminpenjualan.sementara');
-    Route::delete('adminpenjualan/create/{id}', [AdminPenjualanController::class, 'destroysementara'])->name('adminpenjualan.destroysementara');
-    Route::get('adminpenjualan/pdf/{id}', [AdminPenjualanController::class,'generatePDF'])->name('adminpenjualan.pdf');
-
-    Route::resource('adminlaporanpenjualan', AdminLaporanPenjualanController::class);
-    Route::get('adminlaporanpenjualan/pdf', [AdminLaporanPenjualanController::class,'generatePDF'])->name('adminlaporanpenjualan.pdf');
-
-    Route::resource('adminlaporanpendapatan', AdminLaporanPendapatanController::class);
-    Route::get('adminlaporanpendapatan/pdf', [AdminLaporanPendapatanController::class,'generatePDF'])->name('adminlaporanpendapatan.pdf');
-
-    Route::resource('adminstokbarang', AdminLaporanStokBarangController::class);
-    Route::get('adminstokbarang/pdf', [AdminLaporanStokBarangController::class,'generatePDF'])->name('adminstokbarang.pdf');
+Route::prefix('admin')->middleware('auth', 'level:admin')->group(function () {
+    Route::resource('manajemenuser', AdminManajemenuserController::class)->names('admin.manajemenuser');
+    Route::resource('barang', AdminBarangController::class)->names('admin.barang');
+    Route::get('barang/{id}/tambahstok', [AdminBarangController::class, 'tambahStok'])->name('admin.barang.tambahstok');
+    Route::post('barang/{id}/tambahstok', [AdminBarangController::class, 'storeStok'])->name('admin.barang.storestok');
+    Route::resource('customer', AdminCustomerController::class)->names('admin.customer');
+    Route::resource('pembayaran', AdminPembayaran::class)->names('admin.pembayaran');
+    Route::resource('pengiriman', AdminPengiriman::class)->names('admin.pengiriman');
+    Route::resource('pengembalian', AdminPengembalian::class)->names('admin.pengembalian');
+    Route::resource('penjualan', AdminPenjualanController::class)->names('admin.penjualan');
+    Route::post('penjualan/sementara', [AdminPenjualanController::class, 'sementara'])->name('admin.penjualan.sementara');
+    Route::delete('penjualan/create/{id}', [AdminPenjualanController::class, 'destroysementara'])->name('admin.penjualan.destroysementara');
+    Route::get('penjualan/pdf/{id}', [AdminPenjualanController::class, 'generatePDF'])->name('admin.penjualan.pdf');
+    Route::resource('laporanpenjualan', AdminLaporanPenjualanController::class)->names('admin.laporanpenjualan');
+    Route::get('laporanpenjualan/pdf', [AdminLaporanPenjualanController::class, 'generatePDF'])->name('admin.laporanpenjualan.pdf');
+    Route::resource('laporanpendapatan', AdminLaporanPendapatanController::class)->names('admin.laporanpendapatan');
+    Route::get('laporanpendapatan/pdf', [AdminLaporanPendapatanController::class, 'generatePDF'])->name('admin.laporanpendapatan.pdf');
+    Route::resource('stokbarang', AdminLaporanStokBarangController::class)->names('admin.stokbarang');
+    Route::get('stokbarang/pdf', [AdminLaporanStokBarangController::class, 'generatePDF'])->name('admin.stokbarang.pdf');
 });
 
-Route::group(['middleware' => ['auth', 'level:kepalacabang']], function(){
-    Route::resource('kepalacabangmanajemenuser', KepalaCabangManajemenuserController::class);
-    Route::resource('kepalacabangbarang', KepalaCabangBarangController::class);
-    Route::resource('kepalacabangcustomer', KepalaCabangCustomerController::class);
-
-    Route::resource('kepalacabanglaporanpenjualan', KepalaCabangLaporanPenjualanController::class);
-    Route::get('kepalacabanglaporanpenjualan/pdf', [KepalaCabangLaporanPenjualanController::class,'generatePDF'])->name('kepalacabanglaporanpenjualan.pdf');
-
-    Route::resource('kepalacabanglaporanpendapatan', KepalaCabangLaporanPendapatapanController::class);
-    Route::get('kepalacabanglaporanpendapatan/pdf', [KepalaCabangLaporanPendapatapanController::class,'generatePDF'])->name('kepalacabanglaporanpendapatan.pdf');
-
-    Route::resource('kepalacabangstokbarang', KepalaCabangLaporanStokBarangController::class);
-    Route::get('kepalacabangstokbarang/pdf', [KepalaCabangLaporanStokBarangController::class,'generatePDF'])->name('kepalacabangstokbarang.pdf');
+Route::prefix('kepalacabang')->middleware('auth', 'level:kepalacabang')->group(function () {
+    Route::resource('manajemenuser', KepalaCabangManajemenuserController::class)->names('kepalacabang.manajemenuser');
+    Route::resource('barang', KepalaCabangBarangController::class)->names('kepalacabang.barang');
+    Route::resource('customer', KepalaCabangCustomerController::class)->names('kepalacabang.customer');
+    Route::resource('laporanpenjualan', KepalaCabangLaporanPenjualanController::class)->names('kepalacabang.laporanpenjualan');
+    Route::get('laporanpenjualan/pdf', [KepalaCabangLaporanPenjualanController::class, 'generatePDF'])->name('kepalacabang.laporanpenjualan.pdf');
+    Route::resource('laporanpendapatan', KepalaCabangLaporanPendapatapanController::class)->names('kepalacabang.laporanpendapatan');
+    Route::get('laporanpendapatan/pdf', [KepalaCabangLaporanPendapatapanController::class, 'generatePDF'])->name('kepalacabang.laporanpendapatan.pdf');
+    Route::resource('stokbarang', KepalaCabangLaporanStokBarangController::class)->names('kepalacabang.stokbarang');
+    Route::get('stokbarang/pdf', [KepalaCabangLaporanStokBarangController::class, 'generatePDF'])->name('kepalacabang.stokbarang.pdf');
 });
 
-Route::group(['middleware' => ['auth', 'level:supervisor']], function(){
-    Route::resource('supervisormanajemenuser', SupervisorManajemenuserController::class);
-    Route::resource('supervisorbarang', SupervisorBarangController::class);
-    Route::resource('supervisorcustomer', SupervisorCustomerController::class);
-    Route::resource('supervisorpembayaran', SupervisorPembayaran::class);
-    Route::resource('supervisorpengiriman', SupervisorPengiriman::class);
-    Route::resource('supervisorpengembalian', SupervisorPengembalian::class);
-
-    Route::resource('supervisorpenjualan', SupervisorPenjualanController::class);
-    Route::get('supervisorpenjualan/pdf/{id}', [SupervisorPenjualanController::class,'generatePDF'])->name('supervisorpenjualan.pdf');
-
-    Route::resource('supervisorlaporanpenjualan', SupervisorLaporanPenjualan::class);
-    Route::get('supervisorlaporanpenjualan/pdf', [SupervisorLaporanPenjualan::class,'generatePDF'])->name('supervisorlaporanpenjualan.pdf');
-
-    Route::resource('supervisorlaporanpendapatan', SupervisorLaporanPendapatan::class);
-    Route::get('supervisorlaporanpendapatan/pdf', [SupervisorLaporanPendapatan::class,'generatePDF'])->name('supervisorlaporanpendapatan.pdf');
-
-    Route::resource('supervisorstokbarang', SupervisorLaporanStokbarang::class);
-    Route::get('supervisorstokbarang/pdf', [SupervisorLaporanStokbarang::class,'generatePDF'])->name('supervisorstokbarang.pdf');
+Route::prefix('supervisor')->middleware('auth', 'level:supervisor')->group(function () {
+    Route::resource('manajemenuser', SupervisorManajemenuserController::class)->names('supervisor.manajemenuser');
+    Route::resource('barang', SupervisorBarangController::class)->names('supervisor.barang');
+    Route::resource('customer', SupervisorCustomerController::class)->names('supervisor.customer');
+    Route::resource('pembayaran', SupervisorPembayaran::class)->names('supervisor.pembayaran');
+    Route::resource('pengiriman', SupervisorPengiriman::class)->names('supervisor.pengiriman');
+    Route::resource('pengembalian', SupervisorPengembalian::class)->names('supervisor.pengembalian');
+    Route::resource('penjualan', SupervisorPenjualanController::class)->names('supervisor.penjualan');
+    Route::get('penjualan/pdf/{id}', [SupervisorPenjualanController::class, 'generatePDF'])->name('supervisor.penjualan.pdf');
+    Route::resource('laporanpenjualan', SupervisorLaporanPenjualan::class)->names('supervisor.laporanpenjualan');
+    Route::get('laporanpenjualan/pdf', [SupervisorLaporanPenjualan::class, 'generatePDF'])->name('supervisor.laporanpenjualan.pdf');
+    Route::resource('laporanpendapatan', SupervisorLaporanPendapatan::class)->names('supervisor.laporanpendapatan');
+    Route::get('laporanpendapatan/pdf', [SupervisorLaporanPendapatan::class, 'generatePDF'])->name('supervisor.laporanpendapatan.pdf');
+    Route::resource('stokbarang', SupervisorLaporanStokbarang::class)->names('supervisor.stokbarang');
+    Route::get('stokbarang/pdf', [SupervisorLaporanStokbarang::class, 'generatePDF'])->name('supervisor.stokbarang.pdf');
 });
 
-Route::group(['middleware' => ['auth', 'level:sales']], function(){
-    Route::resource('salesbarang', SalesBarangController::class);
-    Route::resource('salescustomer', SalesCustomerController::class);
-    Route::resource('salespembayaran', SalesPembayaran::class);
-    Route::resource('salespengiriman', SalesPengiriman::class);
-    Route::resource('salespengembalian', SalesPengembalian::class);
-
-    Route::resource('salespenjualan', SalesPenjualanController::class);
-    Route::post('salespenjualan/sementara', [SalesPenjualanController::class,'sementara'])->name('salespenjualan.sementara');
-    Route::delete('salespenjualan/create/{id}', [SalesPenjualanController::class, 'destroysementara'])->name('salespenjualan.destroysementara');
-    Route::get('salespenjualan/pdf/{id}', [SalesPenjualanController::class,'generatePDF'])->name('salespenjualan.pdf');
-
-    Route::resource('saleslaporanpenjualan', SalesLaporanPenjualanController::class);
-    Route::get('saleslaporanpenjualan/pdf', [SalesLaporanPenjualanController::class,'generatePDF'])->name('saleslaporanpenjualan.pdf');
-
-    Route::resource('saleslaporanpendapatan', SalesLaporanPendapatanController::class);
-    Route::get('saleslaporanpendapatan/pdf', [SalesLaporanPendapatanController::class,'generatePDF'])->name('saleslaporanpendapatan.pdf');
-
-    Route::resource('salesstokbarang', SalesLaporanStokBarangController::class);
-    Route::get('salesstokbarang/pdf', [SalesLaporanStokBarangController::class,'generatePDF'])->name('salesstokbarang.pdf');
+Route::prefix('sales')->middleware('auth', 'level:sales')->group(function () {
+    Route::resource('barang', SalesBarangController::class)->names('sales.barang');
+    Route::resource('customer', SalesCustomerController::class)->names('sales.customer');
+    Route::resource('pembayaran', SalesPembayaran::class)->names('sales.pembayaran');
+    Route::resource('pengiriman', SalesPengiriman::class)->names('sales.pengiriman');
+    Route::resource('pengembalian', SalesPengembalian::class)->names('sales.pengembalian');
+    Route::resource('penjualan', SalesPenjualanController::class)->names('sales.penjualan');
+    Route::post('penjualan/sementara', [SalesPenjualanController::class, 'sementara'])->name('sales.penjualan.sementara');
+    Route::delete('penjualan/create/{id}', [SalesPenjualanController::class, 'destroysementara'])->name('sales.penjualan.destroysementara');
+    Route::get('penjualan/pdf/{id}', [SalesPenjualanController::class, 'generatePDF'])->name('sales.penjualan.pdf');
+    Route::resource('laporanpenjualan', SalesLaporanPenjualanController::class)->names('sales.laporanpenjualan');
+    Route::get('laporanpenjualan/pdf', [SalesLaporanPenjualanController::class, 'generatePDF'])->name('sales.laporanpenjualan.pdf');
+    Route::resource('laporanpendapatan', SalesLaporanPendapatanController::class)->names('sales.laporanpendapatan');
+    Route::get('laporanpendapatan/pdf', [SalesLaporanPendapatanController::class, 'generatePDF'])->name('sales.laporanpendapatan.pdf');
+    Route::resource('stokbarang', SalesLaporanStokBarangController::class)->names('sales.stokbarang');
+    Route::get('stokbarang/pdf', [SalesLaporanStokBarangController::class, 'generatePDF'])->name('sales.stokbarang.pdf');
 });
 
-Route::group(['middleware' => ['auth', 'level:kurir']], function(){
-    Route::resource('kurirpengiriman', KurirPengiriman::class);
-    Route::resource('kurirpengembalian', KurirPengembalian::class);
-    Route::resource('kurirstokbarang', KurirLaporanStokBarangController::class);
-    Route::get('kurirstokbarang/pdf', [KurirLaporanStokBarangController::class,'generatePDF'])->name('kurirstokbarang.pdf');
+Route::prefix('kurir')->middleware('auth', 'level:kurir')->group(function () {
+    Route::resource('pengiriman', KurirPengiriman::class)->names('kurir.pengiriman');
+    Route::resource('pengembalian', KurirPengembalian::class)->names('kurir.pengembalian');
+    Route::resource('stokbarang', KurirLaporanStokBarangController::class)->names('kurir.stokbarang');
+    Route::get('stokbarang/pdf', [KurirLaporanStokBarangController::class, 'generatePDF'])->name('kurir.stokbarang.pdf');
 });

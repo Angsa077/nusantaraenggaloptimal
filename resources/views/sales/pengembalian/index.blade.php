@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr
-                                        onclick="window.location='{{ route('salespengembalian.show', $item->kd_pengembalian) }}';">
+                                        onclick="window.location='{{ route('sales.pengembalian.show', $item->kd_pengembalian) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_pengembalian ?? 'Tidak ada' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                         <td class="text-left text-md">
@@ -37,7 +37,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('salespengembalian.create') }}"
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('sales.pengembalian.create') }}"
                                 class="btn btn-secondary mr-3">
                                 Ajukan Pengembalian</a>
                         </div>

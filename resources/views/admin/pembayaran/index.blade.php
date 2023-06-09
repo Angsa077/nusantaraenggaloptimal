@@ -25,7 +25,7 @@
                                         $item = $group->first();
                                     @endphp
                                     <tr
-                                        onclick="window.location='{{ route('adminpembayaran.show', $item->kd_penjualan) }}';">
+                                        onclick="window.location='{{ route('admin.pembayaran.show', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                         <td class="text-left text-md">
                                             {{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}
@@ -44,7 +44,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('adminpembayaran.create') }}"
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('admin.pembayaran.create') }}"
                                 class="btn btn-secondary mr-3">
                                 Pembayaran</a>
                         </div>

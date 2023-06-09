@@ -9,9 +9,9 @@
                 <div class="card-body">
                     <div class="table-responsive-sm">
 
-                        <form method="GET" action="{{ route('kurirstokbarang.index') }}" class="form-inline mb-3">
+                        <form method="GET" action="{{ route('kurir.stokbarang.index') }}" class="form-inline mb-3">
                             <div class="d-flex justify-content-end ml-2">
-                                <a href="{{ route('kurirstokbarang.pdf') }}" class="btn btn-secondary"><i
+                                <a href="{{ route('kurir.stokbarang.pdf') }}" class="btn btn-secondary"><i
                                         class="fa fa-file-pdf"></i> Generate PDF</a>
                             </div>
                         </form>

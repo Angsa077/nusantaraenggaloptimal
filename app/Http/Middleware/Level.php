@@ -19,16 +19,7 @@ class Level
     {
         if (in_array($request->user()->level, $levels)){
             return $next($request);
-        }   if (Auth::user()->level == 'admin') {
-            return Redirect::to('dashboard');
-        }   elseif (Auth::user()->level == 'sales') {
-            return Redirect::to('dashboard');
-        }   elseif (Auth::user()->level == 'kurir') {
-            return Redirect::to('dashboard');
-        }   elseif (Auth::user()->level == 'supervisor') {
-            return Redirect::to('dashboard');
-        }   elseif (Auth::user()->level == 'kepalacabang') {
-            return Redirect::to('dashboard');
         }
+        return redirect('/');
     }
 }

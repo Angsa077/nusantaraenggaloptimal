@@ -531,7 +531,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     @if ($data->penjualan->status_pengembalian == 'serahkan')
-                                        <form action="{{ route('adminpengembalian.update', $data->kd_pengembalian) }}"
+                                        <form action="{{ route('admin.pengembalian.update', $data->kd_pengembalian) }}"
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
@@ -566,7 +566,7 @@
                                     @if ($data->id_staf == Auth::user()->id && $data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                                action="{{ route('adminpengembalian.destroy', $data->kd_pengembalian) }}"
+                                                action="{{ route('admin.pengembalian.destroy', $data->kd_pengembalian) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')

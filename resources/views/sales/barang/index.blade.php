@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     @if ($item->status_barang == 'tersedia')
-                                        <tr onclick="window.location='{{ route('salesbarang.show', $item->id_barang) }}';">
+                                        <tr onclick="window.location='{{ route('sales.barang.show', $item->id_barang) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>

@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('adminpenjualan.sementara') }}" method="POST"
+                                <form action="{{ route('admin.penjualan.sementara') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -113,7 +113,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('adminpenjualan.store') }}" method="POST"
+                                <form action="{{ route('admin.penjualan.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -204,7 +204,7 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <form
-                                                                action="{{ route('adminpenjualan.destroysementara', $pensem->kd_penjualansementara) }}"
+                                                                action="{{ route('admin.penjualan.destroysementara', $pensem->kd_penjualansementara) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -326,7 +326,7 @@
                                     </tbody>
                                 </table>
                                 <div class="col-3 col-md-3 order-md-2 order-last"> <a
-                                        href="{{ route('admincustomer.create') }}" class="btn btn-sm btn-secondary">
+                                        href="{{ route('admin.customer.create') }}" class="btn btn-sm btn-secondary">
                                         Tambah Customer</a>
                                 </div>
                             </div>

@@ -367,7 +367,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('kurirpengiriman.update', $data->kd_penjualan) }}"
+                                    <form action="{{ route('kurir.pengiriman.update', $data->kd_penjualan) }}"
                                         method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')

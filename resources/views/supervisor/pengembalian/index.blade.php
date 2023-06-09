@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr
-                                        onclick="window.location='{{ route('supervisorpengembalian.edit', $item->kd_pengembalian) }}';">
+                                        onclick="window.location='{{ route('supervisor.pengembalian.edit', $item->kd_pengembalian) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_pengembalian ?? 'Tidak ada' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                         <td class="text-left text-md">

@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form action="{{ route('salespembayaran.store') }}" method="POST"
+                                <form action="{{ route('sales.pembayaran.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">

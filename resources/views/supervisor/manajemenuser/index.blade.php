@@ -23,7 +23,7 @@
                                 <?php $no = 1; ?>
                                 @foreach ($data as $item)
                                 <tr
-                                onclick="window.location='{{ route('supervisormanajemenuser.show', $item->id) }}';">
+                                onclick="window.location='{{ route('supervisor.manajemenuser.show', $item->id) }}';">
                                         <td class="text-left text-md">{{ $no++ }}</td>
                                         <td class="text-left text-md">{{ $item->name }}</td>
                                         <td class="text-left text-md">{{ $item->nip }}</td>

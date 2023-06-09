@@ -21,7 +21,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                <tr onclick="window.location='{{ route('supervisorpengiriman.show', $item->kd_pengiriman) }}';">
+                                <tr onclick="window.location='{{ route('supervisor.pengiriman.show', $item->kd_pengiriman) }}';">
                                     <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                     <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
                                     <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->alamat : '' }}</td>

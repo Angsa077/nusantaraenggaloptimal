@@ -69,7 +69,7 @@
 
                                     <div class="col-12 d-flex justify-content-end mt-3">
                                         @if ($data->status_barang != 'proses' && $data->status_barang != 'tolak')
-                                            <a href="{{ route('adminbarang.tambahstok', $data->kd_barang) }}"
+                                            <a href="{{ route('admin.barang.tambahstok', $data->kd_barang) }}"
                                                 class="btn btn-secondary">Tambah Stok Barang</a>
                                         @endif
                                     </div>
@@ -107,7 +107,7 @@
                                 <!-- Tambahkan variabel totalJumlah -->
                                 @foreach ($barang as $item)
                                     @if ($item->kd_barang == $data->kd_barang)
-                                        <tr onclick="window.location='{{ route('adminbarang.edit', $item->id_barang) }}';">
+                                        <tr onclick="window.location='{{ route('admin.barang.edit', $item->id_barang) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
                                             <td class="text-left text-md">

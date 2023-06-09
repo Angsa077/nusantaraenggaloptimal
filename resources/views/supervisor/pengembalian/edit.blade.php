@@ -527,7 +527,7 @@
                         <div class="card">
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('supervisorpengembalian.update', $data->kd_pengembalian) }}"
+                                    <form action="{{ route('supervisor.pengembalian.update', $data->kd_pengembalian) }}"
                                         method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')

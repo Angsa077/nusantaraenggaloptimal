@@ -22,7 +22,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr
-                                onclick="window.location='{{ route('salescustomer.show', $item->kd_customer) }}';">
+                                onclick="window.location='{{ route('sales.customer.show', $item->kd_customer) }}';">
                                         <td class="text-left text-md">{{ $item->kd_customer  }}</td>
                                         <td class="text-left text-md">{{ $item->nama_toko }}</td>
                                         <td class="text-left text-md">{{ $item->nama_pemilik }}</td>
@@ -32,7 +32,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('salescustomer.create') }}"
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('sales.customer.create') }}"
                                 class="btn btn-secondary mr-3">
                                 Tambah Data Customer</a>
                         </div>

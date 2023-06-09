@@ -28,7 +28,7 @@
                                     $firstOccurrence = $key === 0 || $item->kd_barang !== $data[$key - 1]->kd_barang;
                                     ?>
                                     @if ($firstOccurrence)
-                                        <tr onclick="window.location='{{ route('adminbarang.show', $item->kd_barang) }}';">
+                                        <tr onclick="window.location='{{ route('admin.barang.show', $item->kd_barang) }}';">
                                             <td class="text-left text-md">{{ $no++ }}</td>
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>
@@ -53,7 +53,7 @@
                             </tbody>
                         </table>
                         <div class="col-3 col-md-3 order-md-2 order-last">
-                            <a href="{{ route('adminbarang.create') }}" class="btn btn-secondary mr-3">
+                            <a href="{{ route('admin.barang.create') }}" class="btn btn-secondary mr-3">
                                 Tambah Data Barang
                             </a>
                         </div>

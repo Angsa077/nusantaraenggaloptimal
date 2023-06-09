@@ -22,7 +22,7 @@
                             <tbody>
                                 <?php $no = 1; ?>
                                 @foreach ($data as $item)
-                                    <tr onclick="window.location='{{ route('adminmanajemenuser.show', $item->id) }}';">
+                                    <tr onclick="window.location='{{ route('admin.manajemenuser.show', $item->id) }}';">
                                         <td class="text-left text-md">{{ $no++ }}</td>
                                         <td class="text-left text-md">{{ $item->name }}</td>
                                         <td class="text-left text-md">{{ $item->nip }}</td>
@@ -34,7 +34,7 @@
                             </tbody>
                         </table>
                         <div class="col-3 col-md-3 order-md-2 order-last"> <a
-                                href="{{ route('adminmanajemenuser.create') }}" class="btn btn-secondary mr-3">
+                                href="{{ route('admin.manajemenuser.create') }}" class="btn btn-secondary mr-3">
                                 Tambah Data User</a>
                         </div>
                     </div>

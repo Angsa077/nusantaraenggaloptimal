@@ -9,9 +9,9 @@
                 <div class="card-body">
                     <div class="table-responsive-sm">
 
-                        <form method="GET" action="{{ route('adminstokbarang.index') }}" class="form-inline mb-3">
+                        <form method="GET" action="{{ route('admin.stokbarang.index') }}" class="form-inline mb-3">
                             <div class="d-flex justify-content-end ml-2">
-                                <a href="{{ route('adminstokbarang.pdf') }}" class="btn btn-secondary"><i
+                                <a href="{{ route('admin.stokbarang.pdf') }}" class="btn btn-secondary"><i
                                         class="fa fa-file-pdf"></i> Generate PDF</a>
                             </div>
                         </form>
@@ -42,7 +42,7 @@
                                         $totalSeluruhBarangTerjual += $totalBarangTerjual ? $totalBarangTerjual->total_jumlahterjual : 0;
                                         $totalSeluruhBarangDikembalikan += $totalBarangDikembalikan ? $totalBarangDikembalikan->total_jumlahrusak : 0;
                                     @endphp
-                                    <tr onclick="window.location='{{ route('adminbarang.show', $item->kd_barang) }}';">
+                                    <tr onclick="window.location='{{ route('admin.barang.show', $item->kd_barang) }}';">
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->nama }}</td>
                                         <td class="text-left text-md">

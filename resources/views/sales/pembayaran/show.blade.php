@@ -23,7 +23,7 @@
                                 @foreach ($pembayaran as $item)
                                     @if ($item->kd_penjualan == $data->kd_penjualan)
                                         <tr
-                                            onclick="window.location='{{ route('salespembayaran.edit', $item->kd_pembayaran) }}';">
+                                            onclick="window.location='{{ route('sales.pembayaran.edit', $item->kd_pembayaran) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>
@@ -39,7 +39,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('salespembayaran.create') }}"
+                        <div class="col-3 col-md-3 order-md-2 order-last"> <a href="{{ route('sales.pembayaran.create') }}"
                                 class="btn btn-secondary mr-3">
                                 Pembayaran</a>
                         </div>

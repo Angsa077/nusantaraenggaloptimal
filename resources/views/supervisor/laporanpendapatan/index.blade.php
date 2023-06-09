@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="table-responsive-sm">
 
-                        <form method="GET" action="{{ route('supervisorlaporanpendapatan.index') }}"
+                        <form method="GET" action="{{ route('supervisor.laporanpendapatan.index') }}"
                             class="form-inline mb-3">
                             <label for="tanggal_awal" class="mr-2">Mulai Tanggal:</label>
                             <input type="date" name="tanggal_awal" id="tanggal_awal"
@@ -19,7 +19,7 @@
                                 class="form-control form-control-sm mr-2" value="{{ request('tanggal_akhir') }}">
                             <button type="submit" class="btn btn-secondary mt-2">Filter</button>
                             <div class="d-flex justify-content-end ml-2">
-                                <a href="{{ route('supervisorlaporanpendapatan.pdf', ['tanggal_awal' => $tanggalAwal, 'tanggal_akhir' => $tanggalAkhir]) }}"
+                                <a href="{{ route('supervisor.laporanpendapatan.pdf', ['tanggal_awal' => $tanggalAwal, 'tanggal_akhir' => $tanggalAkhir]) }}"
                                     class="btn btn-secondary"><i class="fa fa-file-pdf"></i> Generate PDF</a>
                             </div>
                         </form>
@@ -48,7 +48,7 @@
                                             $totalPendapatan += $pendapatan;
                                         @endphp
                                         <tr
-                                            onclick="window.location='{{ route('supervisorpenjualan.edit', $item->kd_penjualan) }}';">
+                                            onclick="window.location='{{ route('supervisor.penjualan.edit', $item->kd_penjualan) }}';">
                                             <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>
                                             <td class="text-left text-md">{{ $item->kd_penjualan }}</td>
                                             <td class="text-left text-md">{{ $item->customer->nama_toko }}</td>

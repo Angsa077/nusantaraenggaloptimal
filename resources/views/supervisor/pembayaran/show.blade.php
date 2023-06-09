@@ -22,7 +22,7 @@
                             <tbody>
                                 @foreach ($pembayaran as $item)
                                     @if ($item->kd_penjualan == $data->kd_penjualan)
-                                    <tr onclick="window.location='{{ route('supervisorpembayaran.edit', $item->kd_pembayaran) }}';">
+                                    <tr onclick="window.location='{{ route('supervisor.pembayaran.edit', $item->kd_pembayaran) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">
                                                 {{ 'Rp ' . number_format($item->total_bayar, 2, ',', '.') }}</td>

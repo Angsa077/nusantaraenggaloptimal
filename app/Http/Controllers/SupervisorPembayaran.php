@@ -88,6 +88,6 @@ class SupervisorPembayaran extends Controller
         Customer::where('kd_customer', $penjualan->kd_customer)->update($data_customer);
         Penjualan::where('kd_penjualan', $pembayaran->kd_penjualan)->update($data_penjualan);
         Pembayaran::where('kd_pembayaran', $id)->update($data_pembayaran);
-        return redirect()->route('salespembayaran.index')->with('success', 'Berhasil memperbarui Data Pembayaran');
+        return redirect()->route('sales.pembayaran.index')->with('success', 'Berhasil memperbarui Data Pembayaran');
     }
 }

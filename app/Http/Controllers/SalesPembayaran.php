@@ -78,7 +78,7 @@ class SalesPembayaran extends Controller
         ];
 
         Pembayaran::create($data_pembayaran);
-        return redirect()->route('salespembayaran.index')->with('success', 'Berhasil Mengisi Pembayaran');
+        return redirect()->route('sales.pembayaran.index')->with('success', 'Berhasil Mengisi Pembayaran');
     }
 
     public function show(string $id)
@@ -110,6 +110,6 @@ class SalesPembayaran extends Controller
         File::delete(public_path('bukti_pembayaran') . '/' . $data->bukti_pembayaran);
 
         Pembayaran::where('kd_pembayaran', $id)->delete();
-        return redirect()->route('salespembayaran.index')->with('success', 'Berhasil Menghapus Data Pembayaran');
+        return redirect()->route('sales.pembayaran.index')->with('success', 'Berhasil Menghapus Data Pembayaran');
     }
 }

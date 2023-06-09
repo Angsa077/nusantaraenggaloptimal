@@ -25,7 +25,7 @@
                                         $item = $group->first();
                                     @endphp
                                     <tr
-                                        onclick="window.location='{{ route('supervisorpembayaran.show', $item->kd_penjualan) }}';">
+                                        onclick="window.location='{{ route('supervisor.pembayaran.show', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
                                         <td class="text-left text-md">
                                             {{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}

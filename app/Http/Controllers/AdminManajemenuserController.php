@@ -102,7 +102,7 @@ class AdminManajemenuserController extends Controller
         ];
 
         User::create($data);
-        return redirect()->route('adminmanajemenuser.index')->with('success', 'Berhasil Mengisi Biodata User');
+        return redirect()->route('admin.manajemenuser.index')->with('success', 'Berhasil Mengisi Biodata User');
     }
 
     /**
@@ -189,7 +189,7 @@ class AdminManajemenuserController extends Controller
         }
 
         User::where('id', $id)->update($data);
-        return redirect()->route('adminmanajemenuser.index')->with('success', 'Berhasil Memperbarui Data User');
+        return redirect()->route('admin.manajemenuser.index')->with('success', 'Berhasil Memperbarui Data User');
     }
 
     /**
@@ -198,6 +198,6 @@ class AdminManajemenuserController extends Controller
     public function destroy(string $id)
     {
         User::where('id', $id)->delete();
-        return redirect()->route('adminmanajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
+        return redirect()->route('admin.manajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
     }
 }

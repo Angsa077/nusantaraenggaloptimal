@@ -90,6 +90,6 @@ class KurirPengiriman extends Controller
         Penjualan::where('kd_penjualan', $id)->update($data_penjualan);
         Pengiriman::where('kd_penjualan', $id)->update($data_pengiriman);
 
-        return redirect()->route('kurirpengiriman.index')->with('success', 'Barang Berhasil Di Checking');
+        return redirect()->route('kurir.pengiriman.index')->with('success', 'Barang Berhasil Di Checking');
     }
 }

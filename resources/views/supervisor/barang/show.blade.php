@@ -99,7 +99,7 @@
                                 <?php $totalJumlah = 0; ?> <!-- Tambahkan variabel totalJumlah -->
                                 @foreach ($barang as $item)
                                     @if ($item->kd_barang == $data->kd_barang)
-                                    <tr onclick="window.location='{{ route('supervisorbarang.edit', $item->id_barang) }}';">
+                                    <tr onclick="window.location='{{ route('supervisor.barang.edit', $item->id_barang) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
                                             <td class="text-left text-md">

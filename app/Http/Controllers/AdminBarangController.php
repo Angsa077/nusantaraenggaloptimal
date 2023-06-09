@@ -93,7 +93,7 @@ class AdminBarangController extends Controller
         ];
 
         Barang::create($data);
-        return redirect()->route('adminbarang.index')->with('success', 'Berhasil Mengisi Data Barang');
+        return redirect()->route('admin.barang.index')->with('success', 'Berhasil Mengisi Data Barang');
     }
 
     /**
@@ -183,7 +183,7 @@ class AdminBarangController extends Controller
         }
 
         Barang::where('id_barang', $id)->update($data);
-        return redirect()->route('adminbarang.index')->with('success', 'Berhasil memperbarui Data barang');
+        return redirect()->route('admin.barang.index')->with('success', 'Berhasil memperbarui Data barang');
     }
 
     /**
@@ -195,7 +195,7 @@ class AdminBarangController extends Controller
         File::delete(public_path('gambar_barang') . '/' . $data->gambar);
 
         Barang::where('id_barang', $id)->delete();
-        return redirect()->route('adminbarang.index')->with('success', 'Berhasil Menghapus Data Barang');
+        return redirect()->route('admin.barang.index')->with('success', 'Berhasil Menghapus Data Barang');
     }
 
     public function tambahStok(string $id)
@@ -259,6 +259,6 @@ class AdminBarangController extends Controller
         ];
 
         Barang::create($data);
-        return redirect()->route('adminbarang.index')->with('success', 'Berhasil memperbarui Data barang');
+        return redirect()->route('admin.barang.index')->with('success', 'Berhasil memperbarui Data barang');
     }
 }

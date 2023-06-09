@@ -28,7 +28,7 @@
                                         $jumlahBar = $item->jumlah;
                                         $jumlahBarang += $jumlahBar;
                                     @endphp
-                                    <tr onclick="window.location='{{ route('salesbarang.show', $item->id_barang) }}';">
+                                    <tr onclick="window.location='{{ route('sales.barang.show', $item->id_barang) }}';">
                                         <td class="text-left text-md"> <img
                                                 src="{{ asset('gambar_barang/' . $item->barang->gambar) }}" width="100px">
                                         </td>

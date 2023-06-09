@@ -17,21 +17,21 @@
                 </li>
 
                 @if (Auth::user()->level == 'admin')
-                    <li class="sidebar-item  {{ \Route::is('adminmanajemenuser.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminmanajemenuser.index') }}">
+                    <li class="sidebar-item  {{ \Route::is('admin.manajemenuser.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.manajemenuser.index') }}">
                             <i class="align-middle" data-feather="users"></i> <span class="align-middle">Manajemen
                                 User</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.barang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.barang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">Barang</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('admincustomer.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admincustomer.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.customer.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.customer.index') }}">
                             <i class="align-middle" data-feather="user-plus"></i> <span
                                 class="align-middle">Customer</span>
                         </a>
@@ -41,29 +41,29 @@
                         Penjualan
                     </li>
 
-                    <li class="sidebar-item  {{ \Route::is('adminpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminpenjualan.index') }}">
+                    <li class="sidebar-item  {{ \Route::is('admin.penjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.penjualan.index') }}">
                             <i class="align-middle" data-feather="check-square"></i> <span
                                 class="align-middle">Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminpembayaran.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminpembayaran.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.pembayaran.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.pembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminpengiriman.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminpengiriman.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.pengiriman.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.pengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminpengembalian.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminpengembalian.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.pengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.pengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -73,22 +73,22 @@
                         Laporan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminlaporanpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminlaporanpenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.laporanpenjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminlaporanpendapatan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminlaporanpendapatan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.laporanpendapatan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.laporanpendapatan.index') }}">
                             <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
                                 Pendapatan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('adminstokbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('adminstokbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('admin.stokbarang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.stokbarang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">
                                 Stok
                                 Barang</span>
@@ -97,21 +97,21 @@
                 @endif
 
                 @if (Auth::user()->level == 'kepalacabang')
-                    <li class="sidebar-item {{ \Route::is('kepalacabangmanajemenuser.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabangmanajemenuser.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.manajemenuser.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.manajemenuser.index') }}">
                             <i class="align-middle" data-feather="users"></i> <span class="align-middle">Manajemen
                                 User</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kepalacabangbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabangbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.barang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.barang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">Barang</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kepalacabangcustomer.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabangcustomer.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.customer.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.customer.index') }}">
                             <i class="align-middle" data-feather="user-plus"></i> <span
                                 class="align-middle">Customer</span>
                         </a>
@@ -121,23 +121,23 @@
                         Laporan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kepalacabanglaporanpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabanglaporanpenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.laporanpenjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kepalacabanglaporanpendapatan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabanglaporanpendapatan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.laporanpendapatan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.laporanpendapatan.index') }}">
                             <i class="align-middle" data-feather="dollar-sign"></i> <span
                                 class="align-middle">Laporan
                                 Pendapatan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kepalacabangstokbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kepalacabangstokbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.stokbarang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.stokbarang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">
                                 Stok
                                 Barang</span>
@@ -146,22 +146,22 @@
                 @endif
 
                 @if (Auth::user()->level == 'supervisor')
-                    <li class="sidebar-item {{ \Route::is('supervisormanajemenuser.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisormanajemenuser.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.manajemenuser.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.manajemenuser.index') }}">
                             <i class="align-middle" data-feather="users"></i> <span class="align-middle">Manajemen
                                 User</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.barang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.barang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span
                                 class="align-middle">Barang</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorcustomer.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorcustomer.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.customer.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.customer.index') }}">
                             <i class="align-middle" data-feather="user-plus"></i> <span
                                 class="align-middle">Customer</span>
                         </a>
@@ -171,29 +171,29 @@
                         Penjualan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorpenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.penjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.penjualan.index') }}">
                             <i class="align-middle" data-feather="check-square"></i> <span
                                 class="align-middle">Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorpembayaran.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorpembayaran.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.pembayaran.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.pembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorpengiriman.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorpengiriman.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.pengiriman.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.pengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorpengembalian.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorpengembalian.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.pengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.pengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -203,23 +203,23 @@
                         Laporan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorlaporanpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorlaporanpenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.laporanpenjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorlaporanpendapatan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorlaporanpendapatan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.laporanpendapatan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.laporanpendapatan.index') }}">
                             <i class="align-middle" data-feather="dollar-sign"></i> <span
                                 class="align-middle">Laporan
                                 Pendapatan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('supervisorstokbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('supervisorstokbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('supervisor.stokbarang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.stokbarang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">
                                 Stok
                                 Barang</span>
@@ -228,15 +228,15 @@
                 @endif
 
                 @if (Auth::user()->level == 'sales')
-                    <li class="sidebar-item {{ \Route::is('salesbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salesbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.barang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.barang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span
                                 class="align-middle">Barang</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salescustomer.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salescustomer.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.customer.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.customer.index') }}">
                             <i class="align-middle" data-feather="user-plus"></i> <span
                                 class="align-middle">Customer</span>
                         </a>
@@ -246,29 +246,29 @@
                         Penjualan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salespenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salespenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.penjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.penjualan.index') }}">
                             <i class="align-middle" data-feather="check-square"></i> <span
                                 class="align-middle">Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salespembayaran.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salespembayaran.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.pembayaran.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.pembayaran.index') }}">
                             <i class="align-middle" data-feather="credit-card"></i> <span
                                 class="align-middle">Pembayaran</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salespengiriman.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salespengiriman.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.pengiriman.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.pengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salespengembalian.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salespengembalian.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.pengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.pengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -278,23 +278,23 @@
                         Laporan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('saleslaporanpenjualan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('saleslaporanpenjualan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.laporanpenjualan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('saleslaporanpendapatan.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('saleslaporanpendapatan.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.laporanpendapatan.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.laporanpendapatan.index') }}">
                             <i class="align-middle" data-feather="dollar-sign"></i> <span
                                 class="align-middle">Laporan
                                 Pendapatan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('salesstokbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('salesstokbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('sales.stokbarang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('sales.stokbarang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">
                                 Stok
                                 Barang</span>
@@ -307,15 +307,15 @@
                         Penjualan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kurirpengiriman.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kurirpengiriman.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kurir.pengiriman.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kurir.pengiriman.index') }}">
                             <i class="align-middle" data-feather="map-pin"></i> <span
                                 class="align-middle">pengiriman</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kurirpengembalian.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kurirpengembalian.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kurir.pengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kurir.pengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
                         </a>
@@ -325,8 +325,8 @@
                         Laporan
                     </li>
 
-                    <li class="sidebar-item {{ \Route::is('kurirstokbarang.index') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('kurirstokbarang.index') }}">
+                    <li class="sidebar-item {{ \Route::is('kurir.stokbarang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kurir.stokbarang.index') }}">
                             <i class="align-middle" data-feather="package"></i> <span class="align-middle">
                                 Stok
                                 Barang</span>

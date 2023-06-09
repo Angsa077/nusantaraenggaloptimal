@@ -89,7 +89,7 @@ class SalesPengembalian extends Controller
 
         Penjualan::where('kd_penjualan', $request->kd_penjualan)->update($data_penjualan);
         Pengembalian::create($data_pengembalian);
-        return redirect()->route('salespengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
+        return redirect()->route('sales.pengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 
     public function show(string $id)
@@ -112,6 +112,6 @@ class SalesPengembalian extends Controller
     public function destroy(string $id)
     {
         Pengembalian::where('kd_pengembalian', $id)->delete();
-        return redirect()->route('salespengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
+        return redirect()->route('sales.pengembalian.index')->with('success', 'Berhasil Menghapus Pengajuan Pengembalian');
     }
 }

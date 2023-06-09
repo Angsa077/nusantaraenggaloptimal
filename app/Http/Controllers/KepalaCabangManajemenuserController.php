@@ -32,12 +32,12 @@ class KepalaCabangManajemenuserController extends Controller
 
         if ($request->simpan == 'Hapus') {
             User::where('id', $id)->delete();
-            return redirect()->route('kepalacabangmanajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
+            return redirect()->route('kepalacabang.manajemenuser.index')->with('success', 'Berhasil Menghapus Biodata User');
         } elseif ($request->simpan == 'Batal') {
             $data['status_akun'] = 'nonaktif';
         }
 
         User::where('id', $id)->update($data);
-        return redirect()->route('kepalacabangmanajemenuser.index')->with('success','Berhasil Memperbarui Data User');
+        return redirect()->route('kepalacabang.manajemenuser.index')->with('success','Berhasil Memperbarui Data User');
     }
 }

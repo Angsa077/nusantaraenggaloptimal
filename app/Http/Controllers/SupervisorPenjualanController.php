@@ -121,7 +121,7 @@ class SupervisorPenjualanController extends Controller
             Pengiriman::create($data_pengiriman);
         }
 
-        return redirect()->route('supervisorpenjualan.index')->with('success', 'Barang Berhasil Di Checking');
+        return redirect()->route('supervisor.penjualan.index')->with('success', 'Barang Berhasil Di Checking');
     }
 
     public function show(Request $request, string $id)

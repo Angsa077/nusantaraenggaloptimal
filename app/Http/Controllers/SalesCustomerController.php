@@ -130,7 +130,7 @@ class SalesCustomerController extends Controller
             ];
 
         Customer::create($data);
-        return redirect()->route('salescustomer.index')->with('success','Berhasil Mengisi Data Customer');
+        return redirect()->route('sales.customer.index')->with('success','Berhasil Mengisi Data Customer');
     }
 
     /**
@@ -214,7 +214,7 @@ class SalesCustomerController extends Controller
             ];
 
             Customer::where('kd_customer', $id)->update($data);
-            return redirect()->route('salescustomer.index')->with('success','Berhasil memperbarui Data Customer');
+            return redirect()->route('sales.customer.index')->with('success','Berhasil memperbarui Data Customer');
     
     }
 
@@ -227,6 +227,6 @@ class SalesCustomerController extends Controller
         File::delete(public_path('gambar_customer') . '/' . $data->gambar);
 
         Customer::where('kd_customer', $id)->delete();
-        return redirect()->route('salescustomer.index')->with('success', 'Berhasil Menghapus Data Customer');
+        return redirect()->route('sales.customer.index')->with('success', 'Berhasil Menghapus Data Customer');
     }
 }

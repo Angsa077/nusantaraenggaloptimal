@@ -28,7 +28,7 @@
                                         $firstOccurrence = ($key === 0 || $item->kd_barang !== $data[$key - 1]->kd_barang);
                                     ?>
                                     @if ($firstOccurrence)
-                                    <tr onclick="window.location='{{ route('supervisorbarang.show', $item->kd_barang) }}';">
+                                    <tr onclick="window.location='{{ route('supervisor.barang.show', $item->kd_barang) }}';">
                                             <td class="text-left text-md">{{ $no++ }}</td>
                                             <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                             <td class="text-left text-md">{{ $item->nama }}</td>

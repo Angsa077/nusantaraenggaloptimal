@@ -158,7 +158,7 @@
                                     @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak')
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                                action="{{ route('salespembayaran.destroy', $data->kd_pembayaran) }}"
+                                                action="{{ route('sales.pembayaran.destroy', $data->kd_pembayaran) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')

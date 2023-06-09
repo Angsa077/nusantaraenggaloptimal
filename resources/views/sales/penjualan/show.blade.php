@@ -32,7 +32,7 @@
                                         $jumlahHar = $item->jumlah * $item->barang->harga_jual;
                                         $jumlahHarga += $jumlahHar;
                                     @endphp
-                                    <tr onclick="window.location='{{ route('salesbarang.show', $item->id_barang) }}';">
+                                    <tr onclick="window.location='{{ route('sales.barang.show', $item->id_barang) }}';">
                                         <td class="text-left text-md"> <img src="{{ asset('gambar_barang/' . $item->barang->gambar) }}" width="100px"></td>
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
@@ -147,7 +147,7 @@
                                     @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                                action="{{ route('salespenjualan.destroy', $data->kd_penjualan) }}"
+                                                action="{{ route('sales.penjualan.destroy', $data->kd_penjualan) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -160,10 +160,10 @@
 
                                     @if ($data->status_persetujuan == 'disetujui')
                                     <div class="col-12 d-flex justify-content-end mt-3">
-                                        <form method="GET" action="{{ route('salespenjualan.index') }}"
+                                        <form method="GET" action="{{ route('sales.penjualan.index') }}"
                                             class="form-inline mb-3">
                                             <div class="d-flex justify-content-end ml-2">
-                                                <a href="{{ route('salespenjualan.pdf', $data->kd_penjualan) }}"
+                                                <a href="{{ route('sales.penjualan.pdf', $data->kd_penjualan) }}"
                                                     class="btn btn-secondary">Cetak Invoice</a>
                                             </div>
                                         </form>

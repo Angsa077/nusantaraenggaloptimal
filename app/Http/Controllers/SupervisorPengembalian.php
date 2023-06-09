@@ -63,6 +63,6 @@ class SupervisorPengembalian extends Controller
 
         Pengembalian::where('kd_pengembalian', $id)->update($data_pengembalian);
         Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->update($data_penjualan);
-        return redirect()->route('supervisorpengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
+        return redirect()->route('supervisor.pengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 }

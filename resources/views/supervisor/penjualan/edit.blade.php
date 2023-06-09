@@ -32,7 +32,7 @@
                                         $jumlahHar = $item->jumlah * $item->barang->harga_jual;
                                         $jumlahHarga += $jumlahHar;
                                     @endphp
-                                    <tr onclick="window.location='{{ route('supervisorbarang.show', $item->kd_barang) }}';">
+                                    <tr onclick="window.location='{{ route('supervisor.barang.show', $item->kd_barang) }}';">
                                         <td class="text-left text-md"> <img src="{{ asset('gambar_barang/' . $item->barang->gambar) }}" width="100px"></td>
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
@@ -153,10 +153,10 @@
 
                                     @if ($data->status_persetujuan == 'disetujui')
                                     <div class="col-12 d-flex justify-content-end mt-3">
-                                        <form method="GET" action="{{ route('supervisorpenjualan.index') }}"
+                                        <form method="GET" action="{{ route('supervisor.penjualan.index') }}"
                                             class="form-inline mb-3">
                                             <div class="d-flex justify-content-end ml-2">
-                                                <a href="{{ route('supervisorpenjualan.pdf', $data->kd_penjualan) }}"
+                                                <a href="{{ route('supervisor.penjualan.pdf', $data->kd_penjualan) }}"
                                                     class="btn btn-secondary">Cetak Invoice</a>
                                             </div>
                                         </form>
@@ -507,7 +507,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('supervisorpenjualan.update', $data->kd_penjualan) }}" method="POST"
+                <form action="{{ route('supervisor.penjualan.update', $data->kd_penjualan) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

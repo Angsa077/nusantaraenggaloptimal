@@ -32,7 +32,7 @@
                                         $jumlahHar = $item->jumlah * $item->barang->harga_jual;
                                         $jumlahHarga += $jumlahHar;
                                     @endphp
-                                    <tr onclick="window.location='{{ route('adminbarang.show', $item->kd_barang) }}';">
+                                    <tr onclick="window.location='{{ route('admin.barang.show', $item->kd_barang) }}';">
                                         <td class="text-left text-md"> <img src="{{ asset('gambar_barang/' . $item->barang->gambar) }}" width="100px"></td>
                                         <td class="text-left text-md">{{ $item->kd_barang }}</td>
                                         <td class="text-left text-md">{{ $item->barang->nama }}</td>
@@ -154,7 +154,7 @@
 
                                         @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                                action="{{ route('adminpenjualan.destroy', $data->kd_penjualan) }}"
+                                                action="{{ route('admin.penjualan.destroy', $data->kd_penjualan) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -165,10 +165,10 @@
                                         @endif
 
                                         @if ($data->status_persetujuan == 'disetujui')
-                                            <form method="GET" action="{{ route('adminpenjualan.index') }}"
+                                            <form method="GET" action="{{ route('admin.penjualan.index') }}"
                                                 class="form-inline mb-3">
                                                 <div class="d-flex justify-content-end ml-2">
-                                                    <a href="{{ route('adminpenjualan.pdf', $data->kd_penjualan) }}"
+                                                    <a href="{{ route('admin.penjualan.pdf', $data->kd_penjualan) }}"
                                                         class="btn btn-secondary">Cetak Invoice</a>
                                                 </div>
                                             </form>
@@ -519,7 +519,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('adminpenjualan.update', $data->kd_penjualan) }}" method="POST"
+                <form action="{{ route('admin.penjualan.update', $data->kd_penjualan) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -558,7 +558,7 @@
                         <button type="submit" class="btn btn-secondary" name="simpan">Proses SPV</button>
                 </form>
                 <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                    action="{{ route('adminpenjualan.destroy', $data->kd_penjualan) }}" class="d-inline" method="POST">
+                    action="{{ route('admin.penjualan.destroy', $data->kd_penjualan) }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger mr-1" type="submit" name="submit">Delete</button>

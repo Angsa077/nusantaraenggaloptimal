@@ -183,7 +183,7 @@ class AdminPenjualanController extends Controller
         // Menghapus data penjualan sementara
         PenjualanSementara::where('id_staf', Auth::user()->id)->delete();
 
-        return redirect()->route('adminpenjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
+        return redirect()->route('admin.penjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
     }
 
     public function edit(string $id)
@@ -211,7 +211,7 @@ class AdminPenjualanController extends Controller
             'id_admin'  => Auth::user()->id,
         ];
         Penjualan::where('kd_penjualan', $id)->update($data);
-        return redirect()->route('adminpenjualan.index')->with('success', 'Barang Berhasil Di Checking');
+        return redirect()->route('admin.penjualan.index')->with('success', 'Barang Berhasil Di Checking');
     }
 
     public function destroy(string $id)
@@ -219,7 +219,7 @@ class AdminPenjualanController extends Controller
         BarangTerjual::where('kd_penjualan', $id)->delete();
         Pembayaran::where('kd_penjualan', $id)->delete();
         Penjualan::where('kd_penjualan', $id)->delete();
-        return redirect()->route('adminpenjualan.index')->with('success', 'Berhasil Menghapus Data Penjualan');
+        return redirect()->route('admin.penjualan.index')->with('success', 'Berhasil Menghapus Data Penjualan');
     }
 
     public function destroysementara($id)

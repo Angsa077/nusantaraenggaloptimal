@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form method="POST" action="{{ route('adminbarang.storestok', $data->kd_barang) }}"  enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('admin.barang.storestok', $data->kd_barang) }}"  enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="row">
@@ -124,7 +124,7 @@
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end mt-3">
-                                            <a href="{{ route('adminbarang.show', $data->kd_barang) }}"
+                                            <a href="{{ route('admin.barang.show', $data->kd_barang) }}"
                                                 class="btn btn-danger mr-2">Batal</a>
                                             <button type="submit" class="btn btn-secondary">Simpan</button>
                                         </div>

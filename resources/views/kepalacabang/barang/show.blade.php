@@ -101,7 +101,7 @@
                                 @foreach ($barang as $item)
                                     @if ($item->kd_barang == $data->kd_barang)
                                         <tr
-                                            onclick="window.location='{{ route('kepalacabangbarang.edit', $item->id_barang) }}';">
+                                            onclick="window.location='{{ route('kepalacabang.barang.edit', $item->id_barang) }}';">
                                             <td class="text-left text-md">{{ $item->created_at }}</td>
                                             <td class="text-left text-md">{{ $item->jumlah }} Barang</td>
                                             <td class="text-left text-md">

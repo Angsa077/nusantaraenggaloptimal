@@ -325,7 +325,7 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-end">
-                                        <a href="{{ route('adminmanajemenuser.edit', $data->id) }}"
+                                        <a href="{{ route('admin.manajemenuser.edit', $data->id) }}"
                                             class="btn btn-secondary mt-3">Edit</a>
                                     </div>
                                 </div>

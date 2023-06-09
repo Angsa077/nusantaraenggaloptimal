@@ -183,7 +183,7 @@ class SalesPenjualanController extends Controller
         // Menghapus data penjualan sementara
         PenjualanSementara::where('id_staf', Auth::user()->id)->delete();
 
-        return redirect()->route('salespenjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
+        return redirect()->route('sales.penjualan.index')->with('success', 'Berhasil Mengisi Pesanan');
     }
 
     public function show(string $id)

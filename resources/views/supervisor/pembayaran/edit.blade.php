@@ -158,7 +158,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <form
-                                                        action="{{ route('supervisorpembayaran.update', $data->kd_pembayaran) }}"
+                                                        action="{{ route('supervisor.pembayaran.update', $data->kd_pembayaran) }}"
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')

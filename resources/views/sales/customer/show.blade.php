@@ -263,7 +263,7 @@
 
                                     <div class="col-12 d-flex justify-content-end mt-3">
                                         <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                                            action="{{ route('salescustomer.destroy', $data->kd_customer) }}"
+                                            action="{{ route('sales.customer.destroy', $data->kd_customer) }}"
                                             class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -271,7 +271,7 @@
                                                 Delete
                                             </button>
                                         </form>
-                                        <a href="{{ route('salescustomer.edit', $data->kd_customer) }}"
+                                        <a href="{{ route('sales.customer.edit', $data->kd_customer) }}"
                                             class="btn btn-secondary">Edit</a>
                                     </div>
                                 </div>
