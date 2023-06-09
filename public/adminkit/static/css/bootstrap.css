@@ -3084,31 +3084,31 @@ progress {
   border-color: #39DA8A;
 }
 
-.btn-danger {
+.btn-danger btn-delete {
   color: #fff;
   background-color: #FF5B5C;
   border-color: #FF5B5C;
 }
-.btn-danger:hover {
+.btn-danger btn-delete:hover {
   color: #fff;
   background-color: #ff3536;
   border-color: #ff2829;
 }
-.btn-check:focus + .btn-danger, .btn-danger:focus {
+.btn-check:focus + .btn-danger btn-delete, .btn-danger btn-delete:focus {
   color: #fff;
   background-color: #ff3536;
   border-color: #ff2829;
   box-shadow: 0 0 0 0.2rem rgba(255, 116, 116, 0.5);
 }
-.btn-check:checked + .btn-danger, .btn-check:active + .btn-danger, .btn-danger:active, .btn-danger.active, .show > .btn-danger.dropdown-toggle {
+.btn-check:checked + .btn-danger btn-delete, .btn-check:active + .btn-danger btn-delete, .btn-danger btn-delete:active, .btn-danger btn-delete.active, .show > .btn-danger btn-delete.dropdown-toggle {
   color: #fff;
   background-color: #ff2829;
   border-color: #ff1b1d;
 }
-.btn-check:checked + .btn-danger:focus, .btn-check:active + .btn-danger:focus, .btn-danger:active:focus, .btn-danger.active:focus, .show > .btn-danger.dropdown-toggle:focus {
+.btn-check:checked + .btn-danger btn-delete:focus, .btn-check:active + .btn-danger btn-delete:focus, .btn-danger btn-delete:active:focus, .btn-danger btn-delete.active:focus, .show > .btn-danger btn-delete.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 116, 116, 0.5);
 }
-.btn-danger:disabled, .btn-danger.disabled {
+.btn-danger btn-delete:disabled, .btn-danger btn-delete.disabled {
   color: #fff;
   background-color: #FF5B5C;
   border-color: #FF5B5C;
