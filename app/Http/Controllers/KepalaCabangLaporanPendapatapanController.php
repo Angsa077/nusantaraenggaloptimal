@@ -2,63 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\BarangTerjual;
+use App\Models\Penjualan;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\View;
 
 class KepalaCabangLaporanPendapatapanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+
+        if ($tanggalAwal && $tanggalAkhir) {
+            $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
+        }
+        return view('kepalacabang.laporanpendapatan.index', ['data' => $data, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function generatePDF(Request $request)
     {
-        //
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
+
+        if ($tanggalAwal && $tanggalAkhir) {
+            $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
+        }
+
+        // Membuat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Menyusun tampilan PDF menggunakan blade view
+        $html = view('kepalacabang.laporanpendapatan.pdf', ['data' => $data, 'tanggalAwal' => $tanggalAwal, 'tanggalAkhir' => $tanggalAkhir])->render();
+
+        // Mengambil format HTML dan merender ke PDF
+        $dompdf->loadHtml($html);
+
+        // Mengatur ukuran dan orientasi halaman PDF
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render tampilan PDF
+        $dompdf->render();
+
+        // Menghasilkan file PDF dan menyimpannya ke dalam server
+        $dompdf->stream("laporan_pendapatan.pdf", ["Attachment" => false]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(Request $request)
     {
-        //
-    }
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $data = Penjualan::with(['barangterjual', 'customer', 'user'])->orderBy('kd_penjualan')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if ($tanggalAwal && $tanggalAkhir) {
+            $data = Penjualan::whereBetween('tgl_penjualan', [$tanggalAwal, $tanggalAkhir])->get();
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // Mengatur tampilan PDF dengan menggunakan view
+        $pdf = View::make('kepalacabang.laporanpendapatan.pdf', [
+            'data' => $data,
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir
+        ])->render();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Membuat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Load HTML ke Dompdf
+        $dompdf->loadHtml($pdf);
+
+        // Render tampilan PDF
+        $dompdf->render();
+
+        // Menghasilkan file PDF dan menyimpannya ke dalam server
+        $dompdf->stream("laporan_pendapatan.pdf");
     }
 }

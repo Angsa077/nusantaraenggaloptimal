@@ -68,6 +68,32 @@
                                 class="align-middle">Pengembalian</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Laporan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('adminlaporanpenjualan.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('adminlaporanpendapatan.index') }}">
+                            <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
+                                Pendapatan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('adminstokbarang.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
+                                Barang</span>
+                        </a>
+                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'kepalacabang')
@@ -90,6 +116,33 @@
                                 class="align-middle">Customer</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Laporan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalacabanglaporanpenjualan.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalacabanglaporanpendapatan.index') }}">
+                            <i class="align-middle" data-feather="dollar-sign"></i> <span
+                                class="align-middle">Laporan
+                                Pendapatan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalacabangstokbarang.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
+                                Barang</span>
+                        </a>
+                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'supervisor')
@@ -102,7 +155,8 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('supervisorbarang.index') }}">
-                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Barang</span>
+                            <i class="align-middle" data-feather="package"></i> <span
+                                class="align-middle">Barang</span>
                         </a>
                     </li>
 
@@ -219,6 +273,33 @@
                                 class="align-middle">Pengembalian</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-header">
+                        Laporan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('saleslaporanpenjualan.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('saleslaporanpendapatan.index') }}">
+                            <i class="align-middle" data-feather="dollar-sign"></i> <span
+                                class="align-middle">Laporan
+                                Pendapatan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('salesstokbarang.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
+                                Barang</span>
+                        </a>
+                    </li>
                 @endif
 
                 @if (Auth::user()->level == 'kurir')
@@ -237,6 +318,18 @@
                         <a class="sidebar-link" href="{{ route('kurirpengembalian.index') }}">
                             <i class="align-middle" data-feather="shopping-bag"></i> <span
                                 class="align-middle">Pengembalian</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        Laporan
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kurirstokbarang.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">
+                                Stok
+                                Barang</span>
                         </a>
                     </li>
                 @endif
