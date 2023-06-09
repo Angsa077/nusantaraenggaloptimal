@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    @if ($item->status_pengiriman == 'selesai')
+                                    @if ($item->status_pengiriman == 'selesai' && $item->id_staf == Auth::user()->id)
                                     <tr
                                         onclick="window.location='{{ route('adminpenjualan.edit', $item->kd_penjualan) }}';">
                                         <td class="text-left text-md">{{ $item->tgl_penjualan }}</td>

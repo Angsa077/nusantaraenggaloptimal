@@ -24,7 +24,7 @@
                                     <tr
                                         onclick="window.location='{{ route('adminpengiriman.show', $item->kd_pengiriman) }}';">
                                         <td class="text-left text-md">{{ $item->penjualan->kd_penjualan }}</td>
-                                        <<td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
+                                        <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->nama_toko : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->customer ? $item->penjualan->customer->alamat : '' }}</td>
                                         <td class="text-left text-md">{{ $item->penjualan->status_pengiriman }}</td>
                                         <td class="text-left text-md">{{ $item->tgl_pengiriman ?? 'Belum Diambil' }}</td>

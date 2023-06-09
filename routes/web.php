@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminPengembalian;
 use App\Http\Controllers\AdminPengiriman;
 use App\Http\Controllers\AdminPenjualanController;
 use App\Http\Controllers\ChangedPasswordController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KepalaCabangBarangController;
 use App\Http\Controllers\KepalaCabangCustomerController;
 use App\Http\Controllers\KepalaCabangLaporanPendapatapanController;
@@ -73,7 +74,8 @@ Route::post('/changed-password', [ChangedPasswordController::class, 'changedPass
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', function (){ return view('dashboard'); });
-    Route::get('dashboard', function (){ return view('dashboard'); })->name('dashboard');
+    // Route::get('dashboard', function (){ return view('dashboard'); })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
 
     Route::get('/change-profile', [ProfiledController::class, 'showProfile'])->name('profile.changed');
     Route::put('/change-profile', [ProfiledController::class, 'changeprofile'])->name('profile.updated');

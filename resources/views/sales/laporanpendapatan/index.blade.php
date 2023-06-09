@@ -42,7 +42,7 @@
                                     $totalPendapatan = 0;
                                 @endphp
                                 @foreach ($data as $item)
-                                    @if ($item->status_pengiriman == 'selesai')
+                                    @if ($item->status_pengiriman == 'selesai' && $item->id_staf == Auth::user()->id)
                                         @php
                                             $pendapatan = ($item->barangterjual->barang->harga_jual - $item->barangterjual->barang->harga_beli) * $item->jumlah_barang;
                                             $totalPendapatan += $pendapatan;
