@@ -108,52 +108,23 @@ class AdminPengembalian extends Controller
 
     public function update(Request $request, string $id)
     {
-        Session::flash('gambar', $request->gambar);
         Session::flash('catatan', $request->catatan);
 
         $request->validate(
             [
-                'gambar' => 'mimes:jpeg,jpg,png,gif|max:1024',
                 'catatan' => 'required',
             ],
             [
-                'gambar.mimes' => 'Bukti Pengembalian Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
-                'gambar.max' => 'Bukti Pengembalian Yang Diperbolehkan Maksimal 1MB',
                 'catatan.required' => 'Catatan Wajib Di isi',
             ]
         );
 
-        if ($request->hasFile('gambar')) {
-            $foto_file = $request->file('gambar');
-            if ($foto_file != null) {
-                $foto_ekstensi = $foto_file->extension();
-                $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
-                $foto_file->move(public_path('gambar'), $foto_nama);
-                Session::flash('gambar', 'gambar/' . $foto_nama); // Menyimpan path file dalam sesi
-            } else {
-                $foto_nama = null;
-            }
-        }
-
         $pengembalian = Pengembalian::where('kd_pengembalian', $id)->first();
-        $penjualan = Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->first();
-        $barang = Barang::where('id_barangterjual', $penjualan->id_barangterjual)->first();
+        $barangrusak = BarangRusak::where('kd_pengembalian', $id)->first();
 
-        $data_barang = [];
+        $data_barangrusak = [];
         $data_penjualan = [];
         $data_pengembalian = [];
-
-            $data_barang = [
-                // 'id_barangterjual' => $penjualan->id_barangterjual,
-                'kd_barang' => $barang->kd_barang,
-                'kd_penjualan' => $pengembalian->kd_penjualan,
-                'kd_pengembalian' => $pengembalian->kd_pengembalian,
-                'jumlah' => $pengembalian->jumlah_barang,
-                'gambar' => $foto_nama,
-                'catatan' => $request->catatan,
-                'id_staf' => Auth::user()->id,
-                'tgl_barangpengembalian' => date('Y-m-d H:i:s', strtotime('now')),
-            ];
 
             $data_penjualan = [
                 'status_pengembalian' => 'selesai',
@@ -164,9 +135,13 @@ class AdminPengembalian extends Controller
                 'tgl_selesai' => date('Y-m-d H:i:s', strtotime('now')),
             ];
 
+            $data_barangrusak = [
+                'catatan' => $request->catatan,
+            ];
+
         Pengembalian::where('kd_pengembalian', $id)->update($data_pengembalian);
         Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->update($data_penjualan);
-        BarangRusak::create($data_barang);
+        BarangRusak::where('id_barangrusak', $barangrusak->id_barangrusak)->update($data_barangrusak);
         return redirect()->route('kurirpengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 

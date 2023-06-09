@@ -108,15 +108,16 @@ class KurirPengembalian extends Controller
 
     public function update(Request $request, string $id)
     {
-        Session::flash('bukti_penyerahan', $request->bukti_penyerahan);
-
         $request->validate(
             [
                 'bukti_penyerahan' => 'mimes:jpeg,jpg,png,gif|max:1024',
+                'gambar' => 'mimes:jpeg,jpg,png,gif|max:1024',
             ],
             [
                 'bukti_penyerahan.mimes' => 'Bukti Penyerahan Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
                 'bukti_penyerahan.max' => 'Bukti Penyerahan Yang Diperbolehkan Maksimal 1MB',
+                'gambar.mimes' => 'Bukti Pengembalian Yang Diperbolehkan Hanya Berektensi JPEG, JPG, PNG, GIF',
+                'gambar.max' => 'Bukti Pengembalian Yang Diperbolehkan Maksimal 1MB',
             ]
         );
 
@@ -126,14 +127,27 @@ class KurirPengembalian extends Controller
                 $foto_ekstensi_penyerahan = $foto_file_penyerahan->extension();
                 $foto_nama_penyerahan = date('ymdhis') . "." . $foto_ekstensi_penyerahan;
                 $foto_file_penyerahan->move(public_path('bukti_penyerahan'), $foto_nama_penyerahan);
-                Session::flash('bukti_penyerahan', 'bukti_penyerahan/' . $foto_nama_penyerahan); // Menyimpan path file dalam sesi
             } else {
                 $foto_nama_penyerahan = null;
             }
         }
 
-        $pengembalian = Pengembalian::where('kd_pengembalian', $id)->first();
+        if ($request->hasFile('gambar')) {
+            $foto_file = $request->file('gambar');
+            if ($foto_file != null) {
+                $foto_ekstensi = $foto_file->extension();
+                $foto_nama = date('ymdhis') . "." . $foto_ekstensi;
+                $foto_file->move(public_path('gambar'), $foto_nama);
+            } else {
+                $foto_nama = null;
+            }
+        }
 
+        $pengembalian = Pengembalian::where('kd_pengembalian', $id)->first();
+        $barangterjual = BarangTerjual::where('id_barangterjual', $pengembalian->id_barangterjual)->first();
+
+        $data_barangrusak = [];
+        $data_barangterjual = [];
         $data_penjualan = [];
         $data_pengembalian = [];
 
@@ -144,18 +158,36 @@ class KurirPengembalian extends Controller
             $data_pengembalian = [
                 'id_kurir' => Auth::user()->id,
                 'tgl_penjemputan' => date('Y-m-d H:i:s', strtotime('now')),
+                'bukti_penyerahan' => $foto_nama_penyerahan,
             ];
-        } elseif ($request->simpan == 'Serahkan') {
+        } 
+        
+        elseif ($request->simpan == 'Serahkan') {
             $data_penjualan = [
                 'status_pengembalian' => 'serahkan',
             ];
-            $data_pengembalian = [
-                'bukti_penyerahan' => $foto_nama_penyerahan,
+
+            $data_barangrusak = [
+                'id_barang' => $barangterjual->id_barang,
+                'kd_barang' => $barangterjual->kd_barang,
+                'kd_penjualan' => $pengembalian->kd_penjualan,
+                'kd_pengembalian' => $pengembalian->kd_pengembalian,
+                'jumlah' => $pengembalian->jumlah_barang,
+                'gambar' => $foto_nama,
+                'catatan' => $request->catatan,
+                'id_staf' => Auth::user()->id,
+                'tgl_barangpengembalian' => date('Y-m-d H:i:s', strtotime('now')),
+            ];
+
+            $data_barangterjual = [
+                'jumlah' => $barangterjual->jumlah - $pengembalian->jumlah_barang,
             ];
         }
 
         Pengembalian::where('kd_pengembalian', $id)->update($data_pengembalian);
         Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->update($data_penjualan);
+        BarangTerjual::where('id_barangterjual', $pengembalian->id_barangterjual)->update($data_barangterjual);
+        BarangRusak::create($data_barangrusak);
         return redirect()->route('kurirpengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 

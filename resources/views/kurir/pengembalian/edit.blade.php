@@ -548,8 +548,7 @@
                                                         <input type="file" id="bukti_penyerahan"
                                                             class="form-control"
                                                             placeholder="Silahkan Masukan Bukti Pengembalian"
-                                                            name="bukti_penyerahan"
-                                                            value="{{ Session::get('bukti_penyerahan') }}">
+                                                            name="bukti_penyerahan">
                                                     </div>
                                                 </div>
                                             </div>
@@ -569,7 +568,7 @@
                                                         </div>
                                                         <input type="file" id="gambar" class="form-control"
                                                             placeholder="Silahkan Masukan Gambar Barang"
-                                                            name="gambar" value="{{ Session::get('gambar') }}">
+                                                            name="gambar">
                                                     </div>
                                                 </div>
                                             </div>
@@ -579,7 +578,7 @@
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             @if ($data->penjualan->status_pengembalian == 'barangsiap' && $data->status_persetujuan == 'disetujui')
                                                 <button type="submit" class="btn btn-secondary" name="simpan"
-                                                    value="Penjemputan">Penjemputan</button>
+                                                    value="Penjemputan">Terima Barang</button>
                                             @endif
                                             @if ($data->penjualan->status_pengembalian == 'penjemputan' && $data->id_kurir == Auth::user()->id)
                                                 <button type="submit" class="btn btn-secondary" name="simpan"
