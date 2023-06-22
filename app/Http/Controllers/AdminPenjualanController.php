@@ -204,12 +204,20 @@ class AdminPenjualanController extends Controller
         ]);
     }
 
-    public function update(string $id)
+    public function update(Request $request,string $id)
     {
-        $data = [
-            'status_persetujuan'  => 'persetujuanspv',
-            'id_admin'  => Auth::user()->id,
-        ];
+        if ($request->simpan == 'Setujui') {
+            $data = [
+                'status_persetujuan'  => 'persetujuanspv',
+                'id_admin'  => Auth::user()->id,
+            ];
+        } elseif ($request->simpan == 'Tolak') {
+            $data = [
+                'status_persetujuan' => 'ditolak',
+                'catatan' => $request->catatan,
+            ];
+        }
+
         Penjualan::where('kd_penjualan', $id)->update($data);
         return redirect()->route('admin.penjualan.index')->with('success', 'Barang Berhasil Di Checking');
     }

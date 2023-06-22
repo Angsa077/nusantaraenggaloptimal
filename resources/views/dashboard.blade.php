@@ -145,7 +145,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col mt-0">
-                                                <h5 class="card-title">Total Pengiriman</h5>
+                                                <h5 class="card-title">Total Pengembalian</h5>
                                             </div>
                                             <?php
                                             $total_pengembalian = 0;

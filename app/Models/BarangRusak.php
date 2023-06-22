@@ -23,6 +23,7 @@ class BarangRusak extends Model
         'jumlah', 
         'gambar', 
         'catatan', 
+        'status', 
         'id_staf', 
         'tgl_barangpengembalian'
     ];

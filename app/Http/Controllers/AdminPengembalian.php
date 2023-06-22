@@ -78,7 +78,7 @@ class AdminPengembalian extends Controller
             'kd_penjualan' => $barangterjual->kd_penjualan,
             'tgl_pengembalian' => date('Y-m-d H:i:s', strtotime('now')),
             'jumlah_barang' => $request->jumlah,
-            'bukti_pengembalian' => $foto_nama_pengembalian, 
+            'bukti_pengembalian' => $foto_nama_pengembalian,
             'status_persetujuan'  => 'proses',
             'id_staf' => Auth::user()->id,
             'catatan' => $request->catatan,
@@ -100,7 +100,7 @@ class AdminPengembalian extends Controller
         $data = Pengembalian::where('kd_pengembalian', $id)->first();
         $barangterjual = BarangTerjual::where('id_barangterjual', $data->id_barangterjual)->first();
         $barang = Barang::where('id_barang', $barangterjual->id_barang)->first();
-        
+
         return view('admin.pengembalian.edit', [
             'data' => $data, 'barangterjual' => $barangterjual, 'barang' => $barang, 'user' => $user, 'kurir' => $kurir, 'spv' => $spv, 'admin' => $admin, 'pengiriman' => $pengiriman, 'penjualan' => $penjualan
         ]);
@@ -121,27 +121,42 @@ class AdminPengembalian extends Controller
 
         $pengembalian = Pengembalian::where('kd_pengembalian', $id)->first();
         $barangrusak = BarangRusak::where('kd_pengembalian', $id)->first();
+        $barang = Barang::where('id_barang', $barangrusak->id_barang)->first();
+        $barangterjual = BarangTerjual::where('id_barang', $barangrusak->id_barang)->first();
 
+        $data_barang = [];
+        $data_barangterjual = [];
         $data_barangrusak = [];
         $data_penjualan = [];
         $data_pengembalian = [];
 
-            $data_penjualan = [
-                'status_pengembalian' => 'selesai',
-            ];
+        $data_penjualan = [
+            'status_pengembalian' => 'selesai',
+        ];
 
-            $data_pengembalian = [
-                'id_admin' => Auth::user()->id,
-                'tgl_selesai' => date('Y-m-d H:i:s', strtotime('now')),
-            ];
+        $data_pengembalian = [
+            'id_admin' => Auth::user()->id,
+            'tgl_selesai' => date('Y-m-d H:i:s', strtotime('now')),
+        ];
 
-            $data_barangrusak = [
-                'catatan' => $request->catatan,
-            ];
+        $data_barangrusak = [
+            'status' => 'rusak',
+            'catatan' => $request->catatan,
+        ];
+
+        $data_barang = [
+            'jumlah' => $barang->jumlah - $barangrusak->jumlah,
+        ];
+
+        $data_barangterjual = [
+            'jumlah' => $barangterjual->jumlah + $barangrusak->jumlah,
+        ];
 
         Pengembalian::where('kd_pengembalian', $id)->update($data_pengembalian);
         Penjualan::where('kd_penjualan', $pengembalian->kd_penjualan)->update($data_penjualan);
         BarangRusak::where('id_barangrusak', $barangrusak->id_barangrusak)->update($data_barangrusak);
+        Barang::where('id_barang', $barangrusak->id_barang)->update($data_barang);
+        BarangTerjual::where('id_barang', $barangrusak->id_barang)->update($data_barangterjual);
         return redirect()->route('kurir.pengembalian.index')->with('success', 'Berhasil Mengisi Pengajuan Pengembalian');
     }
 

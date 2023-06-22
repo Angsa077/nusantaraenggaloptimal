@@ -30,6 +30,12 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-item {{ \Route::is('admin.barangpengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.barangpengembalian.index') }}">
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Barang Pengembalian</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-item {{ \Route::is('admin.customer.index') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.customer.index') }}">
                             <i class="align-middle" data-feather="user-plus"></i> <span
@@ -323,6 +329,13 @@
 
                     <li class="sidebar-header">
                         Laporan
+                    </li>
+
+                    <li class="sidebar-item {{ \Route::is('kurir.laporanpengiriman.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kurir.laporanpengiriman.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Pengiriman</span>
+                        </a>
                     </li>
 
                     <li class="sidebar-item {{ \Route::is('kurir.stokbarang.index') ? 'active' : '' }}">

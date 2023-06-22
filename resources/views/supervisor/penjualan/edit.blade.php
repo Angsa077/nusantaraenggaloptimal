@@ -173,6 +173,25 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="status_persetujuan">Catatan</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="user"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="status_persetujuan"
+                                                            class="form-control" name="status_persetujuan"
+                                                            value="{{ $data->catatan ? $data->catatan : 'Tidak ada' }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_persetujuan">Status Penjualan</label>

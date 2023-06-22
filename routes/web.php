@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminBarangController;
+use App\Http\Controllers\AdminBarangPengembalianController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminLaporanPendapatanController;
 use App\Http\Controllers\AdminLaporanPenjualanController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\KepalaCabangLaporanPendapatapanController;
 use App\Http\Controllers\KepalaCabangLaporanPenjualanController;
 use App\Http\Controllers\KepalaCabangLaporanStokBarangController;
 use App\Http\Controllers\KepalaCabangManajemenuserController;
+use App\Http\Controllers\KurirLaporanPengirimanController;
 use App\Http\Controllers\KurirLaporanStokBarangController;
 use App\Http\Controllers\KurirPengembalian;
 use App\Http\Controllers\KurirPengiriman;
@@ -88,6 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::prefix('admin')->middleware('auth', 'level:admin')->group(function () {
     Route::resource('manajemenuser', AdminManajemenuserController::class)->names('admin.manajemenuser');
     Route::resource('barang', AdminBarangController::class)->names('admin.barang');
+    Route::resource('barangpengembalian', AdminBarangPengembalianController::class)->names('admin.barangpengembalian');
     Route::get('barang/{id}/tambahstok', [AdminBarangController::class, 'tambahStok'])->name('admin.barang.tambahstok');
     Route::post('barang/{id}/tambahstok', [AdminBarangController::class, 'storeStok'])->name('admin.barang.storestok');
     Route::resource('customer', AdminCustomerController::class)->names('admin.customer');
@@ -158,4 +161,6 @@ Route::prefix('kurir')->middleware('auth', 'level:kurir')->group(function () {
     Route::resource('pengembalian', KurirPengembalian::class)->names('kurir.pengembalian');
     Route::resource('stokbarang', KurirLaporanStokBarangController::class)->names('kurir.stokbarang');
     Route::get('stokbarang/pdf', [KurirLaporanStokBarangController::class, 'generatePDF'])->name('kurir.stokbarang.pdf');
+    Route::resource('laporanpengiriman', KurirLaporanPengirimanController::class)->names('kurir.laporanpengiriman');
+    Route::get('laporanpengiriman/pdf', [KurirLaporanPengirimanController::class, 'generatePDF'])->name('kurir.laporanpengiriman.pdf');
 });

@@ -16,13 +16,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $now = Carbon::now('Asia/Jakarta');
         $barangterjual = BarangTerjual::all();
         $barang = Barang::all();
-        $pengiriman = Pengiriman::all();
-        $pembayaran = Pembayaran::all();
-        $pengembalian = Pengembalian::all();
+        $pengiriman = Pengiriman::whereDate('tgl_pengiriman', $now->format('Y-m-d'))->orderBy('kd_pengiriman', 'desc')->get();
+        $pembayaran = Pembayaran::whereDate('tgl_pembayaran', $now->format('Y-m-d'))->orderBy('kd_pembayaran', 'desc')->get();
+        $pengembalian = Pengembalian::whereDate('tgl_pengembalian', $now->format('Y-m-d'))->orderBy('kd_pengembalian', 'desc')->get();
         $user = User::all();
-        $now = Carbon::now('Asia/Jakarta');
         $penjualan = Penjualan::whereDate('tgl_penjualan', $now->format('Y-m-d'))->orderBy('kd_penjualan', 'desc')->get();
         
         return view('dashboard', [

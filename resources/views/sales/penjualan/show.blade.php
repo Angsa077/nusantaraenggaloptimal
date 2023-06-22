@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
+                                    @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak' && $data->id_staf == Auth::user()->id)
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                                 action="{{ route('sales.penjualan.destroy', $data->kd_penjualan) }}"
@@ -180,6 +180,25 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="status_persetujuan">Catatan</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="user"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="status_persetujuan"
+                                                            class="form-control" name="status_persetujuan"
+                                                            value="{{ $data->catatan ? $data->catatan : 'Tidak ada' }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_persetujuan">Status Penjualan</label>

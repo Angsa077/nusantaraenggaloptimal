@@ -152,7 +152,7 @@
                                                 data-target="#listDataModal">Periksa Barang</button>
                                         @endif
 
-                                        @if ($data->status_persetujuan == 'proses' && $data->id_staf == Auth::user()->id)
+                                        @if ($data->status_persetujuan == 'proses' || $data->status_persetujuan == 'ditolak' && $data->id_staf == Auth::user()->id)
                                             <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
                                                 action="{{ route('admin.penjualan.destroy', $data->kd_penjualan) }}"
                                                 class="d-inline" method="POST">
@@ -185,6 +185,25 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="status_persetujuan">Catatan</label>
+                                                <div class="position-relative">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i data-feather="user"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" id="status_persetujuan"
+                                                            class="form-control" name="status_persetujuan"
+                                                            value="{{ $data->catatan ? $data->catatan : 'Tidak ada' }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6 col-12">
                                             <div class="form-group has-icon-left">
                                                 <label for="status_persetujuan">Status Penjualan</label>
@@ -520,49 +539,56 @@
                 </div>
 
                 <form action="{{ route('admin.penjualan.update', $data->kd_penjualan) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-
-                        @if ($data->pembayaran->bukti_pembayaran)
-                            <div class="position-relative mb-3">
-                                <img src="{{ asset('bukti_pembayaran/' . $data->pembayaran->bukti_pembayaran) }}"
-                                    width="100px" height="100px" alt="Bukti Pembayaran" id="bukti_pembayaran">
-                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+    
+                            @if ($data->pembayaran->bukti_pembayaran)
+                                <div class="position-relative mb-3">
+                                    <img src="{{ asset('bukti_pembayaran/' . $data->pembayaran->bukti_pembayaran) }}"
+                                        width="100px" height="100px" alt="Bukti Pembayaran" id="bukti_pembayaran">
+                                    <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                </div>
+                            @endif
+    
+                            <input type="checkbox" id="kd_customer" name="kd_customer"
+                                value="{{ $data->customer->nama_toko }}" required>
+                            <label for="kd_customer"><strong>Nama Customer:</strong>
+                                {{ $data->customer->nama_toko }}</label><br>
+    
+                            <input type="checkbox" id="jumlah_barang" name="jumlah_barang"
+                                value="{{ $data->jumlah_barang }}" required>
+                            <label for="jumlah_barang"><strong>Jumlah Barang:</strong> {{ $data->jumlah_barang }}
+                                Barang</label><br>
+    
+                            <input type="checkbox" id="total_harga" name="total_harga" value="{{ $data->total_harga }}"
+                                required>
+                            <label for="total_harga"><strong>Total Harga:</strong>
+                                {{ 'Rp ' . number_format($data->total_harga, 2, ',', '.') }}</label><br>
+    
+                            <input type="checkbox" id="total_bayar" name="total_bayar" value="{{ $data->total_bayar }}"
+                                required>
+                            <label for="total_bayar"><strong>Total Bayar:</strong>
+                                {{ 'Rp ' . number_format($data->total_bayar, 2, ',', '.') }}</label><br>
+                            <br>
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i data-feather="clipboard"></i>
+                                    </span>
+                                </div>
+                                <input type="text" id="catatan" class="form-control"
+                                    placeholder="Silahkan Masukan Catatan" name="catatan"
+                                    value="{{ Session::get('catatan') }}" required>
                             </div>
-                        @endif
-
-                        <input type="checkbox" id="kd_customer" name="kd_customer"
-                            value="{{ $data->customer->nama_toko }}" required>
-                        <label for="kd_customer"><strong>Nama Customer:</strong>
-                            {{ $data->customer->nama_toko }}</label><br>
-
-                        <input type="checkbox" id="jumlah_barang" name="jumlah_barang"
-                            value="{{ $data->jumlah_barang }}" required>
-                        <label for="jumlah_barang"><strong>Jumlah Barang:</strong> {{ $data->jumlah_barang }}
-                            Barang</label><br>
-
-                        <input type="checkbox" id="total_harga" name="total_harga" value="{{ $data->total_harga }}"
-                            required>
-                        <label for="total_harga"><strong>Total Harga:</strong>
-                            {{ 'Rp ' . number_format($data->total_harga, 2, ',', '.') }}</label><br>
-
-                        <input type="checkbox" id="total_bayar" name="total_bayar" value="{{ $data->total_bayar }}"
-                            required>
-                        <label for="total_bayar"><strong>Total Bayar:</strong>
-                            {{ 'Rp ' . number_format($data->total_bayar, 2, ',', '.') }}</label><br>
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary" name="simpan">Proses SPV</button>
-                </form>
-                <form onsubmit="return confirm('Yakin mau menghapus data ini?')"
-                    action="{{ route('admin.penjualan.destroy', $data->kd_penjualan) }}" class="d-inline" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger mr-1" type="submit" name="submit">Delete</button>
-                </form>
+    
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary mb-1" name="simpan"
+                                value="Setujui">Setujui</button>
+                            <button type="submit" class="btn btn-danger mb-1" name="simpan" value="Tolak">Tolak</button>
+                    </form>
             </div>
         </div>
     </div>
