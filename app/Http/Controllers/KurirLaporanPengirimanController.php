@@ -51,7 +51,7 @@ class KurirLaporanPengirimanController extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("laporan_penjualan.pdf", ["Attachment" => false]);
+        $dompdf->stream("laporan_pengiriman.pdf", ["Attachment" => false]);
     }
 
     public function show(Request $request)
@@ -82,6 +82,6 @@ class KurirLaporanPengirimanController extends Controller
         $dompdf->render();
 
         // Menghasilkan file PDF dan menyimpannya ke dalam server
-        $dompdf->stream("laporan_penjualan.pdf");
+        $dompdf->stream("laporan_pengiriman.pdf");
     }
 }
