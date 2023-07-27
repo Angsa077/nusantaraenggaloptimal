@@ -86,6 +86,13 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-item {{ \Route::is('admin.laporanpengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.laporanpengembalian.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Pengembalian</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-item {{ \Route::is('admin.laporanpendapatan.index') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('admin.laporanpendapatan.index') }}">
                             <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Laporan
@@ -131,6 +138,13 @@
                         <a class="sidebar-link" href="{{ route('kepalacabang.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ \Route::is('kepalacabang.laporanpiutang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalacabang.laporanpiutang.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Piutang</span>
                         </a>
                     </li>
 
@@ -213,6 +227,20 @@
                         <a class="sidebar-link" href="{{ route('supervisor.laporanpenjualan.index') }}">
                             <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
                                 Penjualan</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ \Route::is('supervisor.laporanpiutang.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.laporanpiutang.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Piutang</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ \Route::is('supervisor.laporanpengembalian.index') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('supervisor.laporanpengembalian.index') }}">
+                            <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Laporan
+                                Pengembalian</span>
                         </a>
                     </li>
 

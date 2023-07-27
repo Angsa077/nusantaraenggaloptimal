@@ -158,7 +158,7 @@
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger" type="submit" name="submit">
+                                                <button class="btn btn-sm" type="submit" name="submit" style="background-color: red; color: white; border-radius: 5px;">
                                                     Delete
                                                 </button>
                                             </form>

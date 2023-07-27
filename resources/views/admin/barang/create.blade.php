@@ -97,7 +97,7 @@
                                                                 <i data-feather="dollar-sign"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="harga_beli" class="form-control"
+                                                        <input type="text" id="harga_beli" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Beli" name="harga_beli"
                                                             value="{{ Session::get('harga_beli') }}">
                                                     </div>
@@ -115,7 +115,7 @@
                                                                 <i data-feather="dollar-sign"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="number" id="harga_jual" class="form-control"
+                                                        <input type="text" id="harga_jual" class="form-control"
                                                             placeholder="Silahkan Masukan Harga Jual" name="harga_jual"
                                                             value="{{ Session::get('harga_jual') }}">
                                                     </div>

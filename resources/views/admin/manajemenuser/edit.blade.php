@@ -272,11 +272,9 @@
                                         </div>
 
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-danger mt-3 mr-2" name="simpan"
-                                                value="Hapus">Hapus</button>
-                                            <button type="submit" class="btn btn-secondary mt-3" name="simpan"
-                                                value="Submit">Submit</button>
-                                        </div>
+                                            <button type="submit" class="btn btn-sm mr-2" name="simpan" style="background-color: red; color: white; border-radius: 5px;"value="Hapus">Hapus</button>
+                                            <button type="submit" class="btn btn-secondary" name="simpan" value="Submit">Submit</button>
+                                            </div>
 
                                     </div>
                                 </form>

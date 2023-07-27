@@ -222,3 +222,78 @@
         });
     }
 </script>
+
+
+<script>
+    // Function to format number with thousands separators
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Function to remove commas and non-numeric characters
+    function removeNonNumeric(inputValue) {
+        return inputValue.replace(/[^0-9]/g, '');
+    }
+
+    $(document).ready(function() {
+        // Listen for input changes
+        $('#harga_jual').on('input', function() {
+            // Get the input value
+            let inputValue = $(this).val();
+
+            // Remove non-numeric characters
+            let numericValue = removeNonNumeric(inputValue);
+
+            // Format the number with thousands separators
+            let formattedValue = formatNumberWithCommas(numericValue);
+
+            // Update the input field with the formatted value
+            $(this).val(formattedValue);
+        });
+
+        // When the page loads, format the initial value (if any)
+        let initialValue = $('#harga_jual').val();
+        if (initialValue !== '') {
+            let numericValue = removeNonNumeric(initialValue);
+            let formattedValue = formatNumberWithCommas(numericValue);
+            $('#harga_jual').val(formattedValue);
+        }
+    });
+</script>
+
+<script>
+    // Function to format number with thousands separators
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Function to remove commas and non-numeric characters
+    function removeNonNumeric(inputValue) {
+        return inputValue.replace(/[^0-9]/g, '');
+    }
+
+    $(document).ready(function() {
+        // Listen for input changes
+        $('#harga_beli').on('input', function() {
+            // Get the input value
+            let inputValue = $(this).val();
+
+            // Remove non-numeric characters
+            let numericValue = removeNonNumeric(inputValue);
+
+            // Format the number with thousands separators
+            let formattedValue = formatNumberWithCommas(numericValue);
+
+            // Update the input field with the formatted value
+            $(this).val(formattedValue);
+        });
+
+        // When the page loads, format the initial value (if any)
+        let initialValue = $('#harga_beli').val();
+        if (initialValue !== '') {
+            let numericValue = removeNonNumeric(initialValue);
+            let formattedValue = formatNumberWithCommas(numericValue);
+            $('#harga_beli').val(formattedValue);
+        }
+    });
+</script>

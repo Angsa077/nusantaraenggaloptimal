@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminBarangController;
 use App\Http\Controllers\AdminBarangPengembalianController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminLaporanPendapatanController;
+use App\Http\Controllers\AdminLaporanPengembalianController;
 use App\Http\Controllers\AdminLaporanPenjualanController;
 use App\Http\Controllers\AdminLaporanStokBarangController;
 use App\Http\Controllers\AdminManajemenuserController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\KepalaCabangBarangController;
 use App\Http\Controllers\KepalaCabangCustomerController;
 use App\Http\Controllers\KepalaCabangLaporanPendapatapanController;
 use App\Http\Controllers\KepalaCabangLaporanPenjualanController;
+use App\Http\Controllers\KepalaCabangLaporanPiutangController;
 use App\Http\Controllers\KepalaCabangLaporanStokBarangController;
 use App\Http\Controllers\KepalaCabangManajemenuserController;
 use App\Http\Controllers\KurirLaporanPengirimanController;
@@ -36,7 +38,9 @@ use App\Http\Controllers\SalesPenjualanController;
 use App\Http\Controllers\SupervisorBarangController;
 use App\Http\Controllers\SupervisorCustomerController;
 use App\Http\Controllers\SupervisorLaporanPendapatan;
+use App\Http\Controllers\SupervisorLaporanPengembalianController;
 use App\Http\Controllers\SupervisorLaporanPenjualan;
+use App\Http\Controllers\SupervisorLaporanPiutang;
 use App\Http\Controllers\SupervisorLaporanStokbarang;
 use App\Http\Controllers\SupervisorLaporanStokbarangPengembalian;
 use App\Http\Controllers\SupervisorManajemenuserController;
@@ -107,6 +111,8 @@ Route::prefix('admin')->middleware('auth', 'level:admin')->group(function () {
     Route::get('laporanpendapatan/pdf', [AdminLaporanPendapatanController::class, 'generatePDF'])->name('admin.laporanpendapatan.pdf');
     Route::resource('stokbarang', AdminLaporanStokBarangController::class)->names('admin.stokbarang');
     Route::get('stokbarang/pdf', [AdminLaporanStokBarangController::class, 'generatePDF'])->name('admin.stokbarang.pdf');
+    Route::resource('laporanpengembalian', AdminLaporanPengembalianController::class)->names('admin.laporanpengembalian');
+    Route::get('laporanpengembalian/pdf', [AdminLaporanPengembalianController::class, 'generatePDF'])->name('admin.laporanpengembalian.pdf');
 });
 
 Route::prefix('kepalacabang')->middleware('auth', 'level:kepalacabang')->group(function () {
@@ -119,6 +125,8 @@ Route::prefix('kepalacabang')->middleware('auth', 'level:kepalacabang')->group(f
     Route::get('laporanpendapatan/pdf', [KepalaCabangLaporanPendapatapanController::class, 'generatePDF'])->name('kepalacabang.laporanpendapatan.pdf');
     Route::resource('stokbarang', KepalaCabangLaporanStokBarangController::class)->names('kepalacabang.stokbarang');
     Route::get('stokbarang/pdf', [KepalaCabangLaporanStokBarangController::class, 'generatePDF'])->name('kepalacabang.stokbarang.pdf');
+    Route::resource('laporanpiutang', KepalaCabangLaporanPiutangController::class)->names('kepalacabang.laporanpiutang');
+    Route::get('laporanpiutang/pdf', [KepalaCabangLaporanPiutangController::class, 'generatePDF'])->name('kepalacabang.laporanpiutang.pdf');
 });
 
 Route::prefix('supervisor')->middleware('auth', 'level:supervisor')->group(function () {
@@ -136,6 +144,10 @@ Route::prefix('supervisor')->middleware('auth', 'level:supervisor')->group(funct
     Route::get('laporanpendapatan/pdf', [SupervisorLaporanPendapatan::class, 'generatePDF'])->name('supervisor.laporanpendapatan.pdf');
     Route::resource('stokbarang', SupervisorLaporanStokbarang::class)->names('supervisor.stokbarang');
     Route::get('stokbarang/pdf', [SupervisorLaporanStokbarang::class, 'generatePDF'])->name('supervisor.stokbarang.pdf');
+    Route::resource('laporanpiutang', SupervisorLaporanPiutang::class)->names('supervisor.laporanpiutang');
+    Route::get('laporanpiutang/pdf', [SupervisorLaporanPiutang::class, 'generatePDF'])->name('supervisor.laporanpiutang.pdf');
+    Route::resource('laporanpengembalian', SupervisorLaporanPengembalianController::class)->names('supervisor.laporanpengembalian');
+    Route::get('laporanpengembalian/pdf', [SupervisorLaporanPengembalianController::class, 'generatePDF'])->name('supervisor.laporanpengembalian.pdf');
 });
 
 Route::prefix('sales')->middleware('auth', 'level:sales')->group(function () {

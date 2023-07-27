@@ -208,8 +208,8 @@
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                                    onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                                <button type="submit" class="btn btn-sm" style="background-color: red; color: white; border-radius: 8px;"
+                                                                onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</button>
                                                             </form>
                                                         </td>
                                                     </tr>

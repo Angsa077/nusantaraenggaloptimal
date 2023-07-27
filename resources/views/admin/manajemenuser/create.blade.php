@@ -46,7 +46,7 @@
                                                         </div>
                                                         <select class="form-control" name="level" id="level"
                                                             value="{{ Session::get('level') }}">
-                                                            <option selected>Pilih Jabatan</option>
+                                                            <option value="" disabled selected>Pilih Jabatan</option>
                                                             <option value="kepalacabang">Kepala Cabang</option>
                                                             <option value="supervisor">Supervisor</option>
                                                             <option value="admin">Admin</option>
@@ -214,7 +214,7 @@
                                                         </div>
                                                         <select class="form-control" name="jk" id="jk"
                                                             value="{{ Session::get('jk') }}">
-                                                            <option selected>Pilih Jenis Kelamin</option>
+                                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                                             <option value="lakilaki">Laki-Laki</option>
                                                             <option value="perempuan">Perempuan</option>
                                                         </select>

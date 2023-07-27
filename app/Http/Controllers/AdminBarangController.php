@@ -78,12 +78,15 @@ class AdminBarangController extends Controller
             }
         }
 
+        $numericHargaJual = (int) str_replace('.', '', $request->harga_jual);
+        $numericHargaBeli = (int) str_replace('.', '', $request->harga_beli);
+
         $data = [
             'kd_barang' => $request->kd_barang,
             'nama' => $request->nama,
             'merek' => $request->merek,
-            'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual,
+            'harga_beli' => $numericHargaBeli,
+            'harga_jual' => $numericHargaJual, 
             'jumlah' => $request->jumlah,
             'expired' => $request->expired,
             'status_barang' => 'proses',

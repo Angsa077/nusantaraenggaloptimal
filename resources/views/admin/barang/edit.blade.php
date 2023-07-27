@@ -187,8 +187,8 @@
 
                                         @if ($data->status_barang == 'proses' || $data->status_barang == 'tolak')
                                             <div class="col-12 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-danger mr-2" name="simpan"
-                                                    value="Hapus">Hapus</button>
+                                                <button type="submit" class="btn btn-sm mr-2" style="background-color: red; color: white; border-radius: 5px;" name="simpan"
+                                                    value="Hapus" >Hapus</button>
                                                 <button type="submit" class="btn btn-secondary"
                                                     name="simpan">Perbarui</button>
                                             </div>
